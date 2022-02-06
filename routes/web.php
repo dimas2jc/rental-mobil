@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('booking');
+});
+Route::get('/data_master', function () {
+    return view('data_master_user');
+});
+Route::get('/data_master/users', function () {
+    return view('data_master_user');
 });
