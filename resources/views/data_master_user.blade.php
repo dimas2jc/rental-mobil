@@ -12,12 +12,8 @@
                 aria-controls="pegawai_tab" aria-selected="true">Pegawai</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="customer_tab-tab" data-toggle="tab" href="#customer_tab" role="tab"
-                aria-controls="customer_tab" aria-selected="false">Customer</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="vendor_tab-tab" data-toggle="tab" href="#vendor_tab" role="tab"
-                aria-controls="vendor_tab" aria-selected="false">Vendor</a>
+                <a class="nav-link" id="sales_tab-tab" data-toggle="tab" href="#sales_tab" role="tab"
+                aria-controls="sales_tab" aria-selected="false">Sales</a>
             </li>
         </ul>
 
@@ -42,28 +38,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="tab-pane fade" id="customer_tab" role="tabpanel" aria-labelledby="customer_tab-tab">
-                <table id="table-customer" class="table table-bordered table-striped table-responsive-stack">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dimas</td>
-                            <td>dimas@gmail.com</td>
-                            <td align="center">
-                                <button class="btn btn-success">AKTIF</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="tab-pane fade" id="vendor_tab" role="tabpanel" aria-labelledby="vendor_tab-tab">
-                <table id="table-vendor" class="table table-bordered table-striped table-responsive-stack">
+            <div class="tab-pane fade" id="sales_tab" role="tabpanel" aria-labelledby="sales_tab-tab">
+                <table id="table-sales" class="table table-bordered table-striped table-responsive-stack">
                     <thead class="thead-dark">
                         <tr>
                             <th>Name</th>
@@ -90,4 +66,5 @@
 @section('extra-script')
     <script src="{{asset('assets/js/examples/file-manager.js')}}"></script>
     <script src="{{asset('assets/js/custom/data_master_user.js')}}"></script>
+    <script src="{{asset('assets/js/custom/data_master.js')}}"></script>
 @endsection

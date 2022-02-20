@@ -9,7 +9,11 @@
 
             <div class="header-logo">
                 <a href=index.html>
-                    <img class="logo" src="{{asset('assets/media/image/logo.png')}}" alt="logo">
+                    @if($data != null)
+                        <img class="logo" src="{{ url($logo) }}" style="max-width: 40px" alt="logo">
+                    @else
+                        <img class="logo" src="" style="max-width: 40px" alt="logo">
+                    @endif
                 </a>
             </div>
         </div>
@@ -17,7 +21,7 @@
         <div class="header-body">
             <div class="header-body-left">
                 <!-- <ul class="navbar-nav">
-                    
+
                 </ul> -->
             </div>
 

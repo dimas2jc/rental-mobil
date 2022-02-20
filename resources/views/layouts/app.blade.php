@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Rental Mobil</title>
+    {{-- CSRF Token --}}
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    @php
+        $data = DB::table('company')->first();
+        if($data != null){
+            $logo = "/document/setting/".$data->LOGO;
+        }
+    @endphp
+    @if($data != null)
+        <title>{{ $data->NAME_COMPANY }}</title>
+    @else
+        <title>Sistem Informasi Rental</title>
+    @endif
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{asset('assets/media/image/favicon.png')}}"/>
+    @if($data != null)
+        <link rel="shortcut icon" href="{{ url($logo) }}"/>
+    @endif
 
     <!-- Main css -->
     <link rel="stylesheet" href="{{asset('vendors/bundle.css')}}" type="text/css">
@@ -28,6 +42,33 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .judul-tabel {
+            display: flex;
+        }
+
+        .judul-tabel button:hover,
+        .judul-tabel a:hover {
+            background-color: rgb(68, 8, 38) !important;
+        }
+
+        @media only screen and (max-width: 600px) {
+
+            table {
+                font-size: 1em;
+            }
+
+            .judul-tabel {
+                display: block;
+            }
+
+            .judul-tabel button {
+                margin-top: 10px;
+            }
+
+        }
+    </style>
+
     @yield('extra-css')
 </head>
 <body class="small-navigation">
@@ -86,6 +127,9 @@
 
     <!-- App scripts -->
     <script src="{{asset('assets/js/app.min.js')}}"></script>
+
+    <script> const baseUrl = "{{ env('APP_URL') }}"; </script>
+    <script src="{{asset('vendors/input-mask/jquery.mask.js')}}"></script>
 
     @yield('extra-script')
 

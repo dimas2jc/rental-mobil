@@ -17,6 +17,44 @@
             </li>
 
             <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i data-feather="dollar-sign"></i>
+                    </span>
+                    <span>Keuangan</span>
+                </a>
+                <ul>
+                    <li>
+                        <li>
+                            <a href="#">
+                                <span>Invoice</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <a id="tagihan_sewa" href="">Tagihan Sewa</a>
+                                </li>
+                                <li>
+                                    <a id="klaim" href="">Klaim</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </li>
+                    <li>
+                        <a id="kas_keluar" href="">Kas Keluar</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{url('/laporan')}}" id="monitoring">
+                    <span class="nav-link-icon">
+                        <i data-feather="monitor"></i>
+                    </span>
+                    <span>Monitoring</span>
+                </a>
+            </li>
+
+            <li>
                 <a href="{{url('/laporan')}}" id="laporan">
                     <span class="nav-link-icon">
                         <i data-feather="file-text"></i>
@@ -33,7 +71,7 @@
                     <span>Data Master</span>
                 </a>
             </li>
-            
+
             <!-- <li>
                 <a href="#">
                     <span class="nav-link-icon">
@@ -50,7 +88,7 @@
                     </li>
                 </ul>
             </li> -->
-            
+
         </ul>
     </div>
 </div>

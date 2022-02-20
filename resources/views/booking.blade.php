@@ -3,6 +3,7 @@
 @section('extra-css')
     <!-- Fullcalendar -->
     <link rel="stylesheet" href="{{asset('vendors/fullcalendar/fullcalendar.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('vendors/select2/css/select2.min.css') }}">
 @endsection
 
 @section('content')
@@ -16,11 +17,11 @@
         <div class="btn btn-outline-light">
             <span>@php echo date("d F Y"); @endphp</span>
         </div>
-        <a href="#" class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0 dropdown-toggle" data-toggle="dropdown">Actions</a>
+        {{-- <a href="#" class="btn btn-primary ml-0 ml-md-2 mt-2 mt-md-0 dropdown-toggle" data-toggle="dropdown">Actions</a>
         <div class="dropdown-menu dropdown-menu-right">
             <a href="#" class="dropdown-item">Download</a>
             <a href="#" class="dropdown-item">Print</a>
-        </div>
+        </div> --}}
     </div>
 </div>
 <div class="row no-gutters app-block">
@@ -74,94 +75,131 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Add Event</h5>
+                <h5 class="modal-title">Tambah Booking</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="ti-close"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form autocomplete="off">
+                <form action="{{ url('store_booking') }}" method="POST">
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Title</label>
-                        <div class="col-sm-9">
-                            <input id="event-title" type="text" class="form-control" placeholder="Title">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Event type</label>
-                        <div class="col-sm-9">
-                            <div class="mt-2" id="event-type">
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline1" name="customRadioInline1"
-                                            class="custom-control-input">
-                                    <label class="custom-control-label"
-                                            for="customRadioInline1">Appointment</label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline">
-                                    <input type="radio" id="customRadioInline2" name="customRadioInline1"
-                                            class="custom-control-input">
-                                    <label class="custom-control-label" for="customRadioInline2">Meeting</label>
+                        <label class="col-sm-4 col-form-label">Customer Lama?</label>
+                        <div class="col-sm-8">
+                            <div class="mt-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="sudah_ada" class="custom-control-input" value="1" id="customCheck" checked>
+                                    <label class="custom-control-label" for="customCheck">Ya</label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row row-sm">
-                        <label class="col-sm-3 col-form-label">Start</label>
-                        <div class="col-sm-5">
-                            <input id="event-start-date" type="text"
-                                    class="form-control create-event-datepicker"
-                                    placeholder="Date">
-                        </div>
-                        <div class="col-sm-4">
-                            <input id="event-start-time" type="text" class="form-control create-event-demo"
-                                    placeholder="Time">
-                        </div>
-                    </div>
-                    <div class="form-group row row-sm">
-                        <label class="col-sm-3 col-form-label">End</label>
-                        <div class="col-sm-5">
-                            <input id="event-end-date" type="text" class="form-control create-event-datepicker"
-                                    placeholder="Date">
-                        </div>
-                        <div class="col-sm-4">
-                            <input id="event-end-time" type="text" class="form-control create-event-demo"
-                                    placeholder="Time">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Participate</label>
-                        <div class="col-sm-9">
-                            <div class="avatar-group">
-                                <figure class="avatar avatar-sm">
-                                    <span class="avatar-title bg-success rounded-circle">K</span>
-                                </figure>
-                                <figure class="avatar avatar-sm">
-                                    <span class="avatar-title bg-danger rounded-circle">S</span>
-                                </figure>
-                                <figure class="avatar avatar-sm">
-                                    <span class="avatar-title bg-primary rounded-circle">C</span>
-                                </figure>
-                                <figure class="avatar avatar-sm">
-                                    <img src="../../assets/media/image/user/women_avatar3.jpg"
-                                            class="rounded-circle"
-                                            alt="image">
-                                </figure>
+                    <div class="input-customer" style="display: none">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Nama*
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="name" id="name" class="form-control">
                             </div>
-                            <button type="button" class="btn btn-outline-light btn-sm btn-floating">
-                                <i class="ti-plus"></i>
-                            </button>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Email*
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="email" id="email" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                No. Telp*
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="no_telp" id="no_telp" class="form-control">
+                            </div>
+                            </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                No. KK
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="no_kk" id="no_kk" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Alamat*
+                            </label>
+                            <div class="col-sm-9">
+                                <textarea name="alamat" id="alamat" rows="3" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="select-customer" style="display: block">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Customer
+                            </label>
+                            <div class="col-sm-9">
+                                <select class="form-control select-component select-customer" id="customer" name="customer" required>
+                                    <option selected disabled>Pilih Customer . . </option>
+                                    @foreach ($data['customer'] as $d)
+                                        <option value="{{ $d->ID_CUSTOMER }}">{{ $d->NAME_CUSTOMER }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Kendaraan
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle" required>
+                                <option selected disabled>Pilih Kendaraan . . </option>
+                                @foreach ($data['vehicle'] as $v)
+                                    <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Description</label>
+                        <label for="" class="col-sm-3 col-form-label">
+                            Mulai
+                        </label>
                         <div class="col-sm-9">
-                            <textarea id="event-desc" class="form-control" rows="6"></textarea>
+                            <input type="date" name="start_date" id="start_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Selesai
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="date" name="end_date" id="end_date" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Harga
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="harga" id="harga" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            DP
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="dp" id="dp" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-3"></label>
                         <div class="col-sm-9">
-                            <button type="submit" id="btn-save" class="btn btn-primary">Create</button>
+                            <button type="submit" id="btn-save" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
                 </form>
@@ -202,6 +240,7 @@
     <script src="{{asset('assets/js/examples/fullcalendar.js')}}"></script>
     <script src="{{asset('assets/js/examples/pages/calendar.js')}}"></script>
 
+    <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
     <script src="{{asset('assets/js/custom/booking.js')}}"></script>
 
 @endsection

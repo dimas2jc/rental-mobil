@@ -11,24 +11,26 @@
         <div class="app-sidebar-menu">
             <div>
                 <div class="list-group list-group-flush">
-                    <a href="{{url('/data_master/users')}}" class="list-group-item d-flex align-items-center" id="manajemen_pengguna">
+                    <a href="{{url('/data_master/settings')}}" class="list-group-item d-flex align-items-center" id="setting">
+                        <i class="ti-settings mr-2 list-group-icon"></i>Setting
+                    </a>
+                    {{-- <a href="{{url('/data_master/users')}}" class="list-group-item d-flex align-items-center" id="manajemen_pengguna">
                         <i class="ti-desktop mr-2 list-group-icon"></i>Manajemen Pengguna
-                    </a>
-                    <a href="" class="list-group-item d-flex align-items-center" id="pegawai">
+                    </a> --}}
+                    <a href="{{url('/data_master/employes')}}" class="list-group-item d-flex align-items-center" id="pegawai">
                         <i class="ti-user mr-2 list-group-icon"></i>Pegawai
-                        <span class="small ml-auto">10</span>
+                        <span class="small ml-auto" id="total_pegawai">0</span>
                     </a>
-                    <a href="" class="list-group-item d-flex align-items-center" id="customer">
-                        <i class="ti-user mr-2 list-group-icon"></i>Customer
-                        <span class="small ml-auto">10</span>
+                    <a href="{{url('/data_master/pemilik-kendaraan')}}" class="list-group-item d-flex align-items-center" id="vendor">
+                        <i class="ti-star mr-2 list-group-icon"></i>Pemilik Kendaraan
+                        <span class="small ml-auto" id="total_vendor">0</span>
                     </a>
-                    <a href="" class="list-group-item d-flex align-items-center" id="vendor">
-                        <i class="ti-star mr-2 list-group-icon"></i>Vendor
-                        <span class="small ml-auto">10</span>
-                    </a>
-                    <a href="" class="list-group-item d-flex align-items-center" id="kendaraan">
+                    <a href="{{url('/data_master/kendaraan')}}" class="list-group-item d-flex align-items-center" id="kendaraan">
                         <i class="ti-car mr-2 list-group-icon"></i>Kendaraan
-                        <span class="small ml-auto">10</span>
+                        <span class="small ml-auto" id="total_kendaraan">0</span>
+                    </a>
+                    <a href="{{url('/data_master/harga-kendaraan')}}" class="list-group-item d-flex align-items-center" id="harga_kendaraan">
+                        <i class="ti-money mr-2 list-group-icon"></i>Harga Kendaraan
                     </a>
                 </div>
             </div>

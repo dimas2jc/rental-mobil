@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property string $ID_CHARGE_VEHICLES
  * @property string $NAME_CHARGE_VEHICLES
- * @property float $PRICE_CHARGE_VEHICLES
+ * @property int $PRICE_CHARGE_VEHICLES
  * 
  * @property Collection|PaymentRent[] $payment_rents
  *
@@ -28,7 +28,7 @@ class ChargeRent extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'PRICE_CHARGE_VEHICLES' => 'float'
+		'PRICE_CHARGE_VEHICLES' => 'int'
 	];
 
 	protected $fillable = [

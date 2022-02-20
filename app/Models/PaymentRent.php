@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -14,13 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property string $ID_PAYMENT_RENT
  * @property string|null $ID_CHARGE_VEHICLES
- * @property string|null $ID_BOOKING
- * @property int|null $COMMISION_SALES
  * @property int $TOTAL_PAYMENT
  * @property Carbon $DATE_PAYMENT
+ * @property bool $STATUS_PAYMENT
  * 
  * @property ChargeRent|null $charge_rent
- * @property Booking|null $booking
+ * @property Collection|Relationship9[] $relationship9s
  *
  * @package App\Models
  */
@@ -32,8 +32,8 @@ class PaymentRent extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'COMMISION_SALES' => 'int',
-		'TOTAL_PAYMENT' => 'int'
+		'TOTAL_PAYMENT' => 'int',
+		'STATUS_PAYMENT' => 'bool'
 	];
 
 	protected $dates = [
@@ -42,10 +42,9 @@ class PaymentRent extends Model
 
 	protected $fillable = [
 		'ID_CHARGE_VEHICLES',
-		'ID_BOOKING',
-		'COMMISION_SALES',
 		'TOTAL_PAYMENT',
-		'DATE_PAYMENT'
+		'DATE_PAYMENT',
+		'STATUS_PAYMENT'
 	];
 
 	public function charge_rent()
@@ -53,8 +52,8 @@ class PaymentRent extends Model
 		return $this->belongsTo(ChargeRent::class, 'ID_CHARGE_VEHICLES');
 	}
 
-	public function booking()
+	public function relationship9s()
 	{
-		return $this->belongsTo(Booking::class, 'ID_BOOKING');
+		return $this->hasMany(Relationship9::class, 'ID_PAYMENT_RENT');
 	}
 }

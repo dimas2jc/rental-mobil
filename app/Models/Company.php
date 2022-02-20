@@ -14,8 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ID_COMPANY
  * @property string $NAME_COMPANY
  * @property string $ADDRESS_COMPANY
- * @property float $PHONE_COMPANY
+ * @property string $PHONE_COMPANY
  * @property string $EMAIL_COMPANY
+ * @property string $LOGO
  *
  * @package App\Models
  */
@@ -26,14 +27,11 @@ class Company extends Model
 	public $incrementing = false;
 	public $timestamps = false;
 
-	protected $casts = [
-		'PHONE_COMPANY' => 'float'
-	];
-
 	protected $fillable = [
 		'NAME_COMPANY',
 		'ADDRESS_COMPANY',
 		'PHONE_COMPANY',
-		'EMAIL_COMPANY'
+		'EMAIL_COMPANY',
+		'LOGO'
 	];
 }

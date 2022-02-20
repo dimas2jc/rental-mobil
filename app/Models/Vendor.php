@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ID_VENDORS
  * @property string $NAME_VENDRS
  * @property string $ADDRESS_VENDORS
- * @property float $PHONE_VENDORS
+ * @property string $PHONE_VENDORS
  * @property string $EMAIL_VENDORS
  * 
  * @property Collection|Vehicle[] $vehicles
@@ -28,10 +28,6 @@ class Vendor extends Model
 	protected $primaryKey = 'ID_VENDORS';
 	public $incrementing = false;
 	public $timestamps = false;
-
-	protected $casts = [
-		'PHONE_VENDORS' => 'float'
-	];
 
 	protected $fillable = [
 		'NAME_VENDRS',

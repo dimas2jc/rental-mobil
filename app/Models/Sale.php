@@ -15,7 +15,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $ID_SALES
  * @property string $NAME_SALES
  * @property string $ADDRESS_SALES
- * @property float $PHONE_SALES
+ * @property string $PHONE_SALES
+ * @property bool $STATUS_SALES
  * 
  * @property Collection|Booking[] $bookings
  *
@@ -29,13 +30,14 @@ class Sale extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'PHONE_SALES' => 'float'
+		'STATUS_SALES' => 'bool'
 	];
 
 	protected $fillable = [
 		'NAME_SALES',
 		'ADDRESS_SALES',
-		'PHONE_SALES'
+		'PHONE_SALES',
+		'STATUS_SALES'
 	];
 
 	public function bookings()

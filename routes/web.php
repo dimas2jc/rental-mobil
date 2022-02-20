@@ -1,6 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\SalesController;
+use App\Http\Controllers\PemilikKendaraanController;
+use App\Http\Controllers\HargaKendaraanController;
+use App\Http\Controllers\KendaraanController;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +22,67 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('booking');
+    $data['customer'] = DB::table('customer')->select('ID_CUSTOMER', 'NAME_CUSTOMER')->get();
+    $data['vehicle'] = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
+    return view('booking', compact('data'));
 });
 Route::get('/data_master', function () {
-    return view('data_master_user');
+    return view('data_master_pegawai');
+});
+Route::get('/data_master/settings', function () {
+    return view('data_master_setting');
 });
 Route::get('/data_master/users', function () {
     return view('data_master_user');
 });
+Route::get('/data_master/employes', function () {
+    return view('data_master_pegawai');
+});
+Route::get('/data_master/pemilik-kendaraan', function () {
+    return view('data_master_pemilik_kendaraan');
+});
+Route::get('/data_master/kendaraan', [KendaraanController::class, 'index']);
+Route::get('/data_master/harga-kendaraan', function () {
+    $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
+    return view('data_master_harga_kendaraan', compact('data'));
+});
+
+Route::get('get_booking', [BookingController::class, 'get_booking']);
+Route::post('store_booking', [BookingController::class, 'store_booking']);
+
+Route::post('setting/company', [CompanyController::class, 'setting']);
+Route::get('data_master/get_data_master', [PegawaiController::class, 'data_master']);
+
+Route::get('data_master/get_pegawai/{id}', [PegawaiController::class, 'get_pegawai']);
+Route::post('data_master/pegawai/{id}', [PegawaiController::class, 'update']);
+Route::resource('data_master/pegawai', PegawaiController::class);
+
+Route::get('data_master/get_sales/{id}', [SalesController::class, 'get_sales']);
+Route::post('data_master/sales/{id}', [SalesController::class, 'update']);
+Route::resource('data_master/sales', SalesController::class);
+
+Route::get('data_master/get_pemilik_kendaraan/{id}', [PemilikKendaraanController::class, 'get_pemilik_kendaraan']);
+Route::post('data_master/pemilik_kendaraan/{id}', [PemilikKendaraanController::class, 'update']);
+Route::resource('data_master/pemilik_kendaraan', PemilikKendaraanController::class);
+
+Route::get('data_master/get_harga_kendaraan/{id}', [HargaKendaraanController::class, 'get_harga_kendaraan']);
+Route::post('data_master/harga_kendaraan/{id}', [HargaKendaraanController::class, 'update']);
+Route::resource('data_master/harga_kendaraan', HargaKendaraanController::class);
+
+Route::get('data_master/get_kendaraan/{id}', [KendaraanController::class, 'get_kendaraan']);
+Route::post('data_master/kendaraan/{id}', [KendaraanController::class, 'update_kendaraan']);
+Route::post('data_master/kendaraan', [KendaraanController::class, 'store_kendaraan']);
+
+Route::get('data_master/get_body_kendaraan/{id}', [KendaraanController::class, 'get_body_kendaraan']);
+Route::post('data_master/body_kendaraan/{id}', [KendaraanController::class, 'update_body_kendaraan']);
+Route::post('data_master/body_kendaraan', [KendaraanController::class, 'store_body_kendaraan']);
+
+Route::get('data_master/get_varian_kendaraan/{id}', [KendaraanController::class, 'get_varian_kendaraan']);
+Route::post('data_master/varian_kendaraan/{id}', [KendaraanController::class, 'update_varian_kendaraan']);
+Route::post('data_master/varian_kendaraan', [KendaraanController::class, 'store_varian_kendaraan']);
+
+Route::get('data_master/get_dokumen_kendaraan/{id}', [KendaraanController::class, 'get_dokumen_kendaraan']);
+Route::post('data_master/dokumen_kendaraan/{id}', [KendaraanController::class, 'update_dokumen_kendaraan']);
+Route::post('data_master/dokumen_kendaraan', [KendaraanController::class, 'store_dokumen_kendaraan']);
+
+require dirname(__FILE__).'/api.php';

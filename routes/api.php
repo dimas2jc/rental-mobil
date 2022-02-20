@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Api\PegawaiController;
+use App\Http\Controllers\Api\SalesController;
+use App\Http\Controllers\Api\PemilikKendaraanController;
+use App\Http\Controllers\Api\HargaKendaraanController;
+use App\Http\Controllers\Api\KendaraanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +22,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('pegawai_datatable', [PegawaiController::class, 'pegawai_datatable']);
+
+Route::get('sales_datatable', [SalesController::class, 'sales_datatable']);
+
+Route::get('pemilik_kendaraan_datatable', [PemilikKendaraanController::class, 'pemilik_kendaraan_datatable']);
+
+Route::get('harga_kendaraan_datatable', [HargaKendaraanController::class, 'harga_kendaraan_datatable']);
+
+Route::get('kendaraan_datatable', [KendaraanController::class, 'kendaraan_datatable']);
+
+Route::get('body_datatable', [KendaraanController::class, 'body_kendaraan_datatable']);
+
+Route::get('varian_datatable', [KendaraanController::class, 'varian_kendaraan_datatable']);
+
+Route::get('dokumen_datatable', [KendaraanController::class, 'dokumen_kendaraan_datatable']);
