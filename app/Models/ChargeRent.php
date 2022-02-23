@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class ChargeRent
  * 
- * @property string $ID_CHARGE_VEHICLES
- * @property string $NAME_CHARGE_VEHICLES
- * @property int $PRICE_CHARGE_VEHICLES
+ * @property string $id_charge_vehicles
+ * @property string $name_charge_vehicles
+ * @property int $price_charge_vehicles
  * 
  * @property Collection|PaymentRent[] $payment_rents
  *
@@ -23,21 +23,21 @@ use Illuminate\Database\Eloquent\Model;
 class ChargeRent extends Model
 {
 	protected $table = 'charge_rent';
-	protected $primaryKey = 'ID_CHARGE_VEHICLES';
+	protected $primaryKey = 'id_charge_vehicles';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'PRICE_CHARGE_VEHICLES' => 'int'
+		'price_charge_vehicles' => 'int'
 	];
 
 	protected $fillable = [
-		'NAME_CHARGE_VEHICLES',
-		'PRICE_CHARGE_VEHICLES'
+		'name_charge_vehicles',
+		'price_charge_vehicles'
 	];
 
 	public function payment_rents()
 	{
-		return $this->hasMany(PaymentRent::class, 'ID_CHARGE_VEHICLES');
+		return $this->hasMany(PaymentRent::class, 'id_charge_vehicles');
 	}
 }

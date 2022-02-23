@@ -12,9 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class VehicleBody
  * 
- * @property string $ID_VEHICLE_BODIES
- * @property string $NAME_VEHICLES_BODIES
- * @property float $IS_ACTIVE
+ * @property string $id_vehicle_bodies
+ * @property string $name_vehicles_bodies
+ * @property float $is_active
  * 
  * @property Collection|Vehicle[] $vehicles
  *
@@ -23,21 +23,21 @@ use Illuminate\Database\Eloquent\Model;
 class VehicleBody extends Model
 {
 	protected $table = 'vehicle_bodies';
-	protected $primaryKey = 'ID_VEHICLE_BODIES';
+	protected $primaryKey = 'id_vehicle_bodies';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'IS_ACTIVE' => 'float'
+		'is_active' => 'float'
 	];
 
 	protected $fillable = [
-		'NAME_VEHICLES_BODIES',
-		'IS_ACTIVE'
+		'name_vehicles_bodies',
+		'is_active'
 	];
 
 	public function vehicles()
 	{
-		return $this->hasMany(Vehicle::class, 'ID_VEHICLE_BODIES');
+		return $this->hasMany(Vehicle::class, 'id_vehicle_bodies');
 	}
 }

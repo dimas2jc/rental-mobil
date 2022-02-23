@@ -13,76 +13,80 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Booking
  * 
- * @property string $ID_BOOKING
- * @property string|null $ID_CUSTORMER
- * @property string|null $ID_VEHICLES
- * @property string|null $ID_EMPLOYES
- * @property string|null $ID_SALES
- * @property Carbon $DATE_START
- * @property Carbon $DATE_FINISH
- * @property string $PRICE_SALES
- * @property int $DP_SALES
- * @property bool $STATUS_BOOKING
+ * @property string $id_booking
+ * @property string|null $id_custormer
+ * @property string|null $id_vehicles
+ * @property string|null $id_employes
+ * @property string|null $id_sales
+ * @property Carbon $date_start
+ * @property Carbon $date_finish
+ * @property int $price_sales
+ * @property int|null $dp_sales
+ * @property bool $status_booking
+ * @property int|null $komisi_sales
  * 
  * @property Sale|null $sale
  * @property EmployesCompany|null $employes_company
  * @property Customer|null $customer
  * @property Vehicle|null $vehicle
- * @property Collection|Relationship9[] $relationship9s
+ * @property Collection|DetailPayment[] $detail_payments
  *
  * @package App\Models
  */
 class Booking extends Model
 {
 	protected $table = 'booking';
-	protected $primaryKey = 'ID_BOOKING';
+	protected $primaryKey = 'id_booking';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'DP_SALES' => 'int',
-		'STATUS_BOOKING' => 'bool'
+		'price_sales' => 'int',
+		'dp_sales' => 'int',
+		'status_booking' => 'bool',
+		'komisi_sales' => 'int'
 	];
 
 	protected $dates = [
-		'DATE_START',
-		'DATE_FINISH'
+		'date_start',
+		'date_finish'
 	];
 
 	protected $fillable = [
-		'ID_CUSTORMER',
-		'ID_VEHICLES',
-		'ID_EMPLOYES',
-		'ID_SALES',
-		'DATE_START',
-		'DATE_FINISH',
-		'PRICE_SALES',
-		'DP_SALES',
-		'STATUS_BOOKING'
+		'id_custormer',
+		'id_vehicles',
+		'id_employes',
+		'id_sales',
+		'date_start',
+		'date_finish',
+		'price_sales',
+		'dp_sales',
+		'status_booking',
+		'komisi_sales'
 	];
 
 	public function sale()
 	{
-		return $this->belongsTo(Sale::class, 'ID_SALES');
+		return $this->belongsTo(Sale::class, 'id_sales');
 	}
 
 	public function employes_company()
 	{
-		return $this->belongsTo(EmployesCompany::class, 'ID_EMPLOYES');
+		return $this->belongsTo(EmployesCompany::class, 'id_employes');
 	}
 
 	public function customer()
 	{
-		return $this->belongsTo(Customer::class, 'ID_CUSTORMER');
+		return $this->belongsTo(Customer::class, 'id_custormer');
 	}
 
 	public function vehicle()
 	{
-		return $this->belongsTo(Vehicle::class, 'ID_VEHICLES');
+		return $this->belongsTo(Vehicle::class, 'id_vehicles');
 	}
 
-	public function relationship9s()
+	public function detail_payments()
 	{
-		return $this->hasMany(Relationship9::class, 'ID_BOOKING');
+		return $this->hasMany(DetailPayment::class, 'id_booking');
 	}
 }

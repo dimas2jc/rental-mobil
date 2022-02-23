@@ -6,39 +6,40 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PriceVehicle
  * 
- * @property string $ID_PRICE_VEHICLES
- * @property float $PRICE_VEHICLES
- * @property int $TIME_RENT
+ * @property string $id_price_vehicles
+ * @property string|null $id_vehicles
+ * @property float $price_vehicles
+ * @property int $time_rent
  * 
- * @property Collection|Relationship7[] $relationship7s
+ * @property Vehicle|null $vehicle
  *
  * @package App\Models
  */
 class PriceVehicle extends Model
 {
 	protected $table = 'price_vehicles';
-	protected $primaryKey = 'ID_PRICE_VEHICLES';
+	protected $primaryKey = 'id_price_vehicles';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'PRICE_VEHICLES' => 'float',
-		'TIME_RENT' => 'int'
+		'price_vehicles' => 'float',
+		'time_rent' => 'int'
 	];
 
 	protected $fillable = [
-		'PRICE_VEHICLES',
-		'TIME_RENT'
+		'id_vehicles',
+		'price_vehicles',
+		'time_rent'
 	];
 
-	public function relationship7s()
+	public function vehicle()
 	{
-		return $this->hasMany(Relationship7::class, 'ID_PRICE_VEHICLES');
+		return $this->belongsTo(Vehicle::class, 'id_vehicles');
 	}
 }

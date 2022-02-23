@@ -11,27 +11,29 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Company
  * 
- * @property string $ID_COMPANY
- * @property string $NAME_COMPANY
- * @property string $ADDRESS_COMPANY
- * @property string $PHONE_COMPANY
- * @property string $EMAIL_COMPANY
- * @property string $LOGO
+ * @property string $id_company
+ * @property string $name_company
+ * @property string $address_company
+ * @property float $phone_company
+ * @property string $email_company
  *
  * @package App\Models
  */
 class Company extends Model
 {
 	protected $table = 'company';
-	protected $primaryKey = 'ID_COMPANY';
+	protected $primaryKey = 'id_company';
 	public $incrementing = false;
 	public $timestamps = false;
 
+	protected $casts = [
+		'phone_company' => 'float'
+	];
+
 	protected $fillable = [
-		'NAME_COMPANY',
-		'ADDRESS_COMPANY',
-		'PHONE_COMPANY',
-		'EMAIL_COMPANY',
-		'LOGO'
+		'name_company',
+		'address_company',
+		'phone_company',
+		'email_company'
 	];
 }

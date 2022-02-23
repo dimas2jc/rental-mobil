@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class EmployesCompany
  * 
- * @property string $ID_EMPLOYES
- * @property string $NAME_EMPLOYES
- * @property string $ADDRESS_EMPLOYES
- * @property string $PHONE_EMPLOYES
- * @property bool $STATUS_EMPLOYES
+ * @property string $id_employes
+ * @property string $name_employes
+ * @property string $address_employes
+ * @property float $phone_employes
+ * @property bool $status_employes
  * 
  * @property Collection|Booking[] $bookings
  *
@@ -25,23 +25,24 @@ use Illuminate\Database\Eloquent\Model;
 class EmployesCompany extends Model
 {
 	protected $table = 'employes_company';
-	protected $primaryKey = 'ID_EMPLOYES';
+	protected $primaryKey = 'id_employes';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [
-		'STATUS_EMPLOYES' => 'bool'
+		'phone_employes' => 'float',
+		'status_employes' => 'bool'
 	];
 
 	protected $fillable = [
-		'NAME_EMPLOYES',
-		'ADDRESS_EMPLOYES',
-		'PHONE_EMPLOYES',
-		'STATUS_EMPLOYES'
+		'name_employes',
+		'address_employes',
+		'phone_employes',
+		'status_employes'
 	];
 
 	public function bookings()
 	{
-		return $this->hasMany(Booking::class, 'ID_EMPLOYES');
+		return $this->hasMany(Booking::class, 'id_employes');
 	}
 }

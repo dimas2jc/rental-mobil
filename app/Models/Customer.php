@@ -12,12 +12,12 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Customer
  * 
- * @property string $ID_CUSTORMER
- * @property string $NO_KK_CUSTOMER
- * @property string $NAME_CUSTOMER
- * @property string $ADDRESS_CUSTOMER
- * @property string $PHONE_CUSTOMER
- * @property string $EMAIL_CUSTOMER
+ * @property string $id_custormer
+ * @property string $no_kk_customer
+ * @property string $name_customer
+ * @property string $address_customer
+ * @property float $phone_customer
+ * @property string $email_customer
  * 
  * @property Collection|Booking[] $bookings
  *
@@ -26,20 +26,24 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
 	protected $table = 'customer';
-	protected $primaryKey = 'ID_CUSTORMER';
+	protected $primaryKey = 'id_custormer';
 	public $incrementing = false;
 	public $timestamps = false;
 
+	protected $casts = [
+		'phone_customer' => 'float'
+	];
+
 	protected $fillable = [
-		'NO_KK_CUSTOMER',
-		'NAME_CUSTOMER',
-		'ADDRESS_CUSTOMER',
-		'PHONE_CUSTOMER',
-		'EMAIL_CUSTOMER'
+		'no_kk_customer',
+		'name_customer',
+		'address_customer',
+		'phone_customer',
+		'email_customer'
 	];
 
 	public function bookings()
 	{
-		return $this->hasMany(Booking::class, 'ID_CUSTORMER');
+		return $this->hasMany(Booking::class, 'id_custormer');
 	}
 }

@@ -12,11 +12,11 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Vendor
  * 
- * @property string $ID_VENDORS
- * @property string $NAME_VENDRS
- * @property string $ADDRESS_VENDORS
- * @property string $PHONE_VENDORS
- * @property string $EMAIL_VENDORS
+ * @property string $id_vendors
+ * @property string $name_vendrs
+ * @property string $address_vendors
+ * @property float $phone_vendors
+ * @property string $email_vendors
  * 
  * @property Collection|Vehicle[] $vehicles
  *
@@ -25,19 +25,23 @@ use Illuminate\Database\Eloquent\Model;
 class Vendor extends Model
 {
 	protected $table = 'vendor';
-	protected $primaryKey = 'ID_VENDORS';
+	protected $primaryKey = 'id_vendors';
 	public $incrementing = false;
 	public $timestamps = false;
 
+	protected $casts = [
+		'phone_vendors' => 'float'
+	];
+
 	protected $fillable = [
-		'NAME_VENDRS',
-		'ADDRESS_VENDORS',
-		'PHONE_VENDORS',
-		'EMAIL_VENDORS'
+		'name_vendrs',
+		'address_vendors',
+		'phone_vendors',
+		'email_vendors'
 	];
 
 	public function vehicles()
 	{
-		return $this->hasMany(Vehicle::class, 'ID_VENDORS');
+		return $this->hasMany(Vehicle::class, 'id_vendors');
 	}
 }

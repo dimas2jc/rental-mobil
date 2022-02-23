@@ -12,21 +12,21 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class VehiclesVarian
  * 
- * @property string $ID_VARIAN_VEHICLES
- * @property string $NAMA_VARIAN
- * @property string $VEHICLES_TYPE
- * @property string $VEHICLES_PABRIKAN
- * @property string $SILINDER
- * @property string $KAPASITAS_CC
- * @property string $TIPE_BBM
- * @property string $KAPASITAS_BBM
- * @property string $RASIO_BBM
- * @property string $JENIS_TRANSMISI
- * @property string $KONFIGURASI_AXLE
- * @property string $JUMLAH_SUMBU
- * @property string $UKURAN_BAN
- * @property string $VEHICLES_SIT
- * @property string $NOTE
+ * @property string $id_varian_vehicles
+ * @property string|null $nama_varian
+ * @property string|null $vehicles_type
+ * @property string|null $vehicles_pabrikan
+ * @property string|null $silinder
+ * @property string|null $kapasitas_cc
+ * @property string|null $tipe_bbm
+ * @property string|null $kapasitas_bbm
+ * @property string|null $rasio_bbm
+ * @property string|null $jenis_transmisi
+ * @property string|null $konfigurasi_axle
+ * @property string|null $jumlah_sumbu
+ * @property string|null $ukuran_ban
+ * @property string|null $vehicles_sit
+ * @property string|null $note
  * 
  * @property Collection|Vehicle[] $vehicles
  *
@@ -35,29 +35,29 @@ use Illuminate\Database\Eloquent\Model;
 class VehiclesVarian extends Model
 {
 	protected $table = 'vehicles_varians';
-	protected $primaryKey = 'ID_VARIAN_VEHICLES';
+	protected $primaryKey = 'id_varian_vehicles';
 	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $fillable = [
-		'NAMA_VARIAN',
-		'VEHICLES_TYPE',
-		'VEHICLES_PABRIKAN',
-		'SILINDER',
-		'KAPASITAS_CC',
-		'TIPE_BBM',
-		'KAPASITAS_BBM',
-		'RASIO_BBM',
-		'JENIS_TRANSMISI',
-		'KONFIGURASI_AXLE',
-		'JUMLAH_SUMBU',
-		'UKURAN_BAN',
-		'VEHICLES_SIT',
-		'NOTE'
+		'nama_varian',
+		'vehicles_type',
+		'vehicles_pabrikan',
+		'silinder',
+		'kapasitas_cc',
+		'tipe_bbm',
+		'kapasitas_bbm',
+		'rasio_bbm',
+		'jenis_transmisi',
+		'konfigurasi_axle',
+		'jumlah_sumbu',
+		'ukuran_ban',
+		'vehicles_sit',
+		'note'
 	];
 
 	public function vehicles()
 	{
-		return $this->hasMany(Vehicle::class, 'ID_VARIAN_VEHICLES');
+		return $this->hasMany(Vehicle::class, 'id_varian_vehicles');
 	}
 }
