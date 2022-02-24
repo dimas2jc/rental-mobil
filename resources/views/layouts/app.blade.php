@@ -9,11 +9,11 @@
     @php
         $data = DB::table('company')->first();
         if($data != null){
-            $logo = "/document/setting/".$data->LOGO;
+            $logo = "/document/setting/".$data->logo_company;
         }
     @endphp
     @if($data != null)
-        <title>{{ $data->NAME_COMPANY }}</title>
+        <title>{{ $data->name_company }}</title>
     @else
         <title>Sistem Informasi Rental</title>
     @endif

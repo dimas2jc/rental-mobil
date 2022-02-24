@@ -18,13 +18,32 @@ class KendaraanController extends Controller
         $data['pemilik'] = Vendor::select("id_vendors", "name_vendrs")->get();
         $data['dokumen'] = DocumentVehicle::select("id_doc_vehicles", "name_doc_vehicles")->get();
         $data['body'] = VehicleBody::select("id_vehicle_bodies", "name_vehicles_bodies")->get();
-        $data['varian'] = VehiclesVarian::select("_id_varian_vehicles", "name_varian")->get();
+        $data['varian'] = VehiclesVarian::select("id_varian_vehicles", "nama_varian")->get();
+        $data['vehicles'] = Vehicle::select("id_vendors", "id_doc_vehicles", "id_vehicle_bodies", "id_varian_vehicles")->get();
 
         return view('data_master_kendaraan', compact('data'));
     }
 
     public function store_kendaraan(Request $request)
     {
+        $request->validate([
+            'pemilik' => 'required',
+            'dokumen' => 'required',
+            'body' => 'required',
+            'varian' => 'required',
+            'nopol' => 'required|string',
+            'no_rangka' => 'required|string',
+            'no_mesin' => 'required|string',
+            'warna' => 'required|string',
+            'tahun_pembuatan' => 'required',
+            'no_stnk' => 'required|string',
+            'nama_stnk' => 'required|string',
+            'masa_stnk' => 'required|string',
+            'alamat_stnk' => 'required|string',
+            'no_bpkb' => 'required|string',
+            'tgl_kir' => 'required',
+        ]);
+
         Vehicle::insert([
             'id_vehicles' => Uuid::uuid4(),
             'id_vendors' => $request->vendor,
@@ -74,6 +93,10 @@ class KendaraanController extends Controller
 
     public function store_body_kendaraan(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:60',
+        ]);
+
         if($request->is_active == 'on'){
             $is_active = 1;
         }
@@ -91,6 +114,11 @@ class KendaraanController extends Controller
 
     public function update_body_kendaraan(Request $request, $id)
     {
+
+        $request->validate([
+            'name' => 'required|string|max:60',
+        ]);
+
         if($request->is_active == 'on'){
             $is_active = 1;
         }
@@ -107,6 +135,16 @@ class KendaraanController extends Controller
 
     public function store_varian_kendaraan(Request $request)
     {
+        $request->validate([
+            'name_varian' => 'required|string|max:100',
+            'type_varian' => 'required|string|max:100',
+            'pabrikan' => 'required|string|max:100',
+            'kapasitas_cc' => 'required|max:10',
+            'kapasitas_bbm_varian' => 'required|max:10',
+            'ukuran_ban' => 'required|max:10',
+            'vehicle_sit' => 'required|max:10',
+        ]);
+
         VehiclesVarian::insert([
             '_id_varian_vehicles' => Uuid::uuid4(),
             'name_varian' => $request->name_varian,
@@ -154,7 +192,8 @@ class KendaraanController extends Controller
     {
         $request->validate([
             'file' => 'required',
-            'name_dokumen' => 'required'
+            'name_dokumen' => 'required',
+            'expired_date' => 'required',
         ]);
 
         $file = $request->file('file');
@@ -179,10 +218,9 @@ class KendaraanController extends Controller
             'name_dokumen' => 'required',
             'type_dokumen' => 'required',
             'expired_date' => 'required',
-            'description' => 'required'
         ]);
 
-        if($request->filled('file'))
+        if($request->file('file'))
         {
             $old_file = DocumentVehicle::where('id_doc_vehicles', $id)->first();
             $file = $request->file('file');

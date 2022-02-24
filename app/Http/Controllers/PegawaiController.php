@@ -39,16 +39,17 @@ class PegawaiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
-            'phone' => 'required|max:15'
+            'phone' => 'required|max:15',
         ]);
 
         EmployesCompany::insert([
             'id_employes' => Uuid::uuid4(),
             'name_employes' => $request->name,
             'address_employes' => $request->alamat,
-            'phone_employes' => $request->phone
+            'phone_employes' => $request->phone,
+            'status_employes' => 1
         ]);
 
         return redirect()->back();
@@ -86,7 +87,7 @@ class PegawaiController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15'
         ]);
@@ -126,5 +127,19 @@ class PegawaiController extends Controller
         $data = EmployesCompany::find($id);
 
         return response()->json($data, 200);
+    }
+
+    public function edit_status_pegawai($id){
+        $employes = EmployesCompany::where('id_employes', $id)->first();
+        if($employes->status_employes == 1){
+            EmployesCompany::where('id_employes', $id)->update([
+                'status_employes' => 0
+            ]);
+        }else{
+            EmployesCompany::where('id_employes', $id)->update([
+                'status_employes' => 1
+            ]);
+        }
+        return response()->json($employes, 200);
     }
 }

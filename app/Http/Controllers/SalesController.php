@@ -37,7 +37,7 @@ class SalesController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15'
         ]);
@@ -46,7 +46,8 @@ class SalesController extends Controller
             'id_sales' => Uuid::uuid4(),
             'name_sales' => $request->name,
             'address_sales' => $request->alamat,
-            'phone_sales' => $request->phone
+            'phone_sales' => $request->phone,
+            'status_sales' => 1
         ]);
 
         return redirect()->back();
@@ -84,7 +85,7 @@ class SalesController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15'
         ]);
@@ -116,4 +117,19 @@ class SalesController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function edit_status_sales($id){
+        $sales = Sale::where('id_sales', $id)->first();
+        if($sales->status_sales == 1){
+            Sale::where('id_sales', $id)->update([
+                'status_sales' => 0
+            ]);
+        }else{
+            Sale::where('id_sales', $id)->update([
+                'status_sales' => 1
+            ]);
+        }
+        return response()->json($sales, 200);
+    }
+
 }

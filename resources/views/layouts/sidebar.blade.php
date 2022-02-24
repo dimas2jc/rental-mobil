@@ -46,7 +46,7 @@
             </li>
 
             <li>
-                <a href="{{url('/laporan')}}" id="monitoring">
+                <a href="{{url('/monitoring')}}" id="monitoring">
                     <span class="nav-link-icon">
                         <i data-feather="monitor"></i>
                     </span>
