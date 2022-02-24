@@ -19,6 +19,7 @@ class KendaraanController extends Controller
         $data['dokumen'] = DocumentVehicle::select("id_doc_vehicles", "name_doc_vehicles")->get();
         $data['body'] = VehicleBody::select("id_vehicle_bodies", "name_vehicles_bodies")->get();
         $data['varian'] = VehiclesVarian::select("id_varian_vehicles", "nama_varian")->get();
+        $data['vehicles'] = Vehicle::select("id_vendors", "id_doc_vehicles", "id_vehicle_bodies", "id_varian_vehicles")->get();
 
         return view('data_master_kendaraan', compact('data'));
     }
@@ -86,7 +87,7 @@ class KendaraanController extends Controller
         ]);
 
         Vehicle::where('ID_VEHICLES', $id)->update([
-            'ID_VENDORS' => $request->vendor,
+            'ID_VENDORS' => $request->pemilik,
             'ID_DOC_VEHICLES' => $request->dokumen,
             'ID_VEHICLE_BODIES' => $request->body,
             'ID_VARIAN_VEHICLES' => $request->varian,
@@ -94,12 +95,11 @@ class KendaraanController extends Controller
             'NO_RANGKA' => $request->no_rangka,
             'NOMESIN' => $request->no_mesin,
             'WARNA' => $request->warna,
-            'KAPASITAS_BBM' => $request->kapasitas_bbm,
             'TAHUN_PEMBUATAN' => $request->tahun_pembuatan,
             'NO_STNK' => $request->no_stnk,
             'NAMA_STNK' => $request->nama_stnk,
-            'MASA_STNK' => $request->masa_stnk,
-            'ALAMAT_STNK' => $request->alamat_stnk,
+            'MASA_SNTK' => $request->masa_stnk,
+            'ALAMAT_SNTK' => $request->alamat_stnk,
             'NO_BPKB' => $request->no_bpkb,
             'TGL_KIR' => date("Y-m-d", strtotime($request->tgl_kir))
         ]);

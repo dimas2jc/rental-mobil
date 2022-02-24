@@ -44,17 +44,29 @@
                         TAMBAH BARU
                     </button>
                 </div>
-                <table id="table-kendaraan" class="table table-striped table-bordered responsive" style="width: 100%">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>No. Polisi</th>
-                            <th>Pemilik</th>
-                            <th>Warna</th>
-                            <th>Kapasitas BBM</th>
-                            <th style="width: 10%">Actions</th>
-                        </tr>
-                    </thead>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table id="table-kendaraan" class="table table-striped table-bordered" style="width: 100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>No. Polisi</th>
+                                <th>Pemilik</th>
+                                <th>Varian</th>
+                                <th>Body</th>
+                                <th>Document</th>
+                                <th>Warna</th>
+                                <th>No Rangka</th>
+                                <th>No Mesin</th>
+                                <th>Tahun Pembuatan</th>
+                                <th>No STNK</th>
+                                <th>Nama STNK</th>
+                                <th>Alamat STNK</th>
+                                <th>No BPKB</th>
+                                <th>Tanggal KIR</th>
+                                <th style="width: 10%">Actions</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
             </div>
             <div class="tab-pane fade" id="varian_tab" role="tabpanel" aria-labelledby="varian_tab-tab">
                 <div class="judul-tabel mb-3">
@@ -151,7 +163,10 @@
                             <select class="form-control select-component select-pemilik" id="pemilik" name="pemilik" required>
                                 <option selected disabled>Pilih Pemilik . . </option>
                                 @foreach ($data['pemilik'] as $p)
-                                    <option value="{{ $p->id_vendors }}">{{ $p->name_vendrs }}</option>
+                                    @foreach($data['vehicles'] as $v)
+                                        <option value="{{ $p->id_vendors }}" @if($p->id_vendors === $v->id_vendors) selected @endif>{{ $p->name_vendrs }}</option>
+                                        @break
+                                    @endforeach
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -166,7 +181,10 @@
                             <select class="form-control select-component select-dokumen" id="dokumen" name="dokumen" required>
                                 <option selected disabled>Pilih Dokumen . . </option>
                                 @foreach ($data['dokumen'] as $doc)
-                                    <option value="{{ $doc->id_doc_vehicles }}">{{ $doc->name_doc_vehicles }}</option>
+                                    @foreach($data['vehicles'] as $v)
+                                        <option value="{{ $doc->id_doc_vehicles }}" @if($doc->id_doc_vehicles === $v->id_doc_vehicles) selected @endif>{{ $doc->name_doc_vehicles }}</option>
+                                        @break
+                                    @endforeach
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -181,7 +199,10 @@
                             <select class="form-control select-component select-body" id="body" name="body" required>
                                 <option selected disabled>Pilih Body . . </option>
                                 @foreach ($data['body'] as $b)
-                                    <option value="{{ $b->id_vehicle_bodies }}">{{ $b->name_vehicles_bodies }}</option>
+                                    @foreach($data['vehicles'] as $v)
+                                        <option value="{{ $b->id_vehicle_bodies }}" @if($b->id_vehicle_bodies === $v->id_vehicle_bodies) selected @endif>{{ $b->name_vehicles_bodies }}</option>
+                                        @break
+                                    @endforeach
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -196,7 +217,10 @@
                             <select class="form-control select-component select-varian" id="varian" name="varian" required>
                                 <option selected disabled>Pilih Varian . . </option>
                                 @foreach ($data['varian'] as $var)
-                                    <option value="{{ $var->id_varian_vehicles }}">{{ $var->nama_varian }}</option>
+                                    @foreach($data['vehicles'] as $v)
+                                        <option value="{{ $var->id_varian_vehicles }}" @if($var->id_varian_vehicles === $v->id_varian_vehicles) selected @endif>{{ $var->nama_varian }}</option>
+                                        @break
+                                    @endforeach
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">

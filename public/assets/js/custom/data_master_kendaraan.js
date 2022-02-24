@@ -21,9 +21,19 @@ $(document).ready(function(){
         },
         columns:[
             {data:"nopol",name:"nopol"},
-            {data:"id_vendors",name:"id_vendors"},
+            {data:"name_vendrs",name:"name_vendrs"},
+            {data:"nama_varian",name:"nama_varian"},
+            {data:"name_vehicles_bodies",name:"name_vehicles_bodies"},
+            {data:"name_doc_vehicles",name:"name_doc_vehicles"},
             {data:"warna",name:"warna"},
             {data:"no_rangka",name:"no_rangka"},
+            {data:"nomesin",name:"nomesin"},
+            {data:"tahun_pembuatan",name:"tahun_pembuatan"},
+            {data:"no_stnk",name:"no_stnk"},
+            {data:"nama_stnk",name:"nama_stnk"},
+            {data:"alamat_sntk",name:"alamat_sntk"},
+            {data:"no_bpkb",name:"no_bpkb"},
+            {data:"tgl_kir",name:"tgl_kir"},
             {
                 data: null,
                 className: "text-center",
@@ -89,7 +99,7 @@ $(document).ready(function(){
                 $("#no_bpkb").val(data.no_bpkb);
                 $("#tgl_kir").val(data.tgl_kir);
             },
-            error:function(){
+            error:function(data){
                 console.log(data);
             }
         });
