@@ -43,10 +43,10 @@ class SalesController extends Controller
         ]);
 
         Sale::insert([
-            'ID_SALES' => Uuid::uuid4(),
-            'NAME_SALES' => $request->name,
-            'ADDRESS_SALES' => $request->alamat,
-            'PHONE_SALES' => $request->phone
+            'id_sales' => Uuid::uuid4(),
+            'name_sales' => $request->name,
+            'address_sales' => $request->alamat,
+            'phone_sales' => $request->phone
         ]);
 
         return redirect()->back();
@@ -89,11 +89,11 @@ class SalesController extends Controller
             'phone' => 'required|max:15'
         ]);
 
-        Sale::where('ID_SALES', $id)->update([
-            'ID_SALES' => Uuid::uuid4(),
-            'NAME_SALES' => $request->name,
-            'ADDRESS_SALES' => $request->alamat,
-            'PHONE_SALES' => $request->phone
+        Sale::where('id_sales', $id)->update([
+            'id_sales' => Uuid::uuid4(),
+            'name_sales' => $request->name,
+            'address_sales' => $request->alamat,
+            'phone_sales' => $request->phone
         ]);
 
         return redirect()->back();

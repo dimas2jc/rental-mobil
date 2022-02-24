@@ -17,7 +17,7 @@ class AddForeignKeysToBookingTable extends Migration
             $table->foreign(['id_employes'], 'fk_relationship_13')->references(['id_employes'])->on('employes_company');
             $table->foreign(['id_vehicles'], 'fk_relationship_3')->references(['id_vehicles'])->on('vehicles');
             $table->foreign(['id_sales'], 'fk_relationship_1')->references(['id_sales'])->on('sales');
-            $table->foreign(['id_custormer'], 'fk_relationship_2')->references(['id_custormer'])->on('customer');
+            $table->foreign(['id_customer'], 'fk_relationship_2')->references(['id_customer'])->on('customer');
         });
     }
 

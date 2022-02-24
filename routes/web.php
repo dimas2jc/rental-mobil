@@ -22,8 +22,8 @@ use App\Http\Controllers\BookingController;
 */
 
 Route::get('/', function () {
-    $data['customer'] = DB::table('customer')->select('ID_CUSTOMER', 'NAME_CUSTOMER')->get();
-    $data['vehicle'] = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
+    $data['customer'] = DB::table('customer')->select('id_customer', 'name_customer')->get();
+    // $data['vehicle'] = DB::table('vehicles')->select('id_vehicles', 'nopol')->get();
     return view('booking', compact('data'));
 });
 Route::get('/data_master', function () {
@@ -48,6 +48,8 @@ Route::get('/data_master/harga-kendaraan', function () {
 });
 
 Route::get('get_booking', [BookingController::class, 'get_booking']);
+Route::post('get_kendaraan', [BookingController::class, 'get_kendaraan']);
+Route::post('get_harga', [BookingController::class, 'get_harga']);
 Route::post('store_booking', [BookingController::class, 'store_booking']);
 
 Route::post('setting/company', [CompanyController::class, 'setting']);

@@ -45,10 +45,10 @@ class PegawaiController extends Controller
         ]);
 
         EmployesCompany::insert([
-            'ID_EMPLOYES' => Uuid::uuid4(),
-            'NAME_EMPLOYES' => $request->name,
-            'ADDRESS_EMPLOYES' => $request->alamat,
-            'PHONE_EMPLOYES' => $request->phone
+            'id_employes' => Uuid::uuid4(),
+            'name_employes' => $request->name,
+            'address_employes' => $request->alamat,
+            'phone_employes' => $request->phone
         ]);
 
         return redirect()->back();
@@ -91,11 +91,11 @@ class PegawaiController extends Controller
             'phone' => 'required|max:15'
         ]);
 
-        EmployesCompany::where('ID_EMPLOYES', $id)->update([
-            'ID_EMPLOYES' => Uuid::uuid4(),
-            'NAME_EMPLOYES' => $request->name,
-            'ADDRESS_EMPLOYES' => $request->alamat,
-            'PHONE_EMPLOYES' => $request->phone
+        EmployesCompany::where('id_employes', $id)->update([
+            'id_employes' => Uuid::uuid4(),
+            'name_employes' => $request->name,
+            'address_employes' => $request->alamat,
+            'phone_employes' => $request->phone
         ]);
 
         return redirect()->back();
@@ -114,9 +114,9 @@ class PegawaiController extends Controller
 
     public function data_master()
     {
-        $data['pegawai'] = EmployesCompany::count('ID_EMPLOYES');
-        $data['vendor'] = Vendor::count('ID_VENDORS');
-        $data['vehicle'] = Vehicle::count('ID_VEHICLES');
+        $data['pegawai'] = EmployesCompany::count('id_employes');
+        $data['vendor'] = Vendor::count('id_vendors');
+        $data['vehicle'] = Vehicle::count('id_Vehicles');
 
         return response()->json($data, 200);
     }

@@ -44,11 +44,11 @@ class PemilikKendaraanController extends Controller
         ]);
 
         Vendor::insert([
-            'ID_VENDORS' => Uuid::uuid4(),
-            'NAME_VENDRS' => $request->name,
-            'ADDRESS_VENDORS' => $request->alamat,
-            'PHONE_VENDORS' => $request->phone,
-            'EMAIL_VENDORS' => $request->email
+            'id_vendors' => Uuid::uuid4(),
+            'name_vendrs' => $request->name,
+            'address_vendors' => $request->alamat,
+            'phone_vendors' => $request->phone,
+            'email_vendors' => $request->email
         ]);
 
         return redirect()->back();
@@ -92,12 +92,12 @@ class PemilikKendaraanController extends Controller
             'email' => 'required'
         ]);
 
-        Vendor::where('ID_VENDORS', $id)->update([
-            'ID_VENDORS' => Uuid::uuid4(),
-            'NAME_VENDRS' => $request->name,
-            'ADDRESS_VENDORS' => $request->alamat,
-            'PHONE_VENDORS' => $request->phone,
-            'EMAIL_VENDORS' => $request->email
+        Vendor::where('id_vendors', $id)->update([
+            'id_vendors' => Uuid::uuid4(),
+            'name_vendrs' => $request->name,
+            'address_vendors' => $request->alamat,
+            'phone_vendors' => $request->phone,
+            'email_vendors' => $request->email
         ]);
 
         return redirect()->back();

@@ -4,6 +4,8 @@
     <!-- Fullcalendar -->
     <link rel="stylesheet" href="{{asset('vendors/fullcalendar/fullcalendar.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{ asset('vendors/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/clockpicker/bootstrap-clockpicker.min.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('vendors/datepicker/daterangepicker.css') }}" type="text/css">
 @endsection
 
 @section('content')
@@ -144,7 +146,7 @@
                                 <select class="form-control select-component select-customer" id="customer" name="customer" required>
                                     <option selected disabled>Pilih Customer . . </option>
                                     @foreach ($data['customer'] as $d)
-                                        <option value="{{ $d->ID_CUSTOMER }}">{{ $d->NAME_CUSTOMER }}</option>
+                                        <option value="{{ $d->id_customer }}">{{ $d->name_customer }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -153,23 +155,24 @@
                     <hr>
                     <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">
-                            Kendaraan
-                        </label>
-                        <div class="col-sm-9">
-                            <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle" required>
-                                <option selected disabled>Pilih Kendaraan . . </option>
-                                @foreach ($data['vehicle'] as $v)
-                                    <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-sm-3 col-form-label">
                             Mulai
                         </label>
                         <div class="col-sm-9">
-                            <input type="date" name="start_date" id="start_date" class="form-control">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="start_date" id="start_date" class="form-control change-date datepicker">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group clockpicker-example">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="fa fa-clock-o"></i>
+                                          </span>
+                                        </div>
+                                        <input type="text" class="form-control change-date" name="start_time" id="start_time" value="00:00">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -177,7 +180,34 @@
                             Selesai
                         </label>
                         <div class="col-sm-9">
-                            <input type="date" name="end_date" id="end_date" class="form-control">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="end_date" id="end_date" class="form-control change-date datepicker">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group clockpicker-example">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="fa fa-clock-o"></i>
+                                          </span>
+                                        </div>
+                                        <input type="text" class="form-control change-date" name="end_time" id="end_time" value="00:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Kendaraan
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle" required>
+                                <option selected disabled>Pilih Kendaraan . . </option>
+                                {{-- @foreach ($data['vehicle'] as $v)
+                                    <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
+                                @endforeach --}}
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -239,6 +269,8 @@
     <script src="{{asset('vendors/fullcalendar/fullcalendar.min.js')}}"></script>
     <script src="{{asset('assets/js/examples/fullcalendar.js')}}"></script>
     <script src="{{asset('assets/js/examples/pages/calendar.js')}}"></script>
+    <script src="{{ asset('vendors/clockpicker/bootstrap-clockpicker.min.js') }}"></script>
+    <script src="{{ asset('vendors/datepicker/daterangepicker.js') }}"></script>
 
     <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
     <script src="{{asset('assets/js/custom/booking.js')}}"></script>
