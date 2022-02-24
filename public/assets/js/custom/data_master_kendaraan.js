@@ -20,24 +20,24 @@ $(document).ready(function(){
             }
         },
         columns:[
-            {data:"NOPOL",name:"NOPOL"},
-            {data:"NAME_VENDRS",name:"NAME_VENDRS"},
-            {data:"WARNA",name:"WARNA"},
-            {data:"KAPASITAS_BBM",name:"KAPASITAS_BBM"},
+            {data:"nopol",name:"nopol"},
+            {data:"id_vendors",name:"id_vendors"},
+            {data:"warna",name:"warna"},
+            {data:"no_rangka",name:"no_rangka"},
             {
                 data: null,
                 className: "text-center",
                 orderable: false,
                 searchable: false,
                 render: function ( data, type, row ) {
-                return '<a onClick="edit('+data.ID_VEHICLES+')" id="'+data.ID_VEHICLES+'" class="btn btn-primary btn-sm tombol-edit-kendaraan"><i class="fa fa-pencil"></i></a>';
+                return '<a id="'+data.id_vehicles+'" class="btn btn-primary btn-sm tombol-edit-kendaraan"><i class="fa fa-pencil"></i></a>';
                 }
             }
         ]
     });
 
     $(".tombol-tambah-kendaraan").on("click", function(){
-        $("#vedor").val("");
+        $("#pemilik").val("");
         $("#dokumen").val("");
         $("#body").val("");
         $("#varian").val("");
@@ -72,22 +72,22 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#vedor").val(data.ID_VENDORS);
-                $("#dokumen").val(data.ID_DOC_VEHICLES);
-                $("#body").val(data.ID_VEHICLE_BODIES);
-                $("#varian").val(data.ID_VARIAN_VEHICLES);
-                $("#nopol").val(data.NOPOL);
-                $("#no_rangka").val(data.NO_RANGKA);
-                $("#no_mesin").val(data.NOMESIN);
-                $("#warna").val(data.WARNA);
-                $("#kapasitas_bbm").val(data.KAPASITAS_BBM);
-                $("#tahun_pembuatan").val(data.TAHUN_PEMBUATAN);
-                $("#no_stnk").val(data.NO_STNK);
-                $("#nama_stnk").val(data.NAMA_STNK);
-                $("#masa_stnk").val(data.MASA_STNK);
-                $("#alamat_stnk").val(data.ALAMAT_STNK);
-                $("#no_bpkb").val(data.NO_BPKB);
-                $("#tgl_kir").val(data.TGL_KIR);
+                $("#vedor").val(data.id_vendors);
+                $("#dokumen").val(data.id_doc_vehicles);
+                $("#body").val(data.id_vehicle_bodies);
+                $("#varian").val(data.id_varian_vehicles);
+                $("#nopol").val(data.nopol);
+                $("#no_rangka").val(data.no_rangka);
+                $("#no_mesin").val(data.nomesin);
+                $("#warna").val(data.warna);
+                $("#kapasitas_bbm").val(data.kapasitas_bbm);
+                $("#tahun_pembuatan").val(data.tahun_pembuatan);
+                $("#no_stnk").val(data.no_stnk);
+                $("#nama_stnk").val(data.nama_stnk);
+                $("#masa_stnk").val(data.masa_sntk);
+                $("#alamat_stnk").val(data.alamat_sntk);
+                $("#no_bpkb").val(data.no_bpkb);
+                $("#tgl_kir").val(data.tgl_kir);
             },
             error:function(){
                 console.log(data);
@@ -112,19 +112,27 @@ $(document).ready(function(){
             }
         },
         columns:[
-          {data:"NAMA_VARIAN",name:"NAMA_VARIAN"},
-          {data:"VEHICLES_TYPE",name:"VEHICLES_TYPE"},
-          {data:"VEHICLES_PABRIKAN",name:"VEHICLES_PABRIKAN"},
-          {data:"TIPE_BBM",name:"TIPE_BBM"},
-          {data:"NOTE",name:"NOTE"},
-        //   {data:"action",name:"",className:"text-center",orderable: false, searchable: false},
+          {data:"nama_varian",name:"nama_varian"},
+          {data:"vehicles_type",name:"vehicles_type"},
+          {data:"vehicles_pabrikan",name:"vehicles_pabrikan"},
+          {data:"silinder",name:"silinder"},
+          {data:"kapasitas_cc",name:"kapasitas_cc"},
+          {data:"tipe_bbm",name:"tipe_bbm"},
+          {data:"kapasitas_bbm",name:"kapasitas_bbm"},
+          {data:"rasio_bbm",name:"rasio_bbm"},
+          {data:"jenis_transmisi",name:"jenis_transmisi"},
+          {data:"konfigurasi_axle",name:"konfigurasi_axle"},
+          {data:"jumlah_sumbu",name:"jumlah_sumbu"},
+          {data:"ukuran_ban",name:"ukuran_ban"},
+          {data:"vehicles_sit",name:"vehicles_sit"},
+          {data:"note",name:"note"},
         {
             data: null,
             className: "text-center",
             orderable: false,
             searchable: false,
             render: function ( data, type, row ) {
-              return '<a onClick="edit('+data.ID_VARIAN_VEHICLES+')" id="'+data.ID_VARIAN_VEHICLES+'" class="btn btn-primary btn-sm tombol-edit-varian"><i class="fa fa-pencil"></i></a>';
+              return '<a id="'+data.id_varian_vehicles+'" class="btn btn-primary btn-sm tombol-edit-varian"><i class="fa fa-pencil"></i></a>';
             }
         }
         ]
@@ -164,20 +172,20 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_varian_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#name_varian").val(data.NAMA_VARIAN);
-                $("#type_varian").val(data.VEHICLES_TYPE);
-                $("#pabrikan").val(data.VEHICLES_PABRIKAN);
-                $("#silinder").val(data.SILINDER);
-                $("#kapasitas_cc").val(data.KAPASITAS_CC);
-                $("#tipe_bbm").val(data.TIPE_BBM);
-                $("#kapasitas_bbm_varian").val(data.KAPASITAS_BBM);
-                $("#rasio_bbm").val(data.RASIO_BBM);
-                $("#janis_transmisi").val(data.JENIS_TRANSMISI);
-                $("#konfigurasi_axle").val(data.KONFIGURASI_AXLE);
-                $("#jumlah_sumbu").val(data.JUMLAH_SUMBU);
-                $("#ukuran_ban").val(data.UKURAN_BAN);
-                $("#vehicle_sit").val(data.VEHICLES>SIT);
-                $("#note").val(data.NOTE);
+                $("#name_varian").val(data.nama_varian);
+                $("#type_varian").val(data.vehicles_type);
+                $("#pabrikan").val(data.vehicles_pabrikan);
+                $("#silinder").val(data.silinder);
+                $("#kapasitas_cc").val(data.kapasitas_cc);
+                $("#tipe_bbm").val(data.tipe_bbm);
+                $("#kapasitas_bbm_varian").val(data.kapasitas_bbm);
+                $("#rasio_bbm").val(data.rasio_bbm);
+                $("#jenis_transmisi").val(data.jenis_transmisi);
+                $("#konfigurasi_axle").val(data.konfigurasi_axle);
+                $("#jumlah_sumbu").val(data.jumlah_sumbu);
+                $("#ukuran_ban").val(data.ukuran_ban);
+                $("#vehicle_sit").val(data.vehicles_sit);
+                $("#note").val(data.note);
             },
             error:function(){
                 console.log(data);
@@ -200,7 +208,7 @@ $(document).ready(function(){
             }
         },
         columns:[
-            {data:"NAME_VEHICLES_BODIES",name:"NAME_VEHICLES_BODIES"},
+            {data:"name_vehicles_bodies",name:"name_vehicles_bodies"},
             {
                 data: null,
                 className: "text-center",
@@ -208,7 +216,7 @@ $(document).ready(function(){
                 searchable: false,
                 render: function ( data, type, row ) {
                     let html = ''
-                    if(data.IS_ACTIVE == 1){
+                    if(data.is_active == 1){
                         html = 'Active';
                     }
                     else{
@@ -224,7 +232,7 @@ $(document).ready(function(){
                 orderable: false,
                 searchable: false,
                 render: function ( data, type, row ) {
-                return '<a onClick="edit('+data.ID_VEHICLE_BODIES+')" id="'+data.ID_VEHICLE_BODIES+'" class="btn btn-primary btn-sm tombol-edit-body"><i class="fa fa-pencil"></i></a>';
+                return '<a id="'+data.id_vehicle_bodies+'" class="btn btn-primary btn-sm tombol-edit-body"><i class="fa fa-pencil"></i></a>';
                 }
             }
         ]
@@ -251,8 +259,8 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_body_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#name").val(data.NAME_VEHICLES_BODIES);
-                if(data.IS_ACTIVE == 1){
+                $("#name").val(data.name_vehicles_bodies);
+                if(data.is_active == 1){
                     $("#customCheck").prop("checked", true);
                 }
                 else{
@@ -280,17 +288,23 @@ $(document).ready(function(){
             }
         },
         columns:[
-            {data:"NAME_DOC_VEHICLES",name:"NAME_DOC_VEHICLES"},
-            // {data:"TYPE_DOC_VEHICLES",name:"TYPE_DOC_VEHICLES"},
-            {data:"EXPIRED_DOC_VEHICLES",name:"EXPIRED_DOC_VEHICLES"},
-            {data:"DESCRIPTION",name:"DESCRIPTION"},
+            {data:"name_doc_vehicles",name:"name_doc_vehicles"},
+            {data:"type_doc_vehicles",name:"type_doc_vehicles"},
+            {
+                data:"expired_doc_vehicles",
+                name:"expired_doc_vehicles",
+                render  : function(data,type,row) {
+                    return data.substring(0, 10);
+                }
+            },
+            {data:"description",name:"description"},
             {
                 data: null,
                 className: "text-center",
                 orderable: false,
                 searchable: false,
                 render: function ( data, type, row ) {
-                return '<a onClick="edit('+data.ID_DOC_VEHICLES+')" id="'+data.ID_DOC_VEHICLES+'" class="btn btn-primary btn-sm tombol-edit-dokumen"><i class="fa fa-pencil"></i></a>';
+                    return '<a id="'+data.id_doc_vehicles+'" class="btn btn-primary btn-sm tombol-edit-dokumen"><i class="fa fa-pencil"></i></a>';
                 }
             }
         ]
@@ -311,8 +325,9 @@ $(document).ready(function(){
         $("#formDokumen").attr('method', 'POST');
     });
 
-    $('#table-body tbody').on('click', '.tombol-edit-dokumen', function () {
+    $('#table-dokumen tbody').on('click', '.tombol-edit-dokumen', function () {
         var id = $(this).attr("id");
+        console.log(id);
         $("#judul-modal-dokumen").html("Edit Dokumen");
         url = baseUrl+"/data_master/dokumen_kendaraan/"+id;
         $("#formDokumen").attr('action', url);
@@ -323,10 +338,10 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_dokumen_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#name_dokumen").val(data.NAME_DOC_VEHICLES);
-                $("#type_dokumen").val(data.TYPE_DOC_VEHICLES);
-                $("#expired_date").val(data.EXPIRED_DOC_VEHICLES);
-                $("#description").html(data.DESCRIPTION);
+                $("#name_dokumen").val(data.name_doc_vehicles);
+                $("#type_dokumen").val(data.type_doc_vehicles);
+                $("#expired_date").val((data.expired_doc_vehicles).substring(0, 10));
+                $("#description").html(data.description);
             },
             error:function(){
                 console.log(data);

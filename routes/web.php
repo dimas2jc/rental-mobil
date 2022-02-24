@@ -9,6 +9,7 @@ use App\Http\Controllers\HargaKendaraanController;
 use App\Http\Controllers\KendaraanController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\MonitoringController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,8 @@ Route::get('/data_master', function () {
     return view('data_master_pegawai');
 });
 Route::get('/data_master/settings', function () {
-    return view('data_master_setting');
+    $data['company'] = DB::table('company')->first();
+    return view('data_master_setting', compact('data'));
 });
 Route::get('/data_master/users', function () {
     return view('data_master_user');
@@ -47,18 +49,23 @@ Route::get('/data_master/harga-kendaraan', function () {
     return view('data_master_harga_kendaraan', compact('data'));
 });
 
+Route::get('monitoring', [MonitoringController::class, 'index']);
+
 Route::get('get_booking', [BookingController::class, 'get_booking']);
 Route::post('store_booking', [BookingController::class, 'store_booking']);
 
-Route::post('setting/company', [CompanyController::class, 'setting']);
+Route::post('setting/company', [CompanyController::class, 'setting1']);
+Route::post('setting/company/{id}', [CompanyController::class, 'setting2']);
 Route::get('data_master/get_data_master', [PegawaiController::class, 'data_master']);
 
 Route::get('data_master/get_pegawai/{id}', [PegawaiController::class, 'get_pegawai']);
 Route::post('data_master/pegawai/{id}', [PegawaiController::class, 'update']);
+Route::put('data_master/edit_status_pegawai/{id}', [PegawaiController::class, 'edit_status_pegawai']);
 Route::resource('data_master/pegawai', PegawaiController::class);
 
 Route::get('data_master/get_sales/{id}', [SalesController::class, 'get_sales']);
 Route::post('data_master/sales/{id}', [SalesController::class, 'update']);
+Route::put('data_master/edit_status_sales/{id}', [SalesController::class, 'edit_status_sales']);
 Route::resource('data_master/sales', SalesController::class);
 
 Route::get('data_master/get_pemilik_kendaraan/{id}', [PemilikKendaraanController::class, 'get_pemilik_kendaraan']);
