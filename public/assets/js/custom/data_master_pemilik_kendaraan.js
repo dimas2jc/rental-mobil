@@ -15,10 +15,16 @@ $(document).ready(function(){
             }
         },
         columns:[
-          {data:"NAME_VENDRS",name:"NAME_VENDRS"},
-          {data:"ADDRESS_VENDORS",name:"ADDRESS_VENDORS"},
-          {data:"PHONE_VENDORS",name:"PHONE_VENDORS"},
-          {data:"EMAIL_VENDORS",name:"EMAIL_VENDORS"},
+          {data:"name_vendrs",name:"name_vendrs"},
+          {data:"address_vendors",name:"address_vendors"},
+          {
+            data:"phone_vendors",
+            name:"phone_vendors",
+            render: function(data, type, row){
+              return '0'+data;
+            }
+          },
+          {data:"email_vendors",name:"email_vendors"},
         //   {data:"action",name:"",className:"text-center",orderable: false, searchable: false},
         {
             data: null,
@@ -26,7 +32,7 @@ $(document).ready(function(){
             orderable: false,
             searchable: false,
             render: function ( data, type, row ) {
-              return '<a onClick="edit('+data.ID_VENDORS+')" id="'+data.ID_VENDORS+'" class="btn btn-primary btn-sm tombol-edit-pegawai"><i class="fa fa-pencil"></i></a>';
+              return '<a id="'+data.id_vendors+'" class="btn btn-primary btn-sm tombol-edit-pemilik_kendaraan"><i class="fa fa-pencil"></i></a>';
             }
         }
         ]
@@ -45,7 +51,7 @@ $(document).ready(function(){
 
     $('#phone').mask('000000000000');
 
-    $('#table-pemilik_kendaraan tbody').on('click', '.tombol-edit-pemilik_kendaraan', function () {
+    $('#table-pemilik-kendaraan tbody').on('click', '.tombol-edit-pemilik_kendaraan', function () {
         var id = $(this).attr("id");
         $("#judul-modal").html("Edit Pemilik Kendaraan");
         url = baseUrl+"/data_master/pemilik_kendaraan/"+id;
@@ -57,10 +63,10 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_pemilik_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#name").val(data.NAME_VENDRS);
-                $("#alamat").val(data.ADDRESS_VENDORS);
-                $("#phone").val("0"+data.PHONE_VENDORS);
-                $("#email").val("0"+data.EMAIL_VENDORS);
+                $("#name").val(data.name_vendrs);
+                $("#alamat").val(data.address_vendors);
+                $("#phone").val("0"+data.phone_vendors);
+                $("#email").val(data.email_vendors);
             },
             error:function(){
                 console.log(data);

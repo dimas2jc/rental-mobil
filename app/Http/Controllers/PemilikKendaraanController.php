@@ -37,7 +37,7 @@ class PemilikKendaraanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
             'email' => 'required'
@@ -86,7 +86,7 @@ class PemilikKendaraanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:60|regex:/^[a-zA-Z ]+$/',
+            'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
             'email' => 'required'

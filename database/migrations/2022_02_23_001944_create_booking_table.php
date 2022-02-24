@@ -15,7 +15,7 @@ class CreateBookingTable extends Migration
     {
         Schema::create('booking', function (Blueprint $table) {
             $table->char('id_booking')->primary();
-            $table->char('id_custormer')->nullable()->index('relationship_2_fk');
+            $table->char('id_customer')->nullable()->index('relationship_2_fk');
             $table->char('id_vehicles')->nullable()->index('relationship_3_fk');
             $table->char('id_employes')->nullable()->index('relationship_13_fk');
             $table->char('id_sales')->nullable()->index('relationship_1_fk');

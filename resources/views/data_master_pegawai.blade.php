@@ -32,24 +32,27 @@
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>No. HP</th>
+                            <th>Status</th>
                             <th style="width: 10%">Actions</th>
                         </tr>
                     </thead>
                 </table>
             </div>
+
             <div class="tab-pane fade" id="sales_tab" role="tabpanel" aria-labelledby="sales_tab-tab">
                 <div class="judul-tabel mb-3">
                     <h5>Daftar Sales</h5>
-                    <button class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-tambah-sales" data-toggle="modal" data-target="#modal-tambah-pegawai">
+                    <button class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-tambah-sales" data-toggle="modal" data-target="#modal-tambah-sales">
                         <i class="fa fa-plus mr-1"></i>
                         TAMBAH BARU
                     </button>
-                </div>
+                </div> 
                 <table id="table-sales" class="table table-striped table-bordered responsive" style="width: 100%">
                     <thead class="thead-dark">
                         <th>Nama</th>
                         <th>Alamat</th>
                         <th>No. HP</th>
+                        <th>Status</th>
                         <th style="width: 10%">Actions</th>
                     </thead>
                     <tbody>
@@ -65,7 +68,7 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
-                <h5 class="modal-title" id="judul-modal"></h5>
+                <h5 class="modal-title" id="judul-modal-pegawai"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times-circle text-danger"></i>
                 </button>
@@ -113,11 +116,11 @@
 </div>
 
 {{-- Modal Sales --}}
-{{-- <div class="modal fade" id="modal-tambah-sales" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="modal-tambah-sales" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header bg-secondary">
-                <h5 class="modal-title" id="judul-modal"></h5>
+                <h5 class="modal-title" id="judul-modal-sales"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <i class="fa fa-times-circle text-danger"></i>
                 </button>
@@ -129,7 +132,7 @@
                         <label for="" class="col-form-label">
                             Nama Sales
                         </label>
-                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" required>
+                        <input type="text" name="name" id="name_sales" class="form-control @error('name') is-invalid @enderror" required>
                         <div class="invalid-feedback">
                             Mohon isi nama Sales dengan benar.
                         </div>
@@ -139,7 +142,7 @@
                         <label for="" class="col-form-label">
                             Alamat
                         </label>
-                        <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" required>
+                        <input type="text" name="alamat" id="alamat_sales" class="form-control @error('alamat') is-invalid @enderror" required>
                         <div class="invalid-feedback">
                             Mohon isi alamat dengan benar.
                         </div>
@@ -149,7 +152,7 @@
                         <label for="" class="col-form-label">
                             No. HP
                         </label>
-                        <input type="text" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" required>
+                        <input type="text" name="phone" id="phone_sales" class="form-control @error('phone') is-invalid @enderror" required>
                         <div class="invalid-feedback">
                             Mohon isi nomor hp dengan benar.
                         </div>
@@ -162,7 +165,7 @@
             </form>
         </div>
     </div>
-</div> --}}
+</div>
 
 @endsection
 @section('extra-script')

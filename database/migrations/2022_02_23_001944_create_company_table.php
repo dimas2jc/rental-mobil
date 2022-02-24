@@ -19,6 +19,7 @@ class CreateCompanyTable extends Migration
             $table->text('address_company');
             $table->decimal('phone_company', 8, 0);
             $table->char('email_company');
+            $table->string('logo_company');
         });
     }
 

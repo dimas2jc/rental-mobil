@@ -1,6 +1,6 @@
 <footer class="content-footer">
     @if($data != null)
-        <div>© @php echo date("Y"); @endphp All Right Reserved - <a href="#" target="_blank">{{ $data->NAME_COMPANY }}</a></div>
+        <div>© @php echo date("Y"); @endphp All Right Reserved - <a href="#" target="_blank">{{ $data->name_company }}</a></div>
     @else
         <div>© @php echo date("Y"); @endphp All Right Reserved - <a href="#" target="_blank">Sistem Informasi Rental</a></div>
     @endif
