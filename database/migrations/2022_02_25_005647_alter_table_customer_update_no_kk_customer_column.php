@@ -11,22 +11,22 @@ class AlterTableCustomerUpdateNoKkCustomerColumn extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('customer', function (Blueprint $table) {
-            $table->string('no_kk_customer')->nullable()->change();
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('customer', function (Blueprint $table) {
+    //         $table->string('no_kk_customer')->nullable()->change();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('customer', function (Blueprint $table) {
-            $table->string('no_kk_customer')->change();
-        });
-    }
+    // public function down()
+    // {
+    //     Schema::table('customer', function (Blueprint $table) {
+    //         $table->string('no_kk_customer')->change();
+    //     });
+    // }
 }

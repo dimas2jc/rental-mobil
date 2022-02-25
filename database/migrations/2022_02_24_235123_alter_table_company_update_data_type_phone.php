@@ -11,22 +11,22 @@ class AlterTableCompanyUpdateDataTypePhone extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('company', function (Blueprint $table) {
-            $table->string('phone_company', 13)->change();
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('company', function (Blueprint $table) {
+    //         $table->string('phone_company', 13)->change();
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('company', function (Blueprint $table) {
-            $table->decimal('phone_company')->change();
-        });
-    }
+    // public function down()
+    // {
+    //     Schema::table('company', function (Blueprint $table) {
+    //         $table->decimal('phone_company')->change();
+    //     });
+    // }
 }

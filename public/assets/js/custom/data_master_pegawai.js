@@ -93,7 +93,7 @@ $(document).ready(function(){
                 $("#alamat").val(data.address_employes);
                 $("#phone").val("0"+data.phone_employes);
             },
-            error:function(){
+            error:function(data){
                 console.log(data);
             }
         });
@@ -189,7 +189,7 @@ $(document).ready(function(){
                 $("#alamat_sales").val(data.address_sales);
                 $("#phone_sales").val("0"+data.phone_sales);
             },
-            error:function(){
+            error:function(data){
                 console.log(data);
             }
         });

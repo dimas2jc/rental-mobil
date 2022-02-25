@@ -9,7 +9,7 @@ $(document).ready(function(){
             $("#total_vendor").html(data.vendor);
             $("#total_kendaraan").html(data.vehicle);
         },
-        error:function(){
+        error:function(data){
             console.log(data);
         }
     });

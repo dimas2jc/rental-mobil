@@ -20,7 +20,7 @@ class PegawaiController extends Controller
         $data = EmployesCompany::all();
             return Datatables::of($data)
                 ->addColumn('action', function($row){
-                    $btn = '<a onClick="edit('.$row->ID_EMPLOYES.')" id="edit" class="btn btn-primary btn-sm tombol-tambah-pegawai" data-toggle="modal" data-target="#modal-tambah-pegawai"><i class="fa fa-pencil"></i></a>';
+                    $btn = '<a onClick="edit('.$row->id_employes.')" id="edit" class="btn btn-primary btn-sm tombol-tambah-pegawai" data-toggle="modal" data-target="#modal-tambah-pegawai"><i class="fa fa-pencil"></i></a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])

@@ -26,27 +26,13 @@ class KendaraanController extends Controller
 
     public function store_kendaraan(Request $request)
     {
-        // $request->validate([
-        //     'pemilik' => 'required',
-        //     'dokumen' => 'required',
-        //     'body' => 'required',
-        //     'varian' => 'required',
-        //     'nopol' => 'required|string',
-        //     'no_rangka' => 'required|string',
-        //     'no_mesin' => 'required|string',
-        //     'warna' => 'required|string',
-        //     'tahun_pembuatan' => 'required',
-        //     'no_stnk' => 'required|string',
-        //     'nama_stnk' => 'required|string',
-        //     'masa_stnk' => 'required|string',
-        //     'alamat_stnk' => 'required|string',
-        //     'no_bpkb' => 'required|string',
-        //     'tgl_kir' => 'required',
-        // ]);
+        $request->validate([
+            'nopol' => 'required|string',
+        ]);
 
         Vehicle::insert([
             'id_vehicles' => Uuid::uuid4(),
-            'id_vendors' => $request->vendor,
+            'id_vendors' => $request->pemilik,
             'id_doc_vehicles' => $request->dokumen,
             'id_vehicle_bodies' => $request->body,
             'id_varian_vehicles' => $request->varian,
@@ -70,7 +56,7 @@ class KendaraanController extends Controller
     public function update_kendaraan(Request $request, $id)
     {
         Vehicle::where('id_vehicles', $id)->update([
-            'id_vendors' => $request->vendor,
+            'id_vendors' => $request->pemilik,
             'id_doc_vehicles' => $request->dokumen,
             'id_vehicle_bodies' => $request->body,
             'id_varian_vehicles' => $request->varian,
@@ -147,14 +133,14 @@ class KendaraanController extends Controller
 
         VehiclesVarian::insert([
             'id_varian_vehicles' => Uuid::uuid4(),
-            'name_varian' => $request->name_varian,
+            'nama_varian' => $request->name_varian,
             'vehicles_type' => $request->type_varian,
             'vehicles_pabrikan' => $request->pabrikan,
             'silinder' => $request->silinder,
             'kapasitas_cc' => $request->kapasitas_cc,
             'tipe_bbm' => $request->tipe_bbm,
             'kapasitas_bbm' => $request->kapasitas_bbm_varian,
-            'rasio_mesin' => $request->rasio_mesin,
+            'rasio_bbm' => $request->rasio_bbm,
             'jenis_transmisi' => $request->jenis_transmisi,
             'konfigurasi_axle' => $request->konfigurasi_axle,
             'jumlah_sumbu' => $request->jumlah_sumbu,
@@ -169,14 +155,14 @@ class KendaraanController extends Controller
     public function update_varian_kendaraan(Request $request, $id)
     {
         VehiclesVarian::where('id_varian_vehicles', $id)->update([
-            'name_varian' => $request->name_varian,
+            'nama_varian' => $request->name_varian,
             'vehicles_type' => $request->type_varian,
             'vehicles_pabrikan' => $request->pabrikan,
             'silinder' => $request->silinder,
             'kapasitas_cc' => $request->kapasitas_cc,
             'tipe_bbm' => $request->tipe_bbm,
             'kapasitas_bbm' => $request->kapasitas_bbm_varian,
-            'rasio_mesin' => $request->rasio_mesin,
+            'rasio_bbm' => $request->rasio_bbm,
             'jenis_transmisi' => $request->jenis_transmisi,
             'konfigurasi_axle' => $request->konfigurasi_axle,
             'jumlah_sumbu' => $request->jumlah_sumbu,
@@ -253,7 +239,13 @@ class KendaraanController extends Controller
 
     public function get_kendaraan($id)
     {
-        $data = Vehicle::findOrFail($id);
+        $data = Vehicle::from('vehicles as ve')
+        ->leftJoin('vendor as v', 'v.id_vendors', '=', 've.id_vendors')
+        ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 've.id_varian_vehicles')
+        ->leftJoin('vehicle_bodies as vb', 'vb.id_vehicle_bodies', '=', 've.id_vehicle_bodies')
+        ->leftJoin('document_vehicles as vd', 'vd.id_doc_vehicles', '=', 've.id_doc_vehicles')
+        ->where('id_vehicles', $id)
+        ->get();
 
         return response()->json($data, 200);
     }
@@ -265,6 +257,13 @@ class KendaraanController extends Controller
         return response()->json($data, 200);
     }
 
+    public function get_all_body_kendaraan()
+    {
+        $data = VehicleBody::all();
+
+        return response()->json($data, 200);
+    }
+
     public function get_varian_kendaraan($id)
     {
         $data = VehiclesVarian::findOrFail($id);
@@ -272,9 +271,23 @@ class KendaraanController extends Controller
         return response()->json($data, 200);
     }
 
+    public function get_all_varian_kendaraan()
+    {
+        $data = VehiclesVarian::all();
+
+        return response()->json($data, 200);
+    }
+
     public function get_dokumen_kendaraan($id)
     {
         $data = DocumentVehicle::findOrFail($id);
+
+        return response()->json($data, 200);
+    }
+
+    public function get_all_dokumen_kendaraan()
+    {
+        $data = DocumentVehicle::all();
 
         return response()->json($data, 200);
     }
