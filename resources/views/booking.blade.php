@@ -76,10 +76,10 @@
 <div class="modal fade" id="createEventModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-secondary">
                 <h5 class="modal-title">Tambah Booking</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="ti-close"></i>
+                    <i class="fa fa-times-circle text-danger"></i>
                 </button>
             </div>
             <div class="modal-body">
@@ -245,13 +245,13 @@
 <div class="modal fade" id="viewEventModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-secondary">
                 <h5 class="modal-title">
                     <span class="event-icon mr-2"></span>
                     <span class="event-title">Modal Title</span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="ti-close"></i>
+                    <i class="fa fa-times-circle text-danger"></i>
                 </button>
             </div>
             <div class="modal-body">
@@ -259,8 +259,8 @@
                 <br>
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <button type="button" id="reschedule" class="btn btn-sm btn-primary">Reschedule</button>&nbsp;
-                        <button type="button" id="approve" class="btn btn-sm btn-warning">Approve</button>
+                        <button type="button" id="" class="btn btn-sm btn-primary reschedule">Reschedule</button>&nbsp;
+                        <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
                     </div>
                 </div>
             </div>
@@ -268,6 +268,115 @@
     </div>
 </div>
 <!-- end::Event Info Modal -->
+
+<div class="modal fade" id="update-jadwal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-secondary">
+                <h5 class="modal-title">Reschedule Booking</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-times-circle text-danger"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('update_booking') }}" method="POST">
+                    @csrf
+                    <div class="update-customer">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Nama*
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="name_update" id="name_update" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Mulai
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="update_start_date" id="update_start_date" class="form-control change-date datepicker">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group clockpicker-example">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="fa fa-clock-o"></i>
+                                          </span>
+                                        </div>
+                                        <input type="text" class="form-control change-date" name="update_start_time" id="update_start_time" value="00:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Selesai
+                        </label>
+                        <div class="col-sm-9">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" name="update_end_date" id="update_end_date" class="form-control change-date datepicker">
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="input-group clockpicker-example">
+                                        <div class="input-group-prepend">
+                                          <span class="input-group-text">
+                                            <i class="fa fa-clock-o"></i>
+                                          </span>
+                                        </div>
+                                        <input type="text" class="form-control change-date" name="update_end_time" id="update_end_time" value="00:00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Kendaraan
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle" required>
+                                <option selected disabled>Pilih Kendaraan . . </option>
+                                {{-- @foreach ($data['vehicle'] as $v)
+                                    <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
+                                @endforeach --}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Harga
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="harga_update" id="harga_update" class="form-control">
+                            <input type="hidden" name="real_price_update" id="real_price_update" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            DP
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="dp_update" id="dp_update" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <button type="submit" id="btn-save" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 

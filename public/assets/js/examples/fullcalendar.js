@@ -113,6 +113,8 @@ $(document).ready(function () {
                     modal.find('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
                     modal.find('.event-title').html(event.title);
                     modal.find('.event-body').html(event.description);
+                    modal.find('.reschedule').attr('id', event.id);
+                    modal.find('.approve').attr('id', event.id);
                     modal.modal();
                 },
             });

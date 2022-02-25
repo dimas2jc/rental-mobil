@@ -14,8 +14,10 @@ class AlterTableKendaraanUpdateSomeColumn extends Migration
     public function up()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->string('masa_stnk', 255)->change();
-            $table->string('alamat_stnk', 255)->change();
+            $table->dropColumn('masa_sntk');
+            $table->dropColumn('alamat_sntk');
+            $table->string('masa_stnk', 255)->nullable();
+            $table->string('alamat_stnk', 255)->nullable();
         });
     }
 
@@ -27,8 +29,10 @@ class AlterTableKendaraanUpdateSomeColumn extends Migration
     public function down()
     {
         Schema::table('vehicles', function (Blueprint $table) {
-            $table->char('masa_sntk')->change();
-            $table->char('alamat_sntk')->change();
+            $table->dropColumn('masa_stnk');
+            $table->dropColumn('alamat_stnk');
+            $table->string('masa_sntk', 255)->nullable();
+            $table->string('alamat_sntk', 255)->nullable();
         });
     }
 }

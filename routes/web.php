@@ -52,6 +52,7 @@ Route::get('/data_master/harga-kendaraan', function () {
 Route::get('monitoring', [MonitoringController::class, 'index']);
 
 Route::get('get_booking', [BookingController::class, 'get_booking']);
+Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
 Route::post('get_kendaraan', [BookingController::class, 'get_kendaraan']);
 Route::post('get_harga', [BookingController::class, 'get_harga']);
 Route::post('store_booking', [BookingController::class, 'store_booking']);
