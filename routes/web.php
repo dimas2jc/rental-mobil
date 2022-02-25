@@ -74,6 +74,7 @@ Route::put('data_master/edit_status_sales/{id}', [SalesController::class, 'edit_
 Route::resource('data_master/sales', SalesController::class);
 
 Route::get('data_master/get_pemilik_kendaraan/{id}', [PemilikKendaraanController::class, 'get_pemilik_kendaraan']);
+Route::get('data_master/get_pemilik_kendaraan', [PemilikKendaraanController::class, 'get_all_pemilik_kendaraan']);
 Route::post('data_master/pemilik_kendaraan/{id}', [PemilikKendaraanController::class, 'update']);
 Route::resource('data_master/pemilik_kendaraan', PemilikKendaraanController::class);
 
@@ -86,14 +87,17 @@ Route::post('data_master/kendaraan/{id}', [KendaraanController::class, 'update_k
 Route::post('data_master/kendaraan', [KendaraanController::class, 'store_kendaraan']);
 
 Route::get('data_master/get_body_kendaraan/{id}', [KendaraanController::class, 'get_body_kendaraan']);
+Route::get('data_master/get_body_kendaraan', [KendaraanController::class, 'get_all_body_kendaraan']);
 Route::post('data_master/body_kendaraan/{id}', [KendaraanController::class, 'update_body_kendaraan']);
 Route::post('data_master/body_kendaraan', [KendaraanController::class, 'store_body_kendaraan']);
 
 Route::get('data_master/get_varian_kendaraan/{id}', [KendaraanController::class, 'get_varian_kendaraan']);
+Route::get('data_master/get_varian_kendaraan', [KendaraanController::class, 'get_all_varian_kendaraan']);
 Route::post('data_master/varian_kendaraan/{id}', [KendaraanController::class, 'update_varian_kendaraan']);
 Route::post('data_master/varian_kendaraan', [KendaraanController::class, 'store_varian_kendaraan']);
 
 Route::get('data_master/get_dokumen_kendaraan/{id}', [KendaraanController::class, 'get_dokumen_kendaraan']);
+Route::get('data_master/get_dokumen_kendaraan', [KendaraanController::class, 'get_all_dokumen_kendaraan']);
 Route::post('data_master/dokumen_kendaraan/{id}', [KendaraanController::class, 'update_dokumen_kendaraan']);
 Route::post('data_master/dokumen_kendaraan', [KendaraanController::class, 'store_dokumen_kendaraan']);
 

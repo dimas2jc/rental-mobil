@@ -160,18 +160,7 @@
                             <label for="" class="col-form-label">
                                 Pemilik
                             </label>
-                            <select class="form-control select-component select-pemilik" id="pemilik" name="pemilik" required>
-                                <option selected disabled>Pilih Pemilik . . </option>
-                                @foreach ($data['pemilik'] as $p)
-                                    if($data['vehicles'] == []){
-                                        <option value="{{ $p->id_vendors }}">{{ $p->name_vendrs }}</option>
-                                    }else{
-                                        @foreach($data['vehicles'] as $v)
-                                            <option value="{{ $p->id_vendors }}" @if($p->id_vendors === $v->id_vendors) selected @endif>{{ $p->name_vendrs }}</option>
-                                            @break
-                                        @endforeach
-                                    }
-                                @endforeach
+                            <select class="form-control select-component select-pemilik" id="pemilik" name="pemilik">
                             </select>
                             <div class="invalid-feedback">
                                 Mohon pilih pemilik dulu.
@@ -182,18 +171,7 @@
                             <label for="" class="col-form-label">
                                 Dokumen
                             </label>
-                            <select class="form-control select-component select-dokumen" id="dokumen" name="dokumen" >
-                                <option selected disabled>Pilih Dokumen . . </option>
-                                @foreach ($data['dokumen'] as $doc)
-                                    if($data['vehicles'] == []){
-                                        <option value="{{ $doc->id_doc_vehicles }}">{{ $doc->name_doc_vehicles }}</option>
-                                    }else{
-                                        @foreach($data['vehicles'] as $v)
-                                            <option value="{{ $doc->id_doc_vehicles }}" @if($doc->id_doc_vehicles === $v->id_doc_vehicles) selected @endif>{{ $doc->name_doc_vehicles }}</option>
-                                            @break
-                                        @endforeach
-                                    }
-                                @endforeach
+                            <select class="form-control select-component select-dokumen" id="dokumen" name="dokumen">
                             </select>
                             <div class="invalid-feedback">
                                 Mohon pilih dokumen dulu.
@@ -204,18 +182,7 @@
                             <label for="" class="col-form-label">
                                 Body
                             </label>
-                            <select class="form-control select-component select-body" id="body" name="body" >
-                                <option selected disabled>Pilih Body . . </option>
-                                @foreach ($data['body'] as $b)
-                                    if($data['vehicles'] == []){
-                                        <option value="{{ $b->id_vehicle_bodies }}">{{ $b->name_vehicles_bodies }}</option>
-                                    }else{
-                                        @foreach($data['vehicles'] as $v)
-                                            <option value="{{ $b->id_vehicle_bodies }}" @if($b->id_vehicle_bodies === $v->id_vehicle_bodies) selected @endif>{{ $b->name_vehicles_bodies }}</option>
-                                            @break
-                                        @endforeach
-                                    }
-                                @endforeach
+                            <select class="form-control select-component select-body" id="body" name="body">
                             </select>
                             <div class="invalid-feedback">
                                 Mohon pilih body dulu.
@@ -226,18 +193,7 @@
                             <label for="" class="col-form-label">
                                 Varian
                             </label>
-                            <select class="form-control select-component select-varian" id="varian" name="varian" >
-                                <option selected disabled>Pilih Varian . . </option>
-                                @foreach ($data['varian'] as $var)
-                                    if($data['vehicles'] == []){
-                                        <option value="{{ $var->id_varian_vehicles }}">{{ $var->nama_varian }}</option>
-                                    }else{
-                                        @foreach($data['vehicles'] as $v)
-                                            <option value="{{ $var->id_varian_vehicles }}" @if($var->id_varian_vehicles === $v->id_varian_vehicles) selected @endif>{{ $var->nama_varian }}</option>
-                                            @break
-                                        @endforeach
-                                    }
-                                @endforeach
+                            <select class="form-control select-component select-varian" id="varian" name="varian">
                             </select>
                             <div class="invalid-feedback">
                                 Mohon pilih varian dulu.
@@ -599,7 +555,7 @@
                         <label for="" class="col-form-label">
                             File
                         </label>
-                        <input type="file" name="file" id="file" accept="file/*" class="form-control @error('file') is-invalid @enderror">
+                        <input type="file" name="file" id="file" accept="application/*" class="form-control @error('file') is-invalid @enderror">
                         <div class="invalid-feedback">
                             Mohon isi file dengan benar.
                         </div>

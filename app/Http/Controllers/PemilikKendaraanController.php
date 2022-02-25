@@ -120,4 +120,11 @@ class PemilikKendaraanController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function get_all_pemilik_kendaraan()
+    {
+        $data = Vendor::all();
+
+        return response()->json($data, 200);
+    }
 }

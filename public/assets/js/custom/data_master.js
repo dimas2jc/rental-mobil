@@ -7,9 +7,9 @@ $(document).ready(function(){
             console.log(data);
             $("#total_pegawai").html(data.pegawai);
             $("#total_vendor").html(data.vendor);
-            $("#total_kendaraan").html(data.kendaraan);
+            $("#total_kendaraan").html(data.vehicle);
         },
-        error:function(){
+        error:function(data){
             console.log(data);
         }
     });

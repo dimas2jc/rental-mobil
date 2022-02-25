@@ -11,22 +11,22 @@ class AlterTableCompanyAddLogoCompanyColumn extends Migration
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::table('company', function (Blueprint $table) {
-            $table->string('logo_company', 255);
-        });
-    }
+    // public function up()
+    // {
+    //     Schema::table('company', function (Blueprint $table) {
+    //         $table->string('logo_company', 255);
+    //     });
+    // }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::table('company', function (Blueprint $table) {
-            $table->dropColumn('logo_company');
-        });
-    }
+    // public function down()
+    // {
+    //     Schema::table('company', function (Blueprint $table) {
+    //         $table->dropColumn('logo_company');
+    //     });
+    // }
 }
