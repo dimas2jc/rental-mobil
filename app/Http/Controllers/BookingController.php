@@ -150,4 +150,19 @@ class BookingController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function get_reschedule_booking($id)
+    {
+        $data = Booking::where('id_booking', $id)
+        ->select(
+            '*',
+            DB::raw("DATE_FORMAT(date_start, '%d/%m/%Y') AS start_date"),
+            DB::raw("DATE_FORMAT(date_end, '%d/%m/%Y') AS end_date"),
+            DB::raw("DATE_FORMAT(date_start, '%H:%i') AS start_time"),
+            DB::raw("DATE_FORMAT(date_end, '%H:%i') AS end_time")
+        )
+        ->first();
+
+        return response()->json($data, 200);
+    }
 }

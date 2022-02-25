@@ -86,8 +86,33 @@ $(document).ready(function(){
         });
     });
 
+    $(".reschedule").on("click", function(){
+        $("#viewEventModal").modal("hide");
+        var id_booking = $(this).attr('id');
+
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/reschedule_booking/'+id_booking,
+            dataType: 'json',
+            success: function (results) {
+                $("#name_update").val(results.name);
+                $("#start_date_update").val(results.start_date);
+                $("#end_date_update").val(results.end_date);
+                $("#start_time_update").val(results.start_time);
+                $("#end_time_update").val(results.end_time);
+                $("#harga_sales_update").val(results.price_sales);
+                $("#real_price_update").val(results.start_time);
+                $("#dp_sales_update").val(results.start_time);
+                $("#update-jadwal").modal("show")
+            },
+            error:function(){
+                console.log(data);
+            }
+        });
+    });
+
     function get_vehicle(start, end){
-        console.log(start+" "+end);
+        // console.log(start+" "+end);
         $.ajax({
             type: 'POST',
             url: baseUrl+'/get_kendaraan',
