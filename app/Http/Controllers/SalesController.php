@@ -57,7 +57,7 @@ class SalesController extends Controller
         User::insert([
             'id' => $id,
             'username' => $name[0],
-            'password' => Hash::make($request->$name[0]),
+            'password' => Hash::make($name[0]),
             'role' => 2, // Sales
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

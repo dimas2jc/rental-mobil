@@ -16,6 +16,7 @@
                 </a>
             </li>
 
+            @if (auth()->user()->role == 1)
             <li>
                 <a href="#">
                     <span class="nav-link-icon">
@@ -71,6 +72,7 @@
                     <span>Data Master</span>
                 </a>
             </li>
+            @endif
 
             <!-- <li>
                 <a href="#">

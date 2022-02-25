@@ -59,7 +59,7 @@ class PegawaiController extends Controller
         User::insert([
             'id' => $id,
             'username' => $name[0],
-            'password' => Hash::make($request->$name[0]),
+            'password' => Hash::make($name[0]),
             'role' => 1, // Pegawai
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
