@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("#data_master").addClass("active")
     var url = "";
 
+    // Select2
+    const selectComponent = document.getElementsByClassName("select-component");
+    $(selectComponent).select2();
+
     var table_harga = $('#table-harga').DataTable({
         processing: true,
         serverSide: true,
@@ -15,18 +19,18 @@ $(document).ready(function(){
             }
         },
         columns:[
-          {data:"NOPOL",name:"NOPOL"},
-          {data:"NAMA_VARIAN",name:"NAMA_VARIAN"},
-          {data:"KAPASITAS_BBM",name:"KAPASITAS_BBM"},
-          {data:"PRICE_VEHICLES",name:"PRICE_VEHICLES"},
-          {data:"TIME_RENT",name:"TIME_RENT"},
+          {data:"nopol",name:"nopol"},
+          {data:"nama_varian",name:"nama_varian"},
+          {data:"kapasitas_bbm",name:"kapasitas_bbm"},
+          {data:"price_vehicles",name:"price_vehicles"},
+          {data:"time_rent",name:"time_rent"},
         {
             data: null,
             className: "text-center",
             orderable: false,
             searchable: false,
             render: function ( data, type, row ) {
-              return '<a onClick="edit('+data.ID_VEHICLES+')" id="'+data.ID_VEHICLES+'" class="btn btn-primary btn-sm tombol-edit-pegawai"><i class="fa fa-pencil"></i></a>';
+              return '<a onClick="edit('+data.id_vehicles+')" id="'+data.id_vehicles+'" class="btn btn-primary btn-sm tombol-edit-pegawai"><i class="fa fa-pencil"></i></a>';
             }
         }
         ]
@@ -58,9 +62,9 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_harga_kendaraan/'+id,
             dataType: 'json',
             success: function (data) {
-                $("#kendaraan").val(data.ID_VEHICLES);
-                $("#harga").val(data.PRICE_VEHICLES);
-                // $("#waktu").val(data.TIME_RENT);
+                $("#kendaraan").val(data.id_vehicles);
+                $("#harga").val(data.price_vehicles);
+                // $("#waktu").val(data.time_rent);
             },
             error:function(){
                 console.log(data);

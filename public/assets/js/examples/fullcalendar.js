@@ -75,11 +75,11 @@ $(document).ready(function () {
                 // }
 
                 events[i] = new Object();
-                events[i].title = results[i].NOPOL,
-                events[i].id = results[i].ID_BOOKING,
-                events[i].start = new Date(results[i].DATE_START).toISOString().slice(0, 10),
-                events[i].end = new Date(results[i].DATE_FINISH).toISOString().slice(0, 10),
-                events[i].description = 'Kendaraan dengan nomor polisi '+results[i].NOPOL+' pada tanggal '+new Date(results[i].DATE_START).toISOString().slice(0, 10)+' sampai '+new Date(results[i].DATE_FINISH).toISOString().slice(0, 10)+' oleh '+results[i].NAME_CUSTOMER
+                events[i].title = results[i].nopol,
+                events[i].id = results[i].id_booking,
+                events[i].start = moment(results[i].date_start).toDate(),
+                events[i].end = moment(results[i].date_end).add(1, "days").toDate(),
+                events[i].description = 'Kendaraan dengan nomor polisi '+results[i].nopol+' pada tanggal '+new Date(results[i].date_start).toISOString().slice(0, 10)+' sampai '+new Date(results[i].date_finish).toISOString().slice(0, 10)+' oleh '+results[i].name_customer
             }
 
             $('#calendar-demo').fullCalendar({

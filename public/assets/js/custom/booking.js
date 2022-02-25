@@ -7,6 +7,8 @@ $(document).ready(function(){
     const selectComponent = document.getElementsByClassName("select-component");
     $(selectComponent).select2();
 
+    $('#harga').mask('000000000000');
+
     $('.datepicker').daterangepicker({
         singleDatePicker: true,
         showDropdowns: true
@@ -33,23 +35,35 @@ $(document).ready(function(){
     var end_date;
     var start_time;
     var end_time;
-    // $("#start_date").on("click", function(){
-    //     start_date = $(this).val();
-    //     end_date = $("#end_date").val();
-    //     get_vehicle(start_date, end_date);
-    // })
-
-    // $("#end_date").on("click", function(){
-    //     end_date = $(this).val();
-    //     start_date = $("#start_date").val();
-    //     get_vehicle(start_date, end_date);
-    // })
-
-    $(".change-date").on("change", function(){
+    $("#start_date").on("change", function(){
         start_date = $("#start_date").val()+" "+$("#start_time").val();
         end_date = $("#end_date").val()+" "+$("#end_time").val();
         get_vehicle(start_date, end_date);
     })
+
+    $("#end_date").on("change", function(){
+        start_date = $("#start_date").val()+" "+$("#start_time").val();
+        end_date = $("#end_date").val()+" "+$("#end_time").val();
+        get_vehicle(start_date, end_date);
+    })
+
+    $("#start_time").on("change", function(){
+        start_date = $("#start_date").val()+" "+$("#start_time").val();
+        end_date = $("#end_date").val()+" "+$("#end_time").val();
+        get_vehicle(start_date, end_date);
+    })
+
+    $("#end_time").on("change", function(){
+        start_date = $("#start_date").val()+" "+$("#start_time").val();
+        end_date = $("#end_date").val()+" "+$("#end_time").val();
+        get_vehicle(start_date, end_date);
+    })
+
+    // $(".change-date").on("change", function(){
+    //     start_date = $("#start_date").val()+" "+$("#start_time").val();
+    //     end_date = $("#end_date").val()+" "+$("#end_time").val();
+    //     get_vehicle(start_date, end_date);
+    // })
 
     $("#vehicle").on("change", function(){
         $.ajax({
@@ -59,17 +73,12 @@ $(document).ready(function(){
             data: {
                 date_start: $("#start_date").val()+" "+$("#start_time").val(),
                 date_end: $("#end_date").val()+" "+$("#end_time").val(),
+                id_vehicles: $("#vehicle").val(),
                 _token: token
             },
             success: function (data) {
-                results.data.forEach(addOption);
-                function addOption(item, index, arr){
-                    let text = item.name;
-                    let val = item.id_vehicles;
-                    var option = new Option(text, val);
-                    $(option).html(text);
-                    $("#vehicle"+no).append(option);
-                }
+                $("#harga").val(data);
+                $("#real_price").val(data);
             },
             error:function(){
                 console.log(data);
@@ -88,14 +97,20 @@ $(document).ready(function(){
                 end: end,
                 _token: token
             },
-            success: function (data) {
-                results.data.forEach(addOption);
+            success: function (results) {
+                $("#vehicle option").remove();
+                let text1 = "Pilih Kendaraan ..";
+                let val1 = "";
+                var option1 = new Option(text1, val1);
+                $("#vehicle").append(option1);
+                $("#vehicle option").addClass("selected disabled");
+                results.forEach(addOption);
                 function addOption(item, index, arr){
-                    let text = item.name;
+                    let text = item.nopol;
                     let val = item.id_vehicles;
                     var option = new Option(text, val);
                     $(option).html(text);
-                    $("#vehicle"+no).append(option);
+                    $("#vehicle").append(option);
                 }
             },
             error:function(){

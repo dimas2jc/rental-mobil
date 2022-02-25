@@ -84,6 +84,7 @@
             </div>
             <div class="modal-body">
                 <form action="{{ url('store_booking') }}" method="POST">
+                    @csrf
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Customer Lama?</label>
                         <div class="col-sm-8">
@@ -216,6 +217,7 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text" name="harga" id="harga" class="form-control">
+                            <input type="hidden" name="real_price" id="real_price" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -254,6 +256,13 @@
             </div>
             <div class="modal-body">
                 <div class="event-body"></div>
+                <br>
+                <div class="form-group row">
+                    <div class="col-sm-12">
+                        <button type="button" id="reschedule" class="btn btn-sm btn-primary">Reschedule</button>&nbsp;
+                        <button type="button" id="approve" class="btn btn-sm btn-warning">Approve</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -26,35 +26,35 @@ class KendaraanController extends Controller
 
     public function store_kendaraan(Request $request)
     {
-        $request->validate([
-            'pemilik' => 'required',
-            'dokumen' => 'required',
-            'body' => 'required',
-            'varian' => 'required',
-            'nopol' => 'required|string',
-            'no_rangka' => 'required|string',
-            'no_mesin' => 'required|string',
-            'warna' => 'required|string',
-            'tahun_pembuatan' => 'required',
-            'no_stnk' => 'required|string',
-            'nama_stnk' => 'required|string',
-            'masa_stnk' => 'required|string',
-            'alamat_stnk' => 'required|string',
-            'no_bpkb' => 'required|string',
-            'tgl_kir' => 'required',
-        ]);
+        // $request->validate([
+        //     'pemilik' => 'required',
+        //     'dokumen' => 'required',
+        //     'body' => 'required',
+        //     'varian' => 'required',
+        //     'nopol' => 'required|string',
+        //     'no_rangka' => 'required|string',
+        //     'no_mesin' => 'required|string',
+        //     'warna' => 'required|string',
+        //     'tahun_pembuatan' => 'required',
+        //     'no_stnk' => 'required|string',
+        //     'nama_stnk' => 'required|string',
+        //     'masa_stnk' => 'required|string',
+        //     'alamat_stnk' => 'required|string',
+        //     'no_bpkb' => 'required|string',
+        //     'tgl_kir' => 'required',
+        // ]);
 
         Vehicle::insert([
             'id_vehicles' => Uuid::uuid4(),
             'id_vendors' => $request->vendor,
             'id_doc_vehicles' => $request->dokumen,
             'id_vehicle_bodies' => $request->body,
-            '_id_varian_vehicles' => $request->varian,
+            'id_varian_vehicles' => $request->varian,
             'nopol' => $request->nopol,
             'no_rangka' => $request->no_rangka,
             'nomesin' => $request->no_mesin,
             'warna' => $request->warna,
-            'kapasitas_bbm' => $request->kapasitas_bbm,
+            // 'kapasitas_bbm' => $request->kapasitas_bbm,
             'tahun_pembuatan' => $request->tahun_pembuatan,
             'no_stnk' => $request->no_stnk,
             'nama_stnk' => $request->nama_stnk,
@@ -73,12 +73,12 @@ class KendaraanController extends Controller
             'id_vendors' => $request->vendor,
             'id_doc_vehicles' => $request->dokumen,
             'id_vehicle_bodies' => $request->body,
-            '_id_varian_vehicles' => $request->varian,
+            'id_varian_vehicles' => $request->varian,
             'nopol' => $request->nopol,
             'no_rangka' => $request->no_rangka,
             'nomesin' => $request->no_mesin,
             'warna' => $request->warna,
-            'kapasitas_bbm' => $request->kapasitas_bbm,
+            // 'kapasitas_bbm' => $request->kapasitas_bbm,
             'tahun_pembuatan' => $request->tahun_pembuatan,
             'no_stnk' => $request->no_stnk,
             'nama_stnk' => $request->nama_stnk,
@@ -146,7 +146,7 @@ class KendaraanController extends Controller
         ]);
 
         VehiclesVarian::insert([
-            '_id_varian_vehicles' => Uuid::uuid4(),
+            'id_varian_vehicles' => Uuid::uuid4(),
             'name_varian' => $request->name_varian,
             'vehicles_type' => $request->type_varian,
             'vehicles_pabrikan' => $request->pabrikan,
@@ -168,7 +168,7 @@ class KendaraanController extends Controller
 
     public function update_varian_kendaraan(Request $request, $id)
     {
-        VehiclesVarian::where('_id_varian_vehicles', $id)->update([
+        VehiclesVarian::where('id_varian_vehicles', $id)->update([
             'name_varian' => $request->name_varian,
             'vehicles_type' => $request->type_varian,
             'vehicles_pabrikan' => $request->pabrikan,

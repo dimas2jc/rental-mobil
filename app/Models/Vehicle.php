@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Vehicle
- * 
+ *
  * @property string $id_vehicles
  * @property string|null $id_varian_vehicles
  * @property string|null $id_vendors
@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $alamat_sntk
  * @property string|null $no_bpkb
  * @property string|null $tgl_kir
- * 
+ *
  * @property Vendor|null $vendor
  * @property VehiclesVarian|null $vehicles_varian
  * @property DocumentVehicle|null $document_vehicle
@@ -57,8 +57,8 @@ class Vehicle extends Model
 		'tahun_pembuatan',
 		'no_stnk',
 		'nama_stnk',
-		'masa_sntk',
-		'alamat_sntk',
+		'masa_stnk',
+		'alamat_stnk',
 		'no_bpkb',
 		'tgl_kir'
 	];

@@ -31,7 +31,7 @@ $(document).ready(function(){
             {data:"tahun_pembuatan",name:"tahun_pembuatan"},
             {data:"no_stnk",name:"no_stnk"},
             {data:"nama_stnk",name:"nama_stnk"},
-            {data:"alamat_sntk",name:"alamat_sntk"},
+            {data:"alamat_stnk",name:"alamat_stnk"},
             {data:"no_bpkb",name:"no_bpkb"},
             {data:"tgl_kir",name:"tgl_kir"},
             {
@@ -94,8 +94,8 @@ $(document).ready(function(){
                 $("#tahun_pembuatan").val(data.tahun_pembuatan);
                 $("#no_stnk").val(data.no_stnk);
                 $("#nama_stnk").val(data.nama_stnk);
-                $("#masa_stnk").val(data.masa_sntk);
-                $("#alamat_stnk").val(data.alamat_sntk);
+                $("#masa_stnk").val(data.masa_stnk);
+                $("#alamat_stnk").val(data.alamat_stnk);
                 $("#no_bpkb").val(data.no_bpkb);
                 $("#tgl_kir").val(data.tgl_kir);
             },

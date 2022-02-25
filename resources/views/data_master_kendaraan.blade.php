@@ -163,10 +163,14 @@
                             <select class="form-control select-component select-pemilik" id="pemilik" name="pemilik" required>
                                 <option selected disabled>Pilih Pemilik . . </option>
                                 @foreach ($data['pemilik'] as $p)
-                                    @foreach($data['vehicles'] as $v)
-                                        <option value="{{ $p->id_vendors }}" @if($p->id_vendors === $v->id_vendors) selected @endif>{{ $p->name_vendrs }}</option>
-                                        @break
-                                    @endforeach
+                                    if($data['vehicles'] == []){
+                                        <option value="{{ $p->id_vendors }}">{{ $p->name_vendrs }}</option>
+                                    }else{
+                                        @foreach($data['vehicles'] as $v)
+                                            <option value="{{ $p->id_vendors }}" @if($p->id_vendors === $v->id_vendors) selected @endif>{{ $p->name_vendrs }}</option>
+                                            @break
+                                        @endforeach
+                                    }
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -178,13 +182,17 @@
                             <label for="" class="col-form-label">
                                 Dokumen
                             </label>
-                            <select class="form-control select-component select-dokumen" id="dokumen" name="dokumen" required>
+                            <select class="form-control select-component select-dokumen" id="dokumen" name="dokumen" >
                                 <option selected disabled>Pilih Dokumen . . </option>
                                 @foreach ($data['dokumen'] as $doc)
-                                    @foreach($data['vehicles'] as $v)
-                                        <option value="{{ $doc->id_doc_vehicles }}" @if($doc->id_doc_vehicles === $v->id_doc_vehicles) selected @endif>{{ $doc->name_doc_vehicles }}</option>
-                                        @break
-                                    @endforeach
+                                    if($data['vehicles'] == []){
+                                        <option value="{{ $doc->id_doc_vehicles }}">{{ $doc->name_doc_vehicles }}</option>
+                                    }else{
+                                        @foreach($data['vehicles'] as $v)
+                                            <option value="{{ $doc->id_doc_vehicles }}" @if($doc->id_doc_vehicles === $v->id_doc_vehicles) selected @endif>{{ $doc->name_doc_vehicles }}</option>
+                                            @break
+                                        @endforeach
+                                    }
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -196,13 +204,17 @@
                             <label for="" class="col-form-label">
                                 Body
                             </label>
-                            <select class="form-control select-component select-body" id="body" name="body" required>
+                            <select class="form-control select-component select-body" id="body" name="body" >
                                 <option selected disabled>Pilih Body . . </option>
                                 @foreach ($data['body'] as $b)
-                                    @foreach($data['vehicles'] as $v)
-                                        <option value="{{ $b->id_vehicle_bodies }}" @if($b->id_vehicle_bodies === $v->id_vehicle_bodies) selected @endif>{{ $b->name_vehicles_bodies }}</option>
-                                        @break
-                                    @endforeach
+                                    if($data['vehicles'] == []){
+                                        <option value="{{ $b->id_vehicle_bodies }}">{{ $b->name_vehicles_bodies }}</option>
+                                    }else{
+                                        @foreach($data['vehicles'] as $v)
+                                            <option value="{{ $b->id_vehicle_bodies }}" @if($b->id_vehicle_bodies === $v->id_vehicle_bodies) selected @endif>{{ $b->name_vehicles_bodies }}</option>
+                                            @break
+                                        @endforeach
+                                    }
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -214,13 +226,17 @@
                             <label for="" class="col-form-label">
                                 Varian
                             </label>
-                            <select class="form-control select-component select-varian" id="varian" name="varian" required>
+                            <select class="form-control select-component select-varian" id="varian" name="varian" >
                                 <option selected disabled>Pilih Varian . . </option>
                                 @foreach ($data['varian'] as $var)
-                                    @foreach($data['vehicles'] as $v)
-                                        <option value="{{ $var->id_varian_vehicles }}" @if($var->id_varian_vehicles === $v->id_varian_vehicles) selected @endif>{{ $var->nama_varian }}</option>
-                                        @break
-                                    @endforeach
+                                    if($data['vehicles'] == []){
+                                        <option value="{{ $var->id_varian_vehicles }}">{{ $var->nama_varian }}</option>
+                                    }else{
+                                        @foreach($data['vehicles'] as $v)
+                                            <option value="{{ $var->id_varian_vehicles }}" @if($var->id_varian_vehicles === $v->id_varian_vehicles) selected @endif>{{ $var->nama_varian }}</option>
+                                            @break
+                                        @endforeach
+                                    }
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">
@@ -242,7 +258,7 @@
                             <label for="" class="col-form-label">
                                 No. Rangka
                             </label>
-                            <input type="text" name="no_rangka" id="no_rangka" class="form-control @error('no_rangka') is-invalid @enderror" required>
+                            <input type="text" name="no_rangka" id="no_rangka" class="form-control @error('no_rangka') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi nomor rangka dengan benar.
                             </div>
@@ -252,7 +268,7 @@
                             <label for="" class="col-form-label">
                                 No. Mesin
                             </label>
-                            <input type="text" name="no_mesin" id="no_mesin" class="form-control @error('no_mesin') is-invalid @enderror" required>
+                            <input type="text" name="no_mesin" id="no_mesin" class="form-control @error('no_mesin') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi nomor mesin dengan benar.
                             </div>
@@ -262,21 +278,21 @@
                             <label for="" class="col-form-label">
                                 Warna
                             </label>
-                            <input type="text" name="warna" id="warna" class="form-control @error('warna') is-invalid @enderror" required>
+                            <input type="text" name="warna" id="warna" class="form-control @error('warna') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi warna dengan benar.
                             </div>
                         </div>
 
                     </div>
-                    
+
                     <div class="colnum">
 
                         <div class="form-group">
                             <label for="" class="col-form-label">
                                 Tahun Pembuatan
                             </label>
-                            <input type="text" name="tahun_pembuatan" id="tahun_pembuatan" class="form-control @error('tahun_pembuatan') is-invalid @enderror" required>
+                            <input type="text" name="tahun_pembuatan" id="tahun_pembuatan" class="form-control @error('tahun_pembuatan') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi tahun pembuatan dengan benar.
                             </div>
@@ -286,7 +302,7 @@
                             <label for="" class="col-form-label">
                                 No. STNK
                             </label>
-                            <input type="text" name="no_stnk" id="no_stnk" class="form-control @error('no_stnk') is-invalid @enderror" required>
+                            <input type="text" name="no_stnk" id="no_stnk" class="form-control @error('no_stnk') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi nomor STNK dengan benar.
                             </div>
@@ -296,7 +312,7 @@
                             <label for="" class="col-form-label">
                                 Nama STNK
                             </label>
-                            <input type="text" name="nama_stnk" id="nama_stnk" class="form-control @error('nama_stnk') is-invalid @enderror" required>
+                            <input type="text" name="nama_stnk" id="nama_stnk" class="form-control @error('nama_stnk') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi nama STNK dengan benar.
                             </div>
@@ -306,7 +322,7 @@
                             <label for="" class="col-form-label">
                                 Masa STNK
                             </label>
-                            <input type="text" name="masa_stnk" id="masa_stnk" class="form-control @error('masa_stnk') is-invalid @enderror" required>
+                            <input type="text" name="masa_stnk" id="masa_stnk" class="form-control @error('masa_stnk') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi Masa STNK dengan benar.
                             </div>
@@ -316,7 +332,7 @@
                             <label for="" class="col-form-label">
                                 Alamat STNK
                             </label>
-                            <input type="text" name="alamat_stnk" id="alamat_stnk" class="form-control @error('alamat_stnk') is-invalid @enderror" required>
+                            <input type="text" name="alamat_stnk" id="alamat_stnk" class="form-control @error('alamat_stnk') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi alamat STNK dengan benar.
                             </div>
@@ -326,7 +342,7 @@
                             <label for="" class="col-form-label">
                                 No. BPKB
                             </label>
-                            <input type="text" name="no_bpkb" id="no_bpkb" class="form-control @error('no_bpkb') is-invalid @enderror" required>
+                            <input type="text" name="no_bpkb" id="no_bpkb" class="form-control @error('no_bpkb') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi nomor BPKB dengan benar.
                             </div>
@@ -336,7 +352,7 @@
                             <label for="" class="col-form-label">
                                 Tanggal KIR
                             </label>
-                            <input type="date" name="tgl_kir" id="tgl_kir" class="form-control @error('tgl_kir') is-invalid @enderror" required>
+                            <input type="date" name="tgl_kir" id="tgl_kir" class="form-control @error('tgl_kir') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi tanggal KIR dengan benar.
                             </div>
