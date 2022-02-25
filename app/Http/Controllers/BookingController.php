@@ -49,7 +49,7 @@ class BookingController extends Controller
 
         $id_booking = Uuid::uuid4();
         $id_payment = Uuid::uuid4();
-        Booking::insertGetId([
+        Booking::insert([
             'id_booking' => $id_booking,
             'id_customer' => $id_customer,
             'id_vehicles' => $request->vehicle,
@@ -63,7 +63,7 @@ class BookingController extends Controller
             'real_price' => $request->real_price
         ]);
 
-        PaymentRent::insertGetId([
+        PaymentRent::insert([
             'id_payment_rent' => $id_payment,
             'total_payment' => $request->harga,
             'date_payment' => Carbon::now(),
@@ -83,10 +83,77 @@ class BookingController extends Controller
         return back();
     }
 
+    public function update_booking(Request $request)
+    {
+        // $request->validate([
+        //     'vehicle' => 'required',
+        //     'start_date' => 'required',
+        //     'end_date' => 'required',
+        //     'harga' => 'required',
+        //     'dp' => 'required'
+        // ]);
+
+        DB::beginTransaction();
+        $date_start = strtotime($request->update_start_date." ".$request->update_start_time.":00");
+        $date_end = strtotime($request->update_end_date." ".$request->update_end_time.":00");
+        $jam_now = abs($date_end - $date_start)/(60*60);
+        // dd(abs($date_start-$date_end));
+
+        $booking = Booking::where('booking.id_booking', $request->id_booking_update)
+        ->leftJoin('detail_payment', 'detail_payment.id_booking', 'booking.id_booking')
+        ->first();
+        if($request->kendaraan_sama == 1){
+            $id_vehicle = $booking->id_vehicles;
+        }
+        else{
+            $id_vehicle = $request->vehicle;
+        }
+        $jam = abs(strtotime($booking->date_finish) - strtotime($booking->date_start))/(60*60);
+        $real_price_before = (24 / $jam) * $booking->real_price;
+        $real_price = ($jam_now / 24) * $real_price_before;
+
+
+        Booking::where('id_booking', $request->id_booking_update)->update([
+            'id_vehicles' => $id_vehicle,
+            'date_start' => date("Y-m-d H:i:s", $date_start),
+            'date_finish' => date("Y-m-d H:i:s", $date_end),
+            'price_sales' => $request->harga_update,
+            'dp_sales' => $request->dp_update,
+            'status_booking' => 3, // reschedule
+            'komisi_sales' => $request->harga_update - $real_price,
+            'real_price' => $real_price
+        ]);
+
+        PaymentRent::where('id_payment_rent', $booking->id_payment_rent)->update([
+            'total_payment' => $request->harga_update,
+            'date_payment' => Carbon::now()
+        ]);
+
+        // DetailPayment::insert([
+        //     'id_booking' => $id_booking,
+        //     'id_payment_rent' => $id_payment,
+        //     'price' => $request->dp,
+        //     'description' => "DP - ".$nopol->nopol." - Untuk tgl ".$date_start." sampai ".$date_end,
+        //     'timestamps' => Carbon::now()
+        // ]);
+
+        DB::commit();
+
+        return back();
+    }
+
     public function get_booking()
     {
         $data = Booking::leftJoin('customer', 'customer.id_customer', 'booking.id_customer')
         ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        ->select('booking.*', 'vehicles.nopol', 'vehicles.id_vehicleS', 'customer.name_customer', DB::raw("(
+            CASE
+                WHEN status_booking = 0 THEN '0'
+                WHEN status_booking = 1 THEN '1'
+                WHEN status_booking = 2 THEN '2'
+                WHEN status_booking = 3 THEN '3'
+            END
+        ) AS status"))
         ->get();
 
         return response()->json($data, 200);
@@ -146,23 +213,36 @@ class BookingController extends Controller
 
         $harga = PriceVehicle::where(['id_vehicles' => $request->id_vehicles, 'time_rent' => 24])->first();
         $data = ($jam / $harga->time_rent) * $harga->price_vehicles;
-        // dd($jam);
+        // dd(abs($end_date - $start_date));
 
         return response()->json($data, 200);
     }
 
     public function get_reschedule_booking($id)
     {
-        $data = Booking::where('id_booking', $id)
+        $data = Booking::leftJoin('customer', 'customer.id_customer', 'booking.id_customer')
+        ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        ->where('id_booking', $id)
         ->select(
             '*',
-            DB::raw("DATE_FORMAT(date_start, '%d/%m/%Y') AS start_date"),
-            DB::raw("DATE_FORMAT(date_end, '%d/%m/%Y') AS end_date"),
-            DB::raw("DATE_FORMAT(date_start, '%H:%i') AS start_time"),
-            DB::raw("DATE_FORMAT(date_end, '%H:%i') AS end_time")
+            DB::raw("DATE_FORMAT(booking.date_start, '%m/%d/%Y') AS start_date"),
+            DB::raw("DATE_FORMAT(booking.date_finish, '%m/%d/%Y') AS end_date"),
+            DB::raw("DATE_FORMAT(booking.date_start, '%H:%i') AS start_time"),
+            DB::raw("DATE_FORMAT(booking.date_finish, '%H:%i') AS end_time"),
+            'customer.name_customer as name',
+            'vehicles.id_vehicles',
+            'vehicles.nopol'
         )
         ->first();
 
         return response()->json($data, 200);
+    }
+
+    public function approve($id){
+        Booking::where('id_booking', $id)->update([
+            'status_booking' => 2 // status approved
+        ]);
+
+        return response()->json(200);
     }
 }

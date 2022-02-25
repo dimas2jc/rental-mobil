@@ -77,6 +77,7 @@ $(document).ready(function () {
                 events[i] = new Object();
                 events[i].title = results[i].nopol,
                 events[i].id = results[i].id_booking,
+                events[i].status = results[i].status,
                 events[i].start = moment(results[i].date_start).toDate(),
                 events[i].end = moment(results[i].date_end).add(1, "days").toDate(),
                 events[i].description = 'Kendaraan dengan nomor polisi '+results[i].nopol+' pada tanggal '+new Date(results[i].date_start).toISOString().slice(0, 10)+' sampai '+new Date(results[i].date_finish).toISOString().slice(0, 10)+' oleh '+results[i].name_customer
@@ -115,6 +116,9 @@ $(document).ready(function () {
                     modal.find('.event-body').html(event.description);
                     modal.find('.reschedule').attr('id', event.id);
                     modal.find('.approve').attr('id', event.id);
+                    if(event.status == 2){
+                        modal.find('.approve').css('display', 'none');
+                    }
                     modal.modal();
                 },
             });

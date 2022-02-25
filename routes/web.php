@@ -53,9 +53,11 @@ Route::get('monitoring', [MonitoringController::class, 'index']);
 
 Route::get('get_booking', [BookingController::class, 'get_booking']);
 Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
+Route::get('approve/{id}', [BookingController::class, 'approve']);
 Route::post('get_kendaraan', [BookingController::class, 'get_kendaraan']);
 Route::post('get_harga', [BookingController::class, 'get_harga']);
 Route::post('store_booking', [BookingController::class, 'store_booking']);
+Route::post('update_booking', [BookingController::class, 'update_booking']);
 
 Route::post('setting/company', [CompanyController::class, 'setting1']);
 Route::post('setting/company/{id}', [CompanyController::class, 'setting2']);
