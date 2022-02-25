@@ -26,41 +26,42 @@ class KendaraanController extends Controller
 
     public function store_kendaraan(Request $request)
     {
-        $request->validate([
-            'pemilik' => 'required',
-            'dokumen' => 'required',
-            'body' => 'required',
-            'varian' => 'required',
-            'nopol' => 'required|string',
-            'no_rangka' => 'required|string',
-            'no_mesin' => 'required|string',
-            'warna' => 'required|string',
-            'tahun_pembuatan' => 'required',
-            'no_stnk' => 'required|string',
-            'nama_stnk' => 'required|string',
-            'masa_stnk' => 'required|string',
-            'alamat_stnk' => 'required|string',
-            'no_bpkb' => 'required|string',
-            'tgl_kir' => 'required',
-        ]);
+        // $request->validate([
+        //     'pemilik' => 'required',
+        //     'dokumen' => 'required',
+        //     'body' => 'required',
+        //     'varian' => 'required',
+        //     'nopol' => 'required|string',
+        //     'no_rangka' => 'required|string',
+        //     'no_mesin' => 'required|string',
+        //     'warna' => 'required|string',
+        //     'tahun_pembuatan' => 'required',
+        //     'no_stnk' => 'required|string',
+        //     'nama_stnk' => 'required|string',
+        //     'masa_stnk' => 'required|string',
+        //     'alamat_stnk' => 'required|string',
+        //     'no_bpkb' => 'required|string',
+        //     'tgl_kir' => 'required',
+        // ]);
 
         Vehicle::insert([
-            'ID_VEHICLES' => Uuid::uuid4(),
-            'ID_VENDORS' => $request->pemilik,
-            'ID_DOC_VEHICLES' => $request->dokumen,
-            'ID_VEHICLE_BODIES' => $request->body,
-            'ID_VARIAN_VEHICLES' => $request->varian,
-            'NOPOL' => $request->nopol,
-            'NO_RANGKA' => $request->no_rangka,
-            'NOMESIN' => $request->no_mesin,
-            'WARNA' => $request->warna,
-            'TAHUN_PEMBUATAN' => $request->tahun_pembuatan,
-            'NO_STNK' => $request->no_stnk,
-            'NAMA_STNK' => $request->nama_stnk,
-            'MASA_SNTK' => $request->masa_stnk,
-            'ALAMAT_SNTK' => $request->alamat_stnk,
-            'NO_BPKB' => $request->no_BPKB,
-            'TGL_KIR' => date("Y-m-d", strtotime($request->tgl_kir))
+            'id_vehicles' => Uuid::uuid4(),
+            'id_vendors' => $request->vendor,
+            'id_doc_vehicles' => $request->dokumen,
+            'id_vehicle_bodies' => $request->body,
+            'id_varian_vehicles' => $request->varian,
+            'nopol' => $request->nopol,
+            'no_rangka' => $request->no_rangka,
+            'nomesin' => $request->no_mesin,
+            'warna' => $request->warna,
+            // 'kapasitas_bbm' => $request->kapasitas_bbm,
+            'tahun_pembuatan' => $request->tahun_pembuatan,
+            'no_stnk' => $request->no_stnk,
+            'nama_stnk' => $request->nama_stnk,
+            'masa_stnk' => $request->masa_stnk,
+            'alamat_stnk' => $request->alamat_stnk,
+            'no_bpkb' => $request->no_bpkb,
+            'tgl_kir' => date("Y-m-d", strtotime($request->tgl_kir))
         ]);
 
         return back();
@@ -68,40 +69,23 @@ class KendaraanController extends Controller
 
     public function update_kendaraan(Request $request, $id)
     {
-        $request->validate([
-            'pemilik' => 'required',
-            'dokumen' => 'required',
-            'body' => 'required',
-            'varian' => 'required',
-            'nopol' => 'required|string',
-            'no_rangka' => 'required|string',
-            'no_mesin' => 'required|string',
-            'warna' => 'required|string',
-            'tahun_pembuatan' => 'required',
-            'no_stnk' => 'required|string',
-            'nama_stnk' => 'required|string',
-            'masa_stnk' => 'required|string',
-            'alamat_stnk' => 'required|string',
-            'no_bpkb' => 'required|string',
-            'tgl_kir' => 'required',
-        ]);
-
-        Vehicle::where('ID_VEHICLES', $id)->update([
-            'ID_VENDORS' => $request->pemilik,
-            'ID_DOC_VEHICLES' => $request->dokumen,
-            'ID_VEHICLE_BODIES' => $request->body,
-            'ID_VARIAN_VEHICLES' => $request->varian,
-            'NOPOL' => $request->nopol,
-            'NO_RANGKA' => $request->no_rangka,
-            'NOMESIN' => $request->no_mesin,
-            'WARNA' => $request->warna,
-            'TAHUN_PEMBUATAN' => $request->tahun_pembuatan,
-            'NO_STNK' => $request->no_stnk,
-            'NAMA_STNK' => $request->nama_stnk,
-            'MASA_SNTK' => $request->masa_stnk,
-            'ALAMAT_SNTK' => $request->alamat_stnk,
-            'NO_BPKB' => $request->no_bpkb,
-            'TGL_KIR' => date("Y-m-d", strtotime($request->tgl_kir))
+        Vehicle::where('id_vehicles', $id)->update([
+            'id_vendors' => $request->vendor,
+            'id_doc_vehicles' => $request->dokumen,
+            'id_vehicle_bodies' => $request->body,
+            'id_varian_vehicles' => $request->varian,
+            'nopol' => $request->nopol,
+            'no_rangka' => $request->no_rangka,
+            'nomesin' => $request->no_mesin,
+            'warna' => $request->warna,
+            // 'kapasitas_bbm' => $request->kapasitas_bbm,
+            'tahun_pembuatan' => $request->tahun_pembuatan,
+            'no_stnk' => $request->no_stnk,
+            'nama_stnk' => $request->nama_stnk,
+            'masa_stnk' => $request->masa_stnk,
+            'alamat_stnk' => $request->alamat_stnk,
+            'no_bpkb' => $request->no_bpkb,
+            'tgl_kir' => date("Y-m-d", strtotime($request->tgl_kir))
         ]);
 
         return back();
@@ -120,9 +104,9 @@ class KendaraanController extends Controller
             $is_active = 0;
         }
         VehicleBody::insert([
-            'ID_VEHICLE_BODIES' => Uuid::uuid4(),
-            'NAME_VEHICLES_BODIES' => $request->name,
-            'IS_ACTIVE' => $is_active
+            'id_vehicle_bodies' => Uuid::uuid4(),
+            'name_vehicles_bodies' => $request->name,
+            'is_active' => $is_active
         ]);
 
         return back();
@@ -134,16 +118,16 @@ class KendaraanController extends Controller
         $request->validate([
             'name' => 'required|string|max:60',
         ]);
-        
+
         if($request->is_active == 'on'){
             $is_active = 1;
         }
         else{
             $is_active = 0;
         }
-        VehicleBody::where('ID_VEHICLE_BODIES', $id)->update([
-            'NAME_VEHICLES_BODIES' => $request->name,
-            'IS_ACTIVE' => $is_active
+        VehicleBody::where('id_vehicle_bodies', $id)->update([
+            'name_vehicles_bodies' => $request->name,
+            'is_active' => $is_active
         ]);
 
         return back();
@@ -162,21 +146,21 @@ class KendaraanController extends Controller
         ]);
 
         VehiclesVarian::insert([
-            'ID_VARIAN_VEHICLES' => Uuid::uuid4(),
-            'NAMA_VARIAN' => $request->name_varian,
-            'VEHICLES_TYPE' => $request->type_varian,
-            'VEHICLES_PABRIKAN' => $request->pabrikan,
-            'SILINDER' => $request->silinder,
-            'KAPASITAS_CC' => $request->kapasitas_cc,
-            'TIPE_BBM' => $request->TIPE_BBM,
-            'KAPASITAS_BBM' => $request->kapasitas_bbm_varian,
-            'RASIO_BBM' => $request->rasio_bbm,
-            'JENIS_TRANSMISI' => $request->jenis_transmisi,
-            'KONFIGURASI_AXLE' => $request->konfigurasi_axle,
-            'JUMLAH_SUMBU' => $request->jumlah_sumbu,
-            'UKURAN_BAN' => $request->ukuran_ban,
-            'VEHICLES_SIT' => $request->vehicle_sit,
-            'NOTE' => $request->note
+            'id_varian_vehicles' => Uuid::uuid4(),
+            'name_varian' => $request->name_varian,
+            'vehicles_type' => $request->type_varian,
+            'vehicles_pabrikan' => $request->pabrikan,
+            'silinder' => $request->silinder,
+            'kapasitas_cc' => $request->kapasitas_cc,
+            'tipe_bbm' => $request->tipe_bbm,
+            'kapasitas_bbm' => $request->kapasitas_bbm_varian,
+            'rasio_mesin' => $request->rasio_mesin,
+            'jenis_transmisi' => $request->jenis_transmisi,
+            'konfigurasi_axle' => $request->konfigurasi_axle,
+            'jumlah_sumbu' => $request->jumlah_sumbu,
+            'ukuran_ban' => $request->ukuran_ban,
+            'vehicles_sit' => $request->vehicle_sit,
+            'note' => $request->note
         ]);
 
         return back();
@@ -184,31 +168,21 @@ class KendaraanController extends Controller
 
     public function update_varian_kendaraan(Request $request, $id)
     {
-        $request->validate([
-            'name_varian' => 'required|string|max:100',
-            'type_varian' => 'required|string|max:100',
-            'pabrikan' => 'required|string|max:100',
-            'kapasitas_cc' => 'required|max:10',
-            'kapasitas_bbm_varian' => 'required|max:10',
-            'ukuran_ban' => 'required|max:10',
-            'vehicle_sit' => 'required|max:10',
-        ]);
-        
-        VehiclesVarian::where('ID_VARIAN_VEHICLES', $id)->update([
-            'NAMA_VARIAN' => $request->name_varian,
-            'VEHICLES_TYPE' => $request->type_varian,
-            'VEHICLES_PABRIKAN' => $request->pabrikan,
-            'SILINDER' => $request->silinder,
-            'KAPASITAS_CC' => $request->kapasitas_cc,
-            'TIPE_BBM' => $request->TIPE_BBM,
-            'KAPASITAS_BBM' => $request->kapasitas_bbm_varian,
-            'RASIO_BBM' => $request->rasio_bbm,
-            'JENIS_TRANSMISI' => $request->jenis_transmisi,
-            'KONFIGURASI_AXLE' => $request->konfigurasi_axle,
-            'JUMLAH_SUMBU' => $request->jumlah_sumbu,
-            'UKURAN_BAN' => $request->ukuran_ban,
-            'VEHICLES_SIT' => $request->vehicle_sit,
-            'NOTE' => $request->note
+        VehiclesVarian::where('id_varian_vehicles', $id)->update([
+            'name_varian' => $request->name_varian,
+            'vehicles_type' => $request->type_varian,
+            'vehicles_pabrikan' => $request->pabrikan,
+            'silinder' => $request->silinder,
+            'kapasitas_cc' => $request->kapasitas_cc,
+            'tipe_bbm' => $request->tipe_bbm,
+            'kapasitas_bbm' => $request->kapasitas_bbm_varian,
+            'rasio_mesin' => $request->rasio_mesin,
+            'jenis_transmisi' => $request->jenis_transmisi,
+            'konfigurasi_axle' => $request->konfigurasi_axle,
+            'jumlah_sumbu' => $request->jumlah_sumbu,
+            'ukuran_ban' => $request->ukuran_ban,
+            'vehicles_sit' => $request->vehicle_sit,
+            'note' => $request->note
         ]);
 
         return back();
@@ -227,12 +201,12 @@ class KendaraanController extends Controller
         $file->move('document/vehicle/', $nama_file);
 
         DocumentVehicle::insert([
-            'ID_DOC_VEHICLES' => Uuid::uuid4(),
-            'TYPE_DOC_VEHICLES' => $request->type_dokumen,
-            'NAME_DOC_VEHICLES' => $request->name_dokumen,
-            'UPLOAD_DOC_VEHICLES' => $nama_file,
-            'EXPIRED_DOC_VEHICLES' => date("Y-m-d", strtotime($request->expired_date)),
-            'DESCRIPTION' => $request->description
+            'id_doc_vehicles' => Uuid::uuid4(),
+            'type_doc_vehicles' => $request->type_dokumen,
+            'name_doc_vehicles' => $request->name_dokumen,
+            'upload_doc_vehicles' => $nama_file,
+            'expired_doc_vehicles' => date("Y-m-d", strtotime($request->expired_date)),
+            'description' => $request->description
         ]);
 
         return back();
@@ -248,31 +222,31 @@ class KendaraanController extends Controller
 
         if($request->file('file'))
         {
-            $old_file = DocumentVehicle::where('ID_DOC_VEHICLES', $id)->first();
+            $old_file = DocumentVehicle::where('id_doc_vehicles', $id)->first();
             $file = $request->file('file');
             $nama_file = time()."_".$file->getClientOriginalName();
             $file->move('document/vehicle/', $nama_file);
 
-            Storage::disk('public')->delete("/document/vehicle/".$old_file->UPLOAD_DOC_VEHICLES);
+            Storage::disk('public')->delete("/document/vehicle/".$old_file->upload_doc_vehicles);
 
             $params = [
-                'TYPE_DOC_VEHICLES' => $request->type_dokumen,
-                'NAME_DOC_VEHICLES' => $request->name_dokumen,
-                'UPLOAD_DOC_VEHICLES' => $nama_file,
-                'EXPIRED_DOC_VEHICLES' => date("Y-m-d", strtotime($request->expired_date)),
-                'DESCRIPTION' => $request->description
+                'type_doc_vehicles' => $request->type_dokumen,
+                'name_doc_vehicles' => $request->name_dokumen,
+                'upload_doc_vehicles' => $nama_file,
+                'expired_doc_vehicles' => date("Y-m-d", strtotime($request->expired_date)),
+                'description' => $request->description
             ];
         }
         else{
             $params = [
-                'TYPE_DOC_VEHICLES' => $request->type_dokumen,
-                'NAME_DOC_VEHICLES' => $request->name_dokumen,
-                'EXPIRED_DOC_VEHICLES' => date("Y-m-d", strtotime($request->expired_date)),
-                'DESCRIPTION' => $request->description
+                'type_doc_vehicles' => $request->type_dokumen,
+                'name_doc_vehicles' => $request->name_dokumen,
+                'expired_doc_vehicles' => date("Y-m-d", strtotime($request->expired_date)),
+                'description' => $request->description
             ];
         }
 
-        DocumentVehicle::where('ID_DOC_VEHICLES', $id)->update($params);
+        DocumentVehicle::where('id_doc_vehicles', $id)->update($params);
 
         return back();
     }

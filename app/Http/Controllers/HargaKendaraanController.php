@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PriceVehicle;
+use Ramsey\Uuid\Uuid;
 
 class HargaKendaraanController extends Controller
 {
@@ -41,9 +42,10 @@ class HargaKendaraanController extends Controller
         ]);
 
         PriceVehicle::insert([
-            'ID_PRICE_VEHICLES' => $request->kendaraan,
-            'PRICE_VEHICLES' => $request->harga,
-            'TIME_RENT' => $request->waktu
+            'id_price_vehicles' => Uuid::uuid4(),
+            'id_vehicles' => $request->kendaraan,
+            'price_vehicles' => $request->harga,
+            'time_rent' => $request->waktu
         ]);
 
         return redirect()->back();
@@ -85,10 +87,9 @@ class HargaKendaraanController extends Controller
             'waktu' => 'required'
         ]);
 
-        PriceVehicle::where('ID_VEHICLES', $id)->update([
-            'ID_PRICE_VEHICLES' => $request->kendaraan,
-            'PRICE_VEHICLES' => $request->harga,
-            'TIME_RENT' => $request->waktu
+        PriceVehicle::where('id_vehicles', $id)->update([
+            'price_vehicles' => $request->harga,
+            'time_rent' => $request->waktu
         ]);
 
         return redirect()->back();

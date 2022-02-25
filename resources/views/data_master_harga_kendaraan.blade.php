@@ -1,4 +1,7 @@
 @extends('data_master')
+@section('extra-css')
+    <link rel="stylesheet" href="{{ asset('vendors/select2/css/select2.min.css') }}">
+@endsection
 @section('content-data-master')
 
 <div class="card">
@@ -84,6 +87,7 @@
 @endsection
 @section('extra-script')
     <script src="{{asset('assets/js/examples/file-manager.js')}}"></script>
+    <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
     <script src="{{asset('assets/js/custom/data_master_harga_kendaraan.js')}}"></script>
     <script src="{{asset('assets/js/custom/data_master.js')}}"></script>
 @endsection

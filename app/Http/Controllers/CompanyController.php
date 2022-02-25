@@ -16,12 +16,12 @@ class CompanyController extends Controller
         $file->move('document/setting/', $nama_file);
 
         Company::insert([
-            'ID_COMPANY' => Uuid::uuid4(),
-            'NAME_COMPANY' => $request->name,
-            'ADDRESS_COMPANY' => $request->alamat,
-            'PHONE_COMPANY' => $request->no_telp,
-            'EMAIL_COMPANY' => $request->email,
-            'LOGO_COMPANY' => $nama_file
+            'id_company' => Uuid::uuid4(),
+            'name_company' => $request->name,
+            'address_company' => $request->alamat,
+            'phone_company' => $request->no_telp,
+            'email_company' => $request->email,
+            'logo_company' => $nama_file
         ]);
 
         return back();
@@ -33,20 +33,20 @@ class CompanyController extends Controller
         {
             $file = $request->file('logo');
             $nama_file = time()."_".$file->getClientOriginalName();
-            $file->move('document/setting/', $nama_file);    
+            $file->move('document/setting/', $nama_file);
         }
         else
         {
             $nama_file = $request->logo;
         }
 
-        Company::where('ID_COMPANY', $id)->update([
-            'ID_COMPANY' => Uuid::uuid4(),
-            'NAME_COMPANY' => $request->name,
-            'ADDRESS_COMPANY' => $request->alamat,
-            'PHONE_COMPANY' => $request->no_telp,
-            'EMAIL_COMPANY' => $request->email,
-            'LOGO_COMPANY' => $nama_file
+        Company::where('id_company', $id)->update([
+            'id_company' => Uuid::uuid4(),
+            'name_company' => $request->name,
+            'address_company' => $request->alamat,
+            'phone_company' => $request->no_telp,
+            'email_company' => $request->email,
+            'logo_company' => $nama_file
         ]);
         return back();
     }
