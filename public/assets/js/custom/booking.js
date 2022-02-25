@@ -80,11 +80,24 @@ $(document).ready(function(){
                 $("#harga").val(data);
                 $("#real_price").val(data);
             },
-            error:function(){
+            error:function(data){
                 console.log(data);
             }
         });
     });
+
+    $("#kendaraan_sama").on("change", function(){
+        if($("#kendaraan_sama").val() == 1){
+            $("#kendaraan_sama").val(0);
+            $("#pilih_kendaraan #update_pilih_kendaraan").css("display", "block");
+            $("#pilih_kendaraan #nopol_update").css("display", "none");
+        }
+        else{
+            $("#kendaraan_sama").val(1);
+            $("#pilih_kendaraan #update_pilih_kendaraan").css("display", "none");
+            $("#pilih_kendaraan #nopol_update").css("display", "block");
+        }
+    })
 
     $(".reschedule").on("click", function(){
         $("#viewEventModal").modal("hide");
@@ -94,18 +107,46 @@ $(document).ready(function(){
             type: 'GET',
             url: baseUrl+'/reschedule_booking/'+id_booking,
             dataType: 'json',
-            success: function (results) {
-                $("#name_update").val(results.name);
-                $("#start_date_update").val(results.start_date);
-                $("#end_date_update").val(results.end_date);
-                $("#start_time_update").val(results.start_time);
-                $("#end_time_update").val(results.end_time);
-                $("#harga_sales_update").val(results.price_sales);
-                $("#real_price_update").val(results.start_time);
-                $("#dp_sales_update").val(results.start_time);
+            success: function (data) {
+                // console.log(data);
+                $("#name_update").val(data.name);
+                $("#update_start_date").val(data.start_date);
+                $("#update_end_date").val(data.end_date);
+                $("#update_start_time").val(data.start_time);
+                $("#update_end_time").val(data.end_time);
+                $("#harga_update").val(data.price_sales);
+                $("#real_price_update").val(data.start_time);
+                $("#dp_update").val(data.dp_sales);
+                $("#nopol_update").val(data.nopol);
+                $("#id_vehicle_update").val(data.id_vehicles);
+                $("#id_booking_update").val(id_booking);
                 $("#update-jadwal").modal("show")
             },
-            error:function(){
+            error:function(data){
+                console.log(data);
+            }
+        });
+    });
+
+    $(".approve").on("click", function(){
+        var id = $(this).attr('id');
+        console.log(id);
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/approve/'+id,
+            dataType: 'json',
+            success: function (data) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Booking berhasil disetujui.',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                $("#"+id+".approve").css("display", "none");
+            },
+            error:function(data){
                 console.log(data);
             }
         });
@@ -138,7 +179,7 @@ $(document).ready(function(){
                     $("#vehicle").append(option);
                 }
             },
-            error:function(){
+            error:function(data){
                 console.log(data);
             }
         });

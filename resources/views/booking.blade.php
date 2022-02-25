@@ -281,17 +281,29 @@
             <div class="modal-body">
                 <form action="{{ url('update_booking') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="id_booking_update" id="id_booking_update" class="form-control">
                     <div class="update-customer">
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
                                 Nama*
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" name="name_update" id="name_update" class="form-control">
+                                <input type="text" name="name_update" id="name_update" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
                     <hr>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Kendaraan Sama?</label>
+                        <div class="col-sm-8">
+                            <div class="mt-2">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" name="kendaraan_sama" class="custom-control-input" value="1" id="kendaraan_sama" checked>
+                                    <label class="custom-control-label" for="kendaraan_sama">Ya</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">
                             Mulai
@@ -336,17 +348,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row">
+                    <div class="form-group row" id="pilih_kendaraan">
                         <label for="" class="col-sm-3 col-form-label">
                             Kendaraan
                         </label>
                         <div class="col-sm-9">
-                            <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle" required>
-                                <option selected disabled>Pilih Kendaraan . . </option>
-                                {{-- @foreach ($data['vehicle'] as $v)
-                                    <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
-                                @endforeach --}}
-                            </select>
+                            <input type="hidden" name="id_vehicle_update" id="id_vehicle_update" class="form-control">
+                            <input type="text" name="nopol_update" id="nopol_update" class="form-control" readonly>
+                            <div id="update_pilih_kendaraan" style="display: none">
+                                <select class="form-control select-component select-vehicle" id="vehicle" name="vehicle">
+                                    <option selected disabled>Pilih Kendaraan . . </option>
+                                    {{-- @foreach ($data['vehicle'] as $v)
+                                        <option value="{{ $v->ID_VEHICLES }}">{{ $v->NOPOL }}</option>
+                                    @endforeach --}}
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -383,6 +399,7 @@
 @section('extra-script')
 
     <!-- Fullcalendar -->
+    <script src="{{ asset('assets/sweetalert/sweetalert2.all.js') }}"></script>
     <script src="{{asset('vendors/fullcalendar/moment.min.js')}}"></script>
     <script src="{{asset('vendors/fullcalendar/fullcalendar.min.js')}}"></script>
     <script src="{{asset('assets/js/examples/fullcalendar.js')}}"></script>

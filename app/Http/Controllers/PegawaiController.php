@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EmployesCompany;
+use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Vehicle;
+use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
+use Carbon\Carbon;
 
 class PegawaiController extends Controller
 {
@@ -44,12 +47,22 @@ class PegawaiController extends Controller
             'phone' => 'required|max:15',
         ]);
 
+        $id = Uuid::uuid4();
         EmployesCompany::insert([
-            'id_employes' => Uuid::uuid4(),
+            'id_employes' => $id,
             'name_employes' => $request->name,
             'address_employes' => $request->alamat,
             'phone_employes' => $request->phone,
             'status_employes' => 1
+        ]);
+        $name = explode(" ", $request->name);
+        User::insert([
+            'id' => $id,
+            'username' => $name[0],
+            'password' => Hash::make($name[0]),
+            'role' => 1, // Pegawai
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         return redirect()->back();
@@ -135,9 +148,15 @@ class PegawaiController extends Controller
             EmployesCompany::where('id_employes', $id)->update([
                 'status_employes' => 0
             ]);
+            User::where('id', $id)->update([
+                'status' => 0
+            ]);
         }else{
             EmployesCompany::where('id_employes', $id)->update([
                 'status_employes' => 1
+            ]);
+            User::where('id', $id)->update([
+                'status' => 1
             ]);
         }
         return response()->json($employes, 200);

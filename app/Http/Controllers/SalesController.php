@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Sale;
 use Ramsey\Uuid\Uuid;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class SalesController extends Controller
 {
@@ -42,12 +45,22 @@ class SalesController extends Controller
             'phone' => 'required|max:15'
         ]);
 
+        $id = Uuid::uuid4();
         Sale::insert([
-            'id_sales' => Uuid::uuid4(),
+            'id_sales' => $id,
             'name_sales' => $request->name,
             'address_sales' => $request->alamat,
             'phone_sales' => $request->phone,
             'status_sales' => 1
+        ]);
+        $name = explode(" ", $request->name);
+        User::insert([
+            'id' => $id,
+            'username' => $name[0],
+            'password' => Hash::make($name[0]),
+            'role' => 2, // Sales
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
         ]);
 
         return redirect()->back();
@@ -124,9 +137,15 @@ class SalesController extends Controller
             Sale::where('id_sales', $id)->update([
                 'status_sales' => 0
             ]);
+            User::where('id', $id)->update([
+                'status' => 0
+            ]);
         }else{
             Sale::where('id_sales', $id)->update([
                 'status_sales' => 1
+            ]);
+            User::where('id', $id)->update([
+                'status' => 1
             ]);
         }
         return response()->json($sales, 200);

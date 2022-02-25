@@ -36,7 +36,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link nav-link-notify" title="Notifications" data-toggle="dropdown">
+                        {{-- <a href="#" class="nav-link nav-link-notify" title="Notifications" data-toggle="dropdown">
                             <i data-feather="bell"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
@@ -156,7 +156,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </li>
+                    </li> --}}
 
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
@@ -165,7 +165,7 @@
                                         class="rounded-circle"
                                         alt="avatar">
                             </figure>
-                            <span class="ml-2 d-sm-inline d-none">Bony Gidden</span>
+                            <span class="ml-2 d-sm-inline d-none">{{auth()->user()->username}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                             <div class="text-center py-4">
@@ -173,13 +173,12 @@
                                     <img src="{{asset('assets/media/image/user/man_avatar3.jpg')}}"
                                             class="rounded-circle" alt="image">
                                 </figure>
-                                <h5 class="text-center">Bony Gidden</h5>
-                                <div class="mb-3 small text-center text-muted">@bonygidden</div>
+                                <h5 class="text-center">{{auth()->user()->username}}</h5>
+                                {{-- <div class="mb-3 small text-center text-muted">@bonygidden</div> --}}
                                 <!-- <a href="#" class="btn btn-outline-light btn-rounded">Manage Your Account</a> -->
                             </div>
                             <div class="list-group">
-                                <a href="http://bifor.laborasyon.com/login" class="list-group-item text-danger"
-                                    data-sidebar-target="#settings">Sign Out!</a>
+                                <a href="{{ url('logout') }}" class="list-group-item text-danger">Sign Out!</a>
                             </div>
                         </div>
                     </li>
