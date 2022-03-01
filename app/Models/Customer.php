@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
 	protected $table = 'customer';
-	protected $primaryKey = 'id_custormer';
+	protected $primaryKey = 'id_customer';
 	public $incrementing = false;
 	public $timestamps = false;
 
@@ -44,6 +44,6 @@ class Customer extends Model
 
 	public function bookings()
 	{
-		return $this->hasMany(Booking::class, 'id_custormer');
+		return $this->hasMany(Booking::class, 'id_customer');
 	}
 }

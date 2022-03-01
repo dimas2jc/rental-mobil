@@ -8,6 +8,7 @@ $(document).ready(function(){
             $("#total_pegawai").html(data.pegawai);
             $("#total_vendor").html(data.vendor);
             $("#total_kendaraan").html(data.vehicle);
+            $("#total_customer").html(data.customer);
         },
         error:function(data){
             console.log(data);

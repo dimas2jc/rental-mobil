@@ -41,6 +41,7 @@ class SalesController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:60',
+            'pass' => 'required',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15'
         ]);
@@ -53,11 +54,12 @@ class SalesController extends Controller
             'phone_sales' => $request->phone,
             'status_sales' => 1
         ]);
-        $name = explode(" ", $request->name);
+        // $name = explode(" ", $request->name);
+        // $password = explode(" ", $request->pass);
         User::insert([
             'id' => $id,
-            'username' => $name[0],
-            'password' => Hash::make($name[0]),
+            'username' => $request->name,
+            'password' => Hash::make($request->pass),
             'role' => 2, // Sales
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()

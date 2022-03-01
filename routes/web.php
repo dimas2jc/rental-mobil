@@ -11,6 +11,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,9 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('/data_master/employes', function () {
         return view('data_master_pegawai');
     });
+    Route::get('/data_master/customer', function () {
+        return view('data_master_customer');
+    });
     Route::get('/data_master/pemilik-kendaraan', function () {
         return view('data_master_pemilik_kendaraan');
     });
@@ -74,6 +78,10 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('data_master/pegawai/{id}', [PegawaiController::class, 'update']);
     Route::put('data_master/edit_status_pegawai/{id}', [PegawaiController::class, 'edit_status_pegawai']);
     Route::resource('data_master/pegawai', PegawaiController::class);
+
+    Route::get('data_master/get_customer/{id}', [CustomerController::class, 'get_customer']);
+    Route::post('data_master/customer/{id}', [CustomerController::class, 'update']);
+    Route::put('data_master/edit_status_customer/{id}', [CustomerController::class, 'edit_status_customer']);
 
     Route::get('data_master/get_sales/{id}', [SalesController::class, 'get_sales']);
     Route::post('data_master/sales/{id}', [SalesController::class, 'update']);

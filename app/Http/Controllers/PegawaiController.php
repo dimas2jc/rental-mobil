@@ -7,6 +7,7 @@ use App\Models\EmployesCompany;
 use App\Models\User;
 use App\Models\Vendor;
 use App\Models\Vehicle;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
@@ -43,6 +44,7 @@ class PegawaiController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:60',
+            'pass' => 'required',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
         ]);
@@ -55,11 +57,12 @@ class PegawaiController extends Controller
             'phone_employes' => $request->phone,
             'status_employes' => 1
         ]);
-        $name = explode(" ", $request->name);
+        // $name = explode(" ", $request->name);
+        // $password = explode(" ", $request->pass);
         User::insert([
             'id' => $id,
-            'username' => $name[0],
-            'password' => Hash::make($name[0]),
+            'username' => $request->name,
+            'password' => Hash::make($request->pass),
             'role' => 1, // Pegawai
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
@@ -128,9 +131,10 @@ class PegawaiController extends Controller
 
     public function data_master()
     {
-        $data['pegawai'] = EmployesCompany::count('id_employes');
+        $data['pegawai'] = EmployesCompany::where('status_employes', 1)->count('id_employes');
         $data['vendor'] = Vendor::count('id_vendors');
         $data['vehicle'] = Vehicle::count('id_Vehicles');
+        $data['customer'] = Customer::where('is_blacklist', 0)->count('id_customer');
 
         return response()->json($data, 200);
     }

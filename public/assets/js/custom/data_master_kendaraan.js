@@ -74,6 +74,7 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_pemilik_kendaraan',
             dataType: 'json',
             success: function (data) {
+                $('#pemilik').empty();
                 $('#pemilik').append('<option selected disabled>Pilih Pemilik . . </option>');
                 for(let i=0;i<data.length;i++){
                     $('#pemilik').append(
@@ -91,6 +92,7 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_dokumen_kendaraan',
             dataType: 'json',
             success: function (data) {
+                $('#dokumen').empty();
                 $('#dokumen').append('<option selected disabled>Pilih Dokumen . . </option>');
                 for(let i=0;i<data.length;i++){
                     $('#dokumen').append(
@@ -108,6 +110,7 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_body_kendaraan',
             dataType: 'json',
             success: function (data) {
+                $('#body').empty();
                 $('#body').append('<option selected disabled>Pilih Body . . </option>');
                 for(let i=0;i<data.length;i++){
                     $('#body').append(
@@ -125,6 +128,7 @@ $(document).ready(function(){
             url: baseUrl+'/data_master/get_varian_kendaraan',
             dataType: 'json',
             success: function (data) {
+                $('#varian').empty();
                 $('#varian').append('<option selected disabled>Pilih Varian . . </option>');
                 for(let i=0;i<data.length;i++){
                     $('#varian').append(

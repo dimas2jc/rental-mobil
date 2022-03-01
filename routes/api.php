@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\PemilikKendaraanController;
 use App\Http\Controllers\Api\HargaKendaraanController;
 use App\Http\Controllers\Api\KendaraanController;
 use App\Http\Controllers\Api\MonitoringController;
+use App\Http\Controllers\Api\CustomerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('pegawai_datatable', [PegawaiController::class, 'pegawai_datatable']);
+
+Route::get('customer_datatable', [CustomerController::class, 'customer_datatable']);
+Route::get('customer_b_datatable', [CustomerController::class, 'customer_b_datatable']);
 
 Route::get('sales_datatable', [SalesController::class, 'sales_datatable']);
 

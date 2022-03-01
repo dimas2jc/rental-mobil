@@ -88,6 +88,16 @@
 
                     <div class="form-group">
                         <label for="" class="col-form-label">
+                            Password
+                        </label>
+                        <input type="password" name="pass" id="pass" class="form-control @error('pass') is-invalid @enderror" required>
+                        <div class="invalid-feedback">
+                            Mohon isi password pegawai dengan benar.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-form-label">
                             Alamat
                         </label>
                         <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" required>
@@ -135,6 +145,16 @@
                         <input type="text" name="name" id="name_sales" class="form-control @error('name') is-invalid @enderror" required>
                         <div class="invalid-feedback">
                             Mohon isi nama Sales dengan benar.
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="" class="col-form-label">
+                            Password
+                        </label>
+                        <input type="password" name="pass" id="pass" class="form-control @error('pass') is-invalid @enderror" required>
+                        <div class="invalid-feedback">
+                            Mohon isi password pegawai dengan benar.
                         </div>
                     </div>
 

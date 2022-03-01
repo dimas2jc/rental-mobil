@@ -21,6 +21,10 @@
                         <i class="ti-user mr-2 list-group-icon"></i>Pegawai
                         <span class="small ml-auto" id="total_pegawai">0</span>
                     </a>
+                    <a href="{{url('/data_master/customer')}}" class="list-group-item d-flex align-items-center" id="customer">
+                        <i class="ti-user mr-2 list-group-icon"></i>Customer
+                        <span class="small ml-auto" id="total_customer">0</span>
+                    </a>
                     <a href="{{url('/data_master/pemilik-kendaraan')}}" class="list-group-item d-flex align-items-center" id="vendor">
                         <i class="ti-star mr-2 list-group-icon"></i>Pemilik Kendaraan
                         <span class="small ml-auto" id="total_vendor">0</span>
