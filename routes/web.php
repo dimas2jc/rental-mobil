@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth']],function(){
     });
 
     Route::get('monitoring', [MonitoringController::class, 'index']);
+    Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
 
     Route::get('get_booking', [BookingController::class, 'get_booking']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
@@ -106,6 +107,9 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('data_master/get_dokumen_kendaraan', [KendaraanController::class, 'get_all_dokumen_kendaraan']);
     Route::post('data_master/dokumen_kendaraan/{id}', [KendaraanController::class, 'update_dokumen_kendaraan']);
     Route::post('data_master/dokumen_kendaraan', [KendaraanController::class, 'store_dokumen_kendaraan']);
+
+    Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+
 });
 
 require dirname(__FILE__).'/api.php';

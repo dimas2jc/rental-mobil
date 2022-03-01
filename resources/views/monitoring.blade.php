@@ -35,6 +35,48 @@
                                 <th>Car Wash</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            @foreach($data as $d1)
+                                <tr>
+                                    <td>{{ $d1->vehicles_type }}</td>
+                                    <td>{{ $d1->date_start }}</td>
+                                    <td>{{ $d1->name_sales }}</td>
+                                    <td>{{ $d1->name_customer }}</td>
+                                    <td>{{ $d1->date_start }}</td>
+                                    <td>{{ $d1->date_finish }}</td>
+                                    <td>{{ $d1->total_payment }}</td>
+                                    @foreach($data2 as $d2)
+                                        @if($d1->id_booking == $d2->id_booking)
+                                            @if($d2->id_charge_vehicles == 1)
+                                                <td>
+                                                    {{ $d2->price_charge_vehicles }}
+                                                </td>
+                                            @endif
+                                            @if($d2->id_charge_vehicles == 2)
+                                                <td>
+                                                    {{ $d2->price_charge_vehicles }}
+                                                </td>
+                                            @endif
+                                            @if($d2->id_charge_vehicles == 5)
+                                                <td>
+                                                    {{ $d2->price_charge_vehicles }}
+                                                </td>
+                                            @endif
+                                            @if($d2->id_charge_vehicles == 3)
+                                                <td>
+                                                    {{ $d2->price_charge_vehicles }}
+                                                </td>
+                                            @endif
+                                            @if($d2->id_charge_vehicles == 4)
+                                                <td>
+                                                    {{ $d2->price_charge_vehicles }}
+                                                </td>
+                                            @endif    
+                                        @endif
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
                 </div>
             </div>
