@@ -136,6 +136,7 @@ $(document).ready(function(){
             url: baseUrl+'/approve/'+id,
             dataType: 'json',
             success: function (data) {
+                location.reload();
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

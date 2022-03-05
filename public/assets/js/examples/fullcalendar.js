@@ -80,7 +80,28 @@ $(document).ready(function () {
                 events[i].status = results[i].status,
                 events[i].start = moment(results[i].date_start).toDate(),
                 events[i].end = moment(results[i].date_end).add(1, "days").toDate(),
-                events[i].description = 'Kendaraan dengan nomor polisi '+results[i].nopol+' pada tanggal '+new Date(results[i].date_start).toISOString().slice(0, 10)+' sampai '+new Date(results[i].date_finish).toISOString().slice(0, 10)+' oleh '+results[i].name_customer
+                events[i].description = `<div class="form-group row">`+
+                                            `<div class="col-sm-12">`+
+                                                `<table style="border: 0px">`+
+                                                    `<tr>`+
+                                                        `<td>Nopol</td>`+
+                                                        `<td>: nomor</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Customer</td>`+
+                                                        `<td>: nomor</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Tgl Diambil</td>`+
+                                                        `<td>: nomor</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Tgl Dikembalikan</td>`+
+                                                        `<td>: nomor</td>`+
+                                                    `</tr>`+
+                                                `</table>`+
+                                            `</div>`+
+                                        `</div>`;
             }
 
             $('#calendar-demo').fullCalendar({
@@ -113,7 +134,7 @@ $(document).ready(function () {
                     var modal = $('#viewEventModal');
                     modal.find('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
                     modal.find('.event-title').html(event.title);
-                    modal.find('.event-body').html(event.description);
+                    modal.find('.event-body').append(event.description);
                     modal.find('.reschedule').attr('id', event.id);
                     modal.find('.approve').attr('id', event.id);
                     if(event.status == 2){

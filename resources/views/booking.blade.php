@@ -131,6 +131,14 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
+                                NIK
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="nik" id="nik" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
                                 Alamat*
                             </label>
                             <div class="col-sm-9">
@@ -216,8 +224,15 @@
                             Harga
                         </label>
                         <div class="col-sm-9">
+                            <input type="text" name="real_price" id="real_price" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Harga Sales
+                        </label>
+                        <div class="col-sm-9">
                             <input type="text" name="harga" id="harga" class="form-control">
-                            <input type="hidden" name="real_price" id="real_price" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -260,7 +275,9 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <button type="button" id="" class="btn btn-sm btn-primary reschedule">Reschedule</button>&nbsp;
-                        <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
+                        @if(auth()->user()->role == 1)
+                            <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
+                        @endif
                     </div>
                 </div>
             </div>

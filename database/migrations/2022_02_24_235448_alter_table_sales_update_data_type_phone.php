@@ -11,22 +11,22 @@ class AlterTableSalesUpdateDataTypePhone extends Migration
      *
      * @return void
      */
-    // public function up()
-    // {
-    //     Schema::table('sales', function (Blueprint $table) {
-    //         $table->string('phone_sales', 13)->change();
-    //     });
-    // }
+    public function up()
+    {
+        Schema::table('sales', function (Blueprint $table) {
+            $table->string('phone_sales', 13)->change();
+        });
+    }
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    // public function down()
-    // {
-    //     Schema::table('sales', function (Blueprint $table) {
-    //         $table->decimal('phone_sales')->change();
-    //     });
-    // }
+    public function down()
+    {
+        Schema::table('sales', function (Blueprint $table) {
+            $table->decimal('phone_sales')->change();
+        });
+    }
 }
