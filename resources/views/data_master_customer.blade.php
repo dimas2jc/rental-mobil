@@ -31,7 +31,7 @@
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>No. HP</th>
-                                <th>Email</th>
+                                <th>Sosmed</th>
                                 <th>Is Blacklist</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
@@ -52,7 +52,7 @@
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>No. HP</th>
-                            <th>Email</th>
+                            <th>Sosmed</th>
                             <th>Is Blacklist</th>
                         </thead>
                         <tbody>
@@ -125,11 +125,21 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="" class="col-form-label">
                             Email
                             </label>
                             <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" required>
+                            <div class="invalid-feedback">
+                                Mohon isi email dengan benar.
+                            </div>
+                        </div> -->
+
+                        <div class="form-group">
+                            <label for="" class="col-form-label">
+                            Sosmed
+                            </label>
+                            <input type="text" name="sosmed" id="sosmed" class="form-control @error('sosmed') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi email dengan benar.
                             </div>

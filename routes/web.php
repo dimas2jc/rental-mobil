@@ -12,6 +12,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,7 +63,13 @@ Route::group(['middleware' => ['auth']],function(){
 
     Route::get('monitoring', [MonitoringController::class, 'index']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
+    
+    Route::get('laporan', [LaporanController::class, 'index']);
+    Route::get('laporan/cetak/{id}', [LaporanController::class, 'cetak']);
 
+    Route::get('pembayaran', [PembayaranController::class, 'index']);
+    Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
+    
     Route::get('get_booking', [BookingController::class, 'get_booking']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);
