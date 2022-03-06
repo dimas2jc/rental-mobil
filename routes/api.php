@@ -7,8 +7,6 @@ use App\Http\Controllers\Api\HargaKendaraanController;
 use App\Http\Controllers\Api\KendaraanController;
 use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\CustomerController;
-use App\Http\Controllers\Api\LaporanController;
-use App\Http\Controllers\Api\PembayaranController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -47,7 +45,3 @@ Route::get('varian_datatable', [KendaraanController::class, 'varian_kendaraan_da
 Route::get('dokumen_datatable', [KendaraanController::class, 'dokumen_kendaraan_datatable']);
 
 Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
-
-Route::get('laporan_datatable', [LaporanController::class, 'laporan_datatable']);
-
-Route::get('get_charge', [PembayaranController::class, 'get_charge']);

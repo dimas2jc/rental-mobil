@@ -37,17 +37,7 @@ $(document).ready(function(){
                     return '0'+data;
                 }
             },
-            {
-                data:"sosmed_customer",
-                name:"sosmed_customer",
-                render: function(data, type, row){
-                    if(data != null){
-                        return data;
-                    }else{
-                        return "-";
-                    }
-                }
-            },
+            {data:"email_customer",name:"email_customer"},
             {
                 data:"is_blacklist",name:"is_blacklist",
                 render: function(data, type, row){
@@ -105,7 +95,7 @@ $(document).ready(function(){
                 $("#name").val(data.name_customer);
                 $("#alamat").val(data.address_customer);
                 $("#phone").val("0"+data.phone_customer);
-                $("#sosmed").val(data.sosmed_customer);
+                $("#email").val(data.email_customer);
             },
             error:function(data){
                 console.log(data);
@@ -149,17 +139,7 @@ $(document).ready(function(){
                     return '0'+data;
                 }
             },
-            {
-                data:"sosmed_customer",
-                name:"sosmed_customer",
-                render: function(data, type, row){
-                    if(data != null){
-                        return data;
-                    }else{
-                        return "-";
-                    }
-                }
-            },
+            {data:"email_customer",name:"email_customer"},
             {
                 data:"is_blacklist",
                 name:"is_blacklist",

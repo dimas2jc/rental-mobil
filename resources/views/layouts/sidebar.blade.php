@@ -65,15 +65,6 @@
             </li>
 
             <li>
-                <a href="{{url('/pembayaran')}}" id="pembayaran">
-                    <span class="nav-link-icon">
-                        <i data-feather="dollar-sign"></i>
-                    </span>
-                    <span>Pembayaran</span>
-                </a>
-            </li>
-
-            <li>
                 <a href="{{url('/data_master')}}" id="data_master">
                     <span class="nav-link-icon">
                         <i data-feather="layers"></i>
