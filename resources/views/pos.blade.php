@@ -9,7 +9,7 @@
 <div class="card">
     <div class="card-body">
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="pos_tab" role="tabpanel" aria-labelledby="pos_tab-tab">
+            <div class="tab-pane fade show active mb-3" id="pos_tab" role="tabpanel" aria-labelledby="pos_tab-tab">
                 <div class="judul-tabel mb-3">
                     <h5>Point Of Sales</h5>
                 </div>
@@ -19,9 +19,16 @@
                         <label for="" class="col-sm-2 col-form-label">
                             Booking
                         </label>
-                        <div class="col-sm-5">
+                        <div class="col-sm-4">
                             <select class="form-control select-component select-booking" id="booking" name="booking" required>
                             </select>
+                        </div>
+                        <div class="col-1"></div>
+                        <label for="" class="col-sm-1 col-form-label">
+                            Total
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="number" readonly name="total" id="total" class="form-control">
                         </div>
                     </div>
                 </form>
@@ -30,6 +37,15 @@
                     TAMBAH CHARGE
                 </button>
             </div>
+            <table id="table-pos" class="table table-striped table-bordered responsive" style="width: 100%">
+                <thead class="thead-dark">
+                    <th>Charge</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -53,6 +69,8 @@
                             <th>Action</th>
                         </tr>
                     </thead>
+                    <tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
