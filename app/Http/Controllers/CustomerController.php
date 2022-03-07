@@ -23,6 +23,7 @@ class CustomerController extends Controller
             'name' => 'required|string|max:60',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
+            'sosmed' => 'required',
             'email' => 'required',
         ]);
 
@@ -32,6 +33,7 @@ class CustomerController extends Controller
             'name_customer' => $request->name,
             'address_customer' => $request->alamat,
             'phone_customer' => $request->phone,
+            'sosmed_customer' => $request->sosmed,
             'email_customer' => $request->email
         ]);
 

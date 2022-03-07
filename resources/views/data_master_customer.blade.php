@@ -31,6 +31,7 @@
                                 <th>Nama</th>
                                 <th>Alamat</th>
                                 <th>No. HP</th>
+                                <th>Sosmed</th>
                                 <th>Email</th>
                                 <th>Is Blacklist</th>
                                 <th style="width: 10%">Actions</th>
@@ -43,7 +44,7 @@
             <div class="tab-pane fade" id="customer_b_tab" role="tabpanel" aria-labelledby="customer_b_tab-tab">
                 <div class="judul-tabel mb-3">
                     <h5>Daftar Customer Blacklist</h5>
-                </div> 
+                </div>
                 <div style="overflow-x: auto;">
                     <table id="table-customer-b" class="table table-striped table-bordered" style="width: 100%">
                         <thead class="thead-dark">
@@ -52,6 +53,7 @@
                             <th>Nama</th>
                             <th>Alamat</th>
                             <th>No. HP</th>
+                            <th>Sosmed</th>
                             <th>Email</th>
                             <th>Is Blacklist</th>
                         </thead>
@@ -130,6 +132,15 @@
                             Email
                             </label>
                             <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" required>
+                            <div class="invalid-feedback">
+                                Mohon isi email dengan benar.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="col-form-label">
+                            Sosmed
+                            </label>
+                            <input type="text" name="sosmed" id="sosmed" class="form-control @error('sosmed') is-invalid @enderror">
                             <div class="invalid-feedback">
                                 Mohon isi email dengan benar.
                             </div>

@@ -69,6 +69,12 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('keuangan', [MonitoringController::class, 'index_keuangan']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
 
+    Route::get('laporan', [LaporanController::class, 'index']);
+    Route::get('laporan/cetak/{id}', [LaporanController::class, 'cetak']);
+
+    Route::get('pembayaran', [PembayaranController::class, 'index']);
+    Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
+
     Route::get('get_booking', [BookingController::class, 'get_booking']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);
