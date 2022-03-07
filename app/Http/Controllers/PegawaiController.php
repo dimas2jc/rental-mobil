@@ -47,6 +47,7 @@ class PegawaiController extends Controller
             'pass' => 'required',
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
+            'email' => 'required'
         ]);
 
         $id = Uuid::uuid4();
@@ -55,6 +56,7 @@ class PegawaiController extends Controller
             'name_employes' => $request->name,
             'address_employes' => $request->alamat,
             'phone_employes' => $request->phone,
+            'email_employes' => $request->email,
             'status_employes' => 1
         ]);
         // $name = explode(" ", $request->name);
@@ -64,6 +66,7 @@ class PegawaiController extends Controller
             'username' => $request->name,
             'password' => Hash::make($request->pass),
             'role' => 1, // Pegawai
+            'email' => $request->email,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
@@ -109,10 +112,15 @@ class PegawaiController extends Controller
         ]);
 
         EmployesCompany::where('id_employes', $id)->update([
-            'id_employes' => Uuid::uuid4(),
+            // 'id_employes' => Uuid::uuid4(),
             'name_employes' => $request->name,
             'address_employes' => $request->alamat,
-            'phone_employes' => $request->phone
+            'phone_employes' => $request->phone,
+            'email_employes' => $request->email
+        ]);
+
+        User::where('id', $id)->update([
+            'email' => $request->email
         ]);
 
         return redirect()->back();

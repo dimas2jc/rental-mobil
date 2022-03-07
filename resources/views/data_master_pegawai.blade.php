@@ -46,7 +46,7 @@
                         <i class="fa fa-plus mr-1"></i>
                         TAMBAH BARU
                     </button>
-                </div> 
+                </div>
                 <table id="table-sales" class="table table-striped table-bordered responsive" style="width: 100%">
                     <thead class="thead-dark">
                         <th>Nama</th>
@@ -98,6 +98,16 @@
 
                     <div class="form-group">
                         <label for="" class="col-form-label">
+                            Email
+                        </label>
+                        <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" required>
+                        <div class="invalid-feedback">
+                            Mohon isi email dengan benar.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-form-label">
                             Alamat
                         </label>
                         <input type="text" name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" required>
@@ -117,7 +127,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-google btn-sm" onclick="document.getElementById('insert-form-customer').reset(); $('#modal-tambah-customer').modal('toggle');">BATAL</button>
+                    <button type="button" class="btn btn-google btn-sm" onclick="$('#modal-tambah-pegawai').modal('toggle');">BATAL</button>
                     <button type="submit" class="btn btn-linkedin btn-sm">SIMPAN</button>
                 </div>
             </form>
@@ -147,7 +157,7 @@
                             Mohon isi nama Sales dengan benar.
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="" class="col-form-label">
                             Password
@@ -155,6 +165,16 @@
                         <input type="password" name="pass" id="pass" class="form-control @error('pass') is-invalid @enderror" required>
                         <div class="invalid-feedback">
                             Mohon isi password pegawai dengan benar.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-form-label">
+                            Email
+                        </label>
+                        <input type="text" name="email_sales" id="email_sales" class="form-control @error('email_sales') is-invalid @enderror" required>
+                        <div class="invalid-feedback">
+                            Mohon isi email dengan benar.
                         </div>
                     </div>
 
@@ -179,7 +199,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-google btn-sm" onclick="document.getElementById('insert-form-customer').reset(); $('#modal-tambah-customer').modal('toggle');">BATAL</button>
+                    <button type="button" class="btn btn-google btn-sm" onclick="$('#modal-tambah-sales').modal('toggle');">BATAL</button>
                     <button type="submit" class="btn btn-linkedin btn-sm">SIMPAN</button>
                 </div>
             </form>

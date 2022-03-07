@@ -47,12 +47,20 @@
             </li>
 
             <li>
-                <a href="{{url('/monitoring')}}" id="monitoring">
+                <a href="#" id="monitoring">
                     <span class="nav-link-icon">
                         <i data-feather="monitor"></i>
                     </span>
                     <span>Monitoring</span>
                 </a>
+                <ul>
+                    <li>
+                        <a href="{{url('/monitoring')}}">Monitoring</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/keuangan')}}">Keuangan</a>
+                    </li>
+                </ul>
             </li>
 
             <li>

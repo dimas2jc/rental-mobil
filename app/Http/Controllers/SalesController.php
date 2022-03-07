@@ -43,7 +43,8 @@ class SalesController extends Controller
             'name' => 'required|string|max:60',
             'pass' => 'required',
             'alamat' => 'required|string|max:255',
-            'phone' => 'required|max:15'
+            'phone' => 'required|max:15',
+            'email_sales' => 'required'
         ]);
 
         $id = Uuid::uuid4();
@@ -52,6 +53,7 @@ class SalesController extends Controller
             'name_sales' => $request->name,
             'address_sales' => $request->alamat,
             'phone_sales' => $request->phone,
+            'email_sales' => $request->email_sales,
             'status_sales' => 1
         ]);
         // $name = explode(" ", $request->name);
@@ -109,7 +111,12 @@ class SalesController extends Controller
             'id_sales' => Uuid::uuid4(),
             'name_sales' => $request->name,
             'address_sales' => $request->alamat,
-            'phone_sales' => $request->phone
+            'phone_sales' => $request->phone,
+            'email_sales' => $request->email_sales
+        ]);
+
+        User::where('id', $id)->update([
+            'email' => $request->email_sales
         ]);
 
         return redirect()->back();

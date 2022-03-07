@@ -51,6 +51,7 @@ $(document).ready(function(){
         $("#name").val("");
         $("#alamat").val("");
         $("#phone").val("");
+        $("#email").val("");
 
         $("#judul-modal-pegawai").html("Tambah Pegawai");
         urlPegawai = baseUrl+"/data_master/pegawai"
@@ -92,6 +93,7 @@ $(document).ready(function(){
                 $("#name").val(data.name_employes);
                 $("#alamat").val(data.address_employes);
                 $("#phone").val("0"+data.phone_employes);
+                $("#email").val("0"+data.email_employes);
             },
             error:function(data){
                 console.log(data);
@@ -132,7 +134,7 @@ $(document).ready(function(){
                     return '<button type="submit" class="btn btn-google btn-sm btn-status-sales" id="'+row.id_sales+'">Off</button>';
                 }
             }
-        },        
+        },
         {
             data: null,
             className: "text-center",
@@ -149,6 +151,7 @@ $(document).ready(function(){
         $("#name").val("");
         $("#alamat").val("");
         $("#phone").val("");
+        $("#email_sales").val("");
 
         $("#judul-modal-sales").html("Tambah Sales");
         urlSales = baseUrl+"/data_master/sales"
@@ -188,6 +191,7 @@ $(document).ready(function(){
                 $("#name_sales").val(data.name_sales);
                 $("#alamat_sales").val(data.address_sales);
                 $("#phone_sales").val("0"+data.phone_sales);
+                $("#email_sales").val("0"+data.email_sales);
             },
             error:function(data){
                 console.log(data);

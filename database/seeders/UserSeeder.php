@@ -22,6 +22,7 @@ class UserSeeder extends Seeder
             'name_employes' => 'admin',
             'address_employes' => 'Jl. Pare-Kediri',
             'phone_employes' => '082317881411',
+            'email_employes' => 'dimasihsan.almahdi@gmail.com',
             'status_employes' => 1
         ]);
 
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
             'id' => $id,
             'username' => 'admin',
             'password' => Hash::make('admin'),
+            'email' => 'dimasihsan.almahdi@gmail.com',
             'role' => 1
         ]);
     }

@@ -27,8 +27,15 @@ use App\Http\Controllers\CustomerController;
 Route::get('/login', [HomeController::class, 'authenticate'])->name('login');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::post('/post-login', [HomeController::class, 'postLogin']);
+Route::post('/forgot-password', [HomeController::class, 'forgotPassword']);
+Route::get('/change-password-user/{id}', [HomeController::class, 'changeForgotPassword']);
+Route::post('/post-forgot-password', [HomeController::class, 'storeForgotPassword']);
 
 Route::group(['middleware' => ['auth']],function(){
+    Route::get('/change-password', function () {
+        return view('change_password');
+    });
+    Route::post('/post-change-password', [HomeController::class, 'change_password']);
     Route::get('/', function () {
         $data['customer'] = DB::table('customer')->select('id_customer', 'name_customer')->get();
         // $data['vehicle'] = DB::table('vehicles')->select('id_vehicles', 'nopol')->get();
@@ -59,7 +66,7 @@ Route::group(['middleware' => ['auth']],function(){
         return view('data_master_harga_kendaraan', compact('data'));
     });
 
-    Route::get('monitoring', [MonitoringController::class, 'index']);
+    Route::get('keuangan', [MonitoringController::class, 'index_keuangan']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
 
     Route::get('get_booking', [BookingController::class, 'get_booking']);

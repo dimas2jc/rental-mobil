@@ -8,6 +8,9 @@ $(document).ready(function(){
     $(selectComponent).select2();
 
     $('#harga').mask('000000000000');
+    $('#no_telp').mask('000000000000');
+    $('#no_kk').mask('0000000000000000');
+    $('#nik').mask('0000000000000000');
 
     $('.datepicker').daterangepicker({
         singleDatePicker: true,
@@ -77,7 +80,7 @@ $(document).ready(function(){
                 _token: token
             },
             success: function (data) {
-                $("#harga").val(data);
+                // $("#harga").val(data);
                 $("#real_price").val(data);
             },
             error:function(data){

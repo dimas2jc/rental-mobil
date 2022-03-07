@@ -7,7 +7,7 @@ use DB;
 
 class MonitoringController extends Controller
 {
-    public function index(){
+    public function index_keuangan(){
         $data = DB::table('booking as b')
                 ->join('sales as s', 's.id_sales', '=', 'b.id_sales')
                 ->join('customer as c', 'c.id_customer', '=', 'b.id_customer')
@@ -58,7 +58,7 @@ class MonitoringController extends Controller
     //     ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
     //     ->select('b.id_booking', 'vv.vehicles_type as type_unit', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales',
     //     'c.name_customer as user', 'b.real_price as real_price', 'pr.total_payment as price_user', 'o.price_charge_vehicles as o_charge', 'lw.price_charge_vehicles as lw_charge',
-    //      'b.dp_sales as dp_sales', 
+    //      'b.dp_sales as dp_sales',
     //     'dp.description as description')
     //     ->groupBy('b.id_booking', 'type_unit', 'date_start', 'date_finish', 'name_sales', 'user', 'real_price', 'price_user', 'o_charge', 'lw_charge', 'dp_sales', 'description')
     //     ->where('b.status_booking', 4)

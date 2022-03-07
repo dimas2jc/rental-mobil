@@ -6,7 +6,7 @@
         <div class="tab-content">
             <div class="tab-pane fade show active" id="monitoring_tab" role="tabpanel" aria-labelledby="monitoring_tab-tab">
                 <div class="judul-tabel mb-3">
-                    <h5>Tabel Monitoring</h5>
+                    <h5>Monitoring Keuangan</h5>
                 </div>
                 <div style="overflow-x: auto;">
                     <table id="table-monitoring" class="table table-striped table-bordered" style="width: 100%">
@@ -71,7 +71,7 @@
                                                 <td>
                                                     {{ $d2->price_charge_vehicles }}
                                                 </td>
-                                            @endif    
+                                            @endif
                                         @endif
                                     @endforeach
                                 </tr>

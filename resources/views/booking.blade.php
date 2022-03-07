@@ -107,7 +107,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
-                                Email*
+                                Email
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" name="email" id="email" class="form-control">
@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
-                                NIK
+                                NIK*
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" name="nik" id="nik" class="form-control">
