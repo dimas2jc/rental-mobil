@@ -34,6 +34,7 @@ $(document).ready(function(){
                 }
             },
             columns:[
+                {data:"id_charge_vehicles",name:"id_charge_vehicles"},
                 {data:"name_charge_vehicles",name:"name_charge_vehicles"},
                 {data:"price_charge_vehicles",name:"price_charge_vehicles"},
                 {
@@ -48,67 +49,68 @@ $(document).ready(function(){
     });
     
     $('#table-charge tbody').on('click', '.pilih-charge', function () {
-        var id = $(this).attr("id");
-        // console.log(id);
+        let id_charge = $(this).attr("id");
+        // console.log('id 1 '+ id_charge);
        
-
         $.ajax({
             type: 'GET',
             url: baseUrl+'/get_charge',
             dataType: 'json',
             success: function (data) {
-                var data = data.data;
+                var value = data.data;
+                // console.log(value[1].id_charge_vehicles);
                 var index;
                 var colnum=0;
-                for(var i=0;i<data.length;i++){
-                    if(data[i].id_charge_vehicles == id){
+                for(var i=0;i<=value.length;i++){
+                    if(value[i].id_charge_vehicles == id_charge){
                         index=i;
+                        // console.log('id 2 '+index);
                         break;
                     }
                 }
-                $("#modal-tambah-charge").modal("hide");
+                // $("#modal-tambah-charge").modal("hide");
 
-                var table = document.getElementById("table-pos");
+                // var table = document.getElementById("table-pos");
 
-                var flag=-1;
+                // var flag=-1;
         
-                for(var z=1; z<table.rows.length; z++)
-                {
-                    var x=table.rows[z].childNodes[0].childNodes[0];
-                    // console.log(x.value);
-                    if(x.value == data[index].id_charge_vehicles)
-                    {
-                    flag = z;
-                    break;
-                    }
-                }
+                // for(var z=1; z<table.rows.length; z++)
+                // {
+                //     var x=table.rows[z].childNodes[0].childNodes[0];
+                //     // console.log(x.value);
+                //     if(x.value == value[index].id_charge_vehicles)
+                //     {
+                //     flag = z;
+                //     break;
+                //     }
+                // }
         
-                if(flag != -1)
-                {
-                    var colQty = table.rows[flag].childNodes[2].childNodes[0];
-                    colQty.value = parseInt(colQty.value) + 1;
-                    var idrow = table.rows[flag].childNodes[0].childNodes[0].value;
-                    console.log(idrow);
-                    recount(idrow);
-                }
-                else
-                {
-                var row = table.insertRow(table.rows.length);
-                row.setAttribute('id','col'+colnum);
-                var id = 'col'+colnum;
-                colnum++;
+                // if(flag != -1)
+                // {
+                //     var colQty = table.rows[flag].childNodes[2].childNodes[0];
+                //     colQty.value = parseInt(colQty.value) + 1;
+                //     var idrow = table.rows[flag].childNodes[0].childNodes[0].value;
+                //     console.log(idrow);
+                //     recount(idrow);
+                // }
+                // else
+                // {
+                // var row = table.insertRow(table.rows.length);
+                // row.setAttribute('id','col'+colnum);
+                // var id = 'col'+colnum;
+                // colnum++;
         
-                let rupiah = Intl.NumberFormat('id-ID');
+                // let rupiah = Intl.NumberFormat('id-ID');
         
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
+                // var cell1 = row.insertCell(0);
+                // var cell2 = row.insertCell(1);
+                // var cell3 = row.insertCell(2);
 
-                // cell1.innerHTML = '<input type="hidden" name="id['+data[index].id_charge_vehicles+']" value="'+data[index].id_charge_vehicles+'">'+data[index].name_charge_vehicles;
-                // cell2.innerHTML = '<input type="hidden" id="harga'+data[index].id_charge_vehicles+'" name="harga['+data[index].id_charge_vehicles+']" value="'+data[index].price_charge_vehicles+'" >'+rupiah.format(data[index].price_charge_vehicles);
+                // cell1.innerHTML = '<input type="hidden" name="id['+value[z].id_charge_vehicles+']" value="'+value[z].id_charge_vehicles+'">'+value[z].name_charge_vehicles;
+                // cell2.innerHTML = '<input type="hidden" id="harga'+value[z].id_charge_vehicles+'" name="harga['+value[z].id_charge_vehicles+']" value="'+value[z].price_charge_vehicles+'" >'+rupiah.format(value[z].price_charge_vehicles);
                 // cell3.innerHTML = '<i class="icon-copy fa fa-trash" onclick="hapusEl(\''+id+'\')" style="cursor:pointer"> Del</i>';
         
-                }
+                // }
         
             },
             error:function(data){

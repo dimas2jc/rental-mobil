@@ -64,6 +64,7 @@
                 <table id="table-charge" class="table table-striped table-bordered" style="width: 100%">
                     <thead class="thead-dark">
                         <tr>
+                            <th>ID</th>
                             <th>Charge</th>
                             <th>Price</th>
                             <th>Action</th>
