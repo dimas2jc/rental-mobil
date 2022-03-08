@@ -46,6 +46,11 @@ class BookingController extends Controller
             ]);
         }
 
+        $customer = Customer::where('id_customer', $id_customer)->first();
+        if($customer-> is_blacklist == 1){
+            return back()->with("error", "Customer ".$customer->name_customer." dengan NIK ".$customer->no_nik_customer." telah diblokir");
+        }
+
         $date_start = $request->start_date." ".$request->start_time;
         $date_end = $request->end_date." ".$request->end_time;
 

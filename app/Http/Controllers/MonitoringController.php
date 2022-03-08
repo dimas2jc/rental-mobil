@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\DetailPayment;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MonitoringController extends Controller
 {
@@ -67,4 +70,45 @@ class MonitoringController extends Controller
     //     return response()->json($data, 200);
 
     // }
+
+    public function get_board_monitoring()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+        $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
+
+        // $booking = DetailPayment::where('booking.date_start','>=', $startOfWeek)
+        // ->where('booking.date_finish','<=', $endOfWeek)
+        // ->orWhere(function ($query) use ($endOfWeek) {
+        //     $query->where('booking.date_finish', '>',  $endOfWeek);
+        // })
+        // ->leftJoin('booking', 'booking.id_booking', 'detail_payment.id_booking')
+        // ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        // ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        // ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        // ->leftJoin('customer', 'customer.id_customer', 'booking.id_customer')
+        // ->leftJoin('payment_rent as pr', 'pr.id_payment_rent', 'detail_payment.id_payment_rent')
+        // ->groupBy('booking.id_booking')
+        // ->orderBy('booking.id_vehicles', 'ASC')
+        // ->orderBy('detail_payment.timestamps', 'ASC')
+        // ->select(
+        //     'booking.*',
+        //     'customer.name_customer',
+        //     'sales.name_sales',
+        //     DB::raw("(
+        //         CASE
+        //             WHEN detail_payment.description like 'DP' THEN detail_payment.price
+        //             ELSE null
+        //         END
+        //     ) AS detail_payment"),
+        //     DB::raw("(
+        //         CASE
+        //             WHEN SUM(detail_payment.price) = pr.total_payment THEN detail_payment.price
+        //             ELSE null
+        //         END
+        //     ) AS pelunasan"),
+        //     DB::raw("CONCAT(vv.nama_varian,' ',vehicles.nopol) AS vehicle_name")
+        // )->get();
+
+        return response()->json(200);
+    }
 }

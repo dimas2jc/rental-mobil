@@ -25,6 +25,14 @@
             <a href="#" class="dropdown-item">Print</a>
         </div> --}}
     </div>
+    @if(session()->has('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="ti-close"></i>
+        </button>
+    </div>
+    @endif
 </div>
 <div class="row no-gutters app-block">
     <!-- <div class="col-md-3 app-sidebar">
@@ -155,7 +163,7 @@
                                 <select class="form-control select-component select-customer" id="customer" name="customer" required>
                                     <option selected disabled>Pilih Customer . . </option>
                                     @foreach ($data['customer'] as $d)
-                                        <option value="{{ $d->id_customer }}">{{ $d->name_customer }}</option>
+                                        <option value="{{ $d->id_customer }}">{{ $d->no_nik_customer }}</option>
                                     @endforeach
                                 </select>
                             </div>

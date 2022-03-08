@@ -55,7 +55,7 @@
                 </a>
                 <ul>
                     <li>
-                        <a href="{{url('/monitoring')}}">Monitoring</a>
+                        <a href="{{url('/board_monitoring')}}">Monitoring</a>
                     </li>
                     <li>
                         <a href="{{url('/keuangan')}}">Keuangan</a>

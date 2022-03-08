@@ -12,6 +12,8 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MonitoringController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\PembayaranController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +39,7 @@ Route::group(['middleware' => ['auth']],function(){
     });
     Route::post('/post-change-password', [HomeController::class, 'change_password']);
     Route::get('/', function () {
-        $data['customer'] = DB::table('customer')->select('id_customer', 'name_customer')->get();
+        $data['customer'] = DB::table('customer')->select('id_customer', 'no_nik_customer')->get();
         // $data['vehicle'] = DB::table('vehicles')->select('id_vehicles', 'nopol')->get();
         return view('booking', compact('data'));
     })->name('pegawai');
@@ -65,6 +67,11 @@ Route::group(['middleware' => ['auth']],function(){
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
     });
+    Route::get('/board_monitoring', function () {
+        return view('board_monitoring');
+    });
+
+    Route::get('get_board_monitoring', [MonitoringController::class, 'get_board_monitoring']);
 
     Route::get('keuangan', [MonitoringController::class, 'index_keuangan']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
