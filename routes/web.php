@@ -29,10 +29,17 @@ use App\Http\Controllers\PembayaranController;
 Route::get('/login', [HomeController::class, 'authenticate'])->name('login');
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::post('/post-login', [HomeController::class, 'postLogin']);
+Route::post('/forgot-password', [HomeController::class, 'forgotPassword']);
+Route::get('/change-password-user/{id}', [HomeController::class, 'changeForgotPassword']);
+Route::post('/post-forgot-password', [HomeController::class, 'storeForgotPassword']);
 
 Route::group(['middleware' => ['auth']],function(){
+    Route::get('/change-password', function () {
+        return view('change_password');
+    });
+    Route::post('/post-change-password', [HomeController::class, 'change_password']);
     Route::get('/', function () {
-        $data['customer'] = DB::table('customer')->select('id_customer', 'name_customer')->get();
+        $data['customer'] = DB::table('customer')->select('id_customer', 'no_nik_customer')->get();
         // $data['vehicle'] = DB::table('vehicles')->select('id_vehicles', 'nopol')->get();
         return view('booking', compact('data'));
     })->name('pegawai');
@@ -60,17 +67,20 @@ Route::group(['middleware' => ['auth']],function(){
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
     });
+    Route::get('/board_monitoring', function () {
+        return view('board_monitoring');
+    });
 
-    Route::get('monitoring', [MonitoringController::class, 'index']);
+    Route::get('get_board_monitoring', [MonitoringController::class, 'get_board_monitoring']);
+
+    Route::get('keuangan', [MonitoringController::class, 'index_keuangan']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
-    
+
     Route::get('laporan', [LaporanController::class, 'index']);
     Route::get('laporan/cetak/{id}', [LaporanController::class, 'cetak']);
 
     Route::get('pembayaran', [PembayaranController::class, 'index']);
     Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
-    Route::get('get_charge', [PembayaranController::class, 'get_charge']);
-    
     Route::get('get_booking', [BookingController::class, 'get_booking']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);

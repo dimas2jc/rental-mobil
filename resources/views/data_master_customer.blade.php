@@ -32,6 +32,7 @@
                                 <th>Alamat</th>
                                 <th>No. HP</th>
                                 <th>Sosmed</th>
+                                <th>Email</th>
                                 <th>Is Blacklist</th>
                                 <th style="width: 10%">Actions</th>
                             </tr>
@@ -43,7 +44,7 @@
             <div class="tab-pane fade" id="customer_b_tab" role="tabpanel" aria-labelledby="customer_b_tab-tab">
                 <div class="judul-tabel mb-3">
                     <h5>Daftar Customer Blacklist</h5>
-                </div> 
+                </div>
                 <div style="overflow-x: auto;">
                     <table id="table-customer-b" class="table table-striped table-bordered" style="width: 100%">
                         <thead class="thead-dark">
@@ -53,6 +54,7 @@
                             <th>Alamat</th>
                             <th>No. HP</th>
                             <th>Sosmed</th>
+                            <th>Email</th>
                             <th>Is Blacklist</th>
                         </thead>
                         <tbody>
@@ -125,7 +127,7 @@
                             </div>
                         </div>
 
-                        <!-- <div class="form-group">
+                        <div class="form-group">
                             <label for="" class="col-form-label">
                             Email
                             </label>
@@ -133,8 +135,7 @@
                             <div class="invalid-feedback">
                                 Mohon isi email dengan benar.
                             </div>
-                        </div> -->
-
+                        </div>
                         <div class="form-group">
                             <label for="" class="col-form-label">
                             Sosmed

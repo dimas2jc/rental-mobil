@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableEmployesUpdateDataTypePhone extends Migration
+class AlterTableSalesAddEmailColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AlterTableEmployesUpdateDataTypePhone extends Migration
      */
     public function up()
     {
-        Schema::table('employes_company', function (Blueprint $table) {
-            $table->string('phone_employes', 13)->change();
+        Schema::table('sales', function (Blueprint $table) {
+            $table->string('email_sales', 255)->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AlterTableEmployesUpdateDataTypePhone extends Migration
     public function down()
     {
         Schema::table('employes_company', function (Blueprint $table) {
-            $table->decimal('phone_employes')->change();
+            $table->dropColumn('email_sales',);
         });
     }
 }

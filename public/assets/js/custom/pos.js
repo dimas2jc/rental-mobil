@@ -30,7 +30,7 @@ $(document).ready(function(){
                 // headers : {'Authorization' : 'Bearer '+authUser.api_token},
                 url : baseUrl+'/api/get_charge',
                 data: function(d) {
-    
+
                 }
             },
             columns:[

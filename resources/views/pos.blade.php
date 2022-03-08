@@ -11,7 +11,7 @@
         <div class="tab-content">
             <div class="tab-pane fade show active mb-3" id="pos_tab" role="tabpanel" aria-labelledby="pos_tab-tab">
                 <div class="judul-tabel mb-3">
-                    <h5>Point Of Sales</h5>
+                    <h5>Pembayaran</h5>
                 </div>
                 <form action="" id="formPembayaran" method="POST" class="needs-validation" novalidate>
                     @csrf

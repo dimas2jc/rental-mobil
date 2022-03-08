@@ -78,7 +78,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-google btn-sm" onclick="document.getElementById('insert-form-customer').reset(); $('#modal-tambah-customer').modal('toggle');">BATAL</button>
+                    <button type="button" class="btn btn-google btn-sm" onclick="$('#modal-tambah-pemilik_kendaraan').modal('toggle');">BATAL</button>
                     <button type="submit" class="btn btn-linkedin btn-sm">SIMPAN</button>
                 </div>
             </form>

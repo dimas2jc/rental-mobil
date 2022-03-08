@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableCustomerAddSosmedCustomer extends Migration
+class AlterTableEmployesCompanyAddEmailColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AlterTableCustomerAddSosmedCustomer extends Migration
      */
     public function up()
     {
-        Schema::table('customer', function (Blueprint $table) {
-            $table->string('sosmed_customer', 255)->nullable();
+        Schema::table('employes_company', function (Blueprint $table) {
+            $table->string('email_employes', 255)->nullable();
         });
-
     }
 
     /**
@@ -26,8 +25,8 @@ class AlterTableCustomerAddSosmedCustomer extends Migration
      */
     public function down()
     {
-        Schema::table('customer', function (Blueprint $table) {
-            $table->dropColumn('sosmed_customer');
+        Schema::table('employes_company', function (Blueprint $table) {
+            $table->dropColumn('email_employes');
         });
     }
 }

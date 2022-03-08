@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
+use App\Models\DetailPayment;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MonitoringController extends Controller
 {
-    public function index(){
+    public function index_keuangan(){
         $data = DB::table('booking as b')
                 ->join('sales as s', 's.id_sales', '=', 'b.id_sales')
                 ->join('customer as c', 'c.id_customer', '=', 'b.id_customer')
@@ -58,7 +61,7 @@ class MonitoringController extends Controller
     //     ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
     //     ->select('b.id_booking', 'vv.vehicles_type as type_unit', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales',
     //     'c.name_customer as user', 'b.real_price as real_price', 'pr.total_payment as price_user', 'o.price_charge_vehicles as o_charge', 'lw.price_charge_vehicles as lw_charge',
-    //      'b.dp_sales as dp_sales', 
+    //      'b.dp_sales as dp_sales',
     //     'dp.description as description')
     //     ->groupBy('b.id_booking', 'type_unit', 'date_start', 'date_finish', 'name_sales', 'user', 'real_price', 'price_user', 'o_charge', 'lw_charge', 'dp_sales', 'description')
     //     ->where('b.status_booking', 4)
@@ -67,4 +70,45 @@ class MonitoringController extends Controller
     //     return response()->json($data, 200);
 
     // }
+
+    public function get_board_monitoring()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+        $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
+
+        // $booking = DetailPayment::where('booking.date_start','>=', $startOfWeek)
+        // ->where('booking.date_finish','<=', $endOfWeek)
+        // ->orWhere(function ($query) use ($endOfWeek) {
+        //     $query->where('booking.date_finish', '>',  $endOfWeek);
+        // })
+        // ->leftJoin('booking', 'booking.id_booking', 'detail_payment.id_booking')
+        // ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        // ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        // ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        // ->leftJoin('customer', 'customer.id_customer', 'booking.id_customer')
+        // ->leftJoin('payment_rent as pr', 'pr.id_payment_rent', 'detail_payment.id_payment_rent')
+        // ->groupBy('booking.id_booking')
+        // ->orderBy('booking.id_vehicles', 'ASC')
+        // ->orderBy('detail_payment.timestamps', 'ASC')
+        // ->select(
+        //     'booking.*',
+        //     'customer.name_customer',
+        //     'sales.name_sales',
+        //     DB::raw("(
+        //         CASE
+        //             WHEN detail_payment.description like 'DP' THEN detail_payment.price
+        //             ELSE null
+        //         END
+        //     ) AS detail_payment"),
+        //     DB::raw("(
+        //         CASE
+        //             WHEN SUM(detail_payment.price) = pr.total_payment THEN detail_payment.price
+        //             ELSE null
+        //         END
+        //     ) AS pelunasan"),
+        //     DB::raw("CONCAT(vv.nama_varian,' ',vehicles.nopol) AS vehicle_name")
+        // )->get();
+
+        return response()->json(200);
+    }
 }

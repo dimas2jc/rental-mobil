@@ -17,7 +17,7 @@
             </li>
 
             @if (auth()->user()->role == 1)
-            <li>
+            {{-- <li>
                 <a href="#">
                     <span class="nav-link-icon">
                         <i data-feather="dollar-sign"></i>
@@ -44,14 +44,31 @@
                         <a id="kas_keluar" href="">Kas Keluar</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li>
-                <a href="{{url('/monitoring')}}" id="monitoring">
+                <a href="#" id="monitoring">
                     <span class="nav-link-icon">
                         <i data-feather="monitor"></i>
                     </span>
                     <span>Monitoring</span>
+                </a>
+                <ul>
+                    <li>
+                        <a href="{{url('/board_monitoring')}}">Monitoring</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/keuangan')}}">Keuangan</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{url('/pembayaran')}}" id="pembayaran">
+                    <span class="nav-link-icon">
+                        <i data-feather="dollar-sign"></i>
+                    </span>
+                    <span>Pembayaran</span>
                 </a>
             </li>
 
@@ -61,15 +78,6 @@
                         <i data-feather="file-text"></i>
                     </span>
                     <span>Laporan</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="{{url('/pembayaran')}}" id="pembayaran">
-                    <span class="nav-link-icon">
-                        <i data-feather="dollar-sign"></i>
-                    </span>
-                    <span>Pembayaran</span>
                 </a>
             </li>
 

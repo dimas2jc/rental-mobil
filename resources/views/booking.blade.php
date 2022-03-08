@@ -25,6 +25,14 @@
             <a href="#" class="dropdown-item">Print</a>
         </div> --}}
     </div>
+    @if(session()->has('error'))
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        {{ session('error') }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <i class="ti-close"></i>
+        </button>
+    </div>
+    @endif
 </div>
 <div class="row no-gutters app-block">
     <!-- <div class="col-md-3 app-sidebar">
@@ -107,7 +115,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
-                                Email*
+                                Email
                             </label>
                             <div class="col-sm-9">
                                 <input type="text" name="email" id="email" class="form-control">
@@ -131,6 +139,14 @@
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-3 col-form-label">
+                                NIK*
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" name="nik" id="nik" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
                                 Alamat*
                             </label>
                             <div class="col-sm-9">
@@ -147,7 +163,7 @@
                                 <select class="form-control select-component select-customer" id="customer" name="customer" required>
                                     <option selected disabled>Pilih Customer . . </option>
                                     @foreach ($data['customer'] as $d)
-                                        <option value="{{ $d->id_customer }}">{{ $d->name_customer }}</option>
+                                        <option value="{{ $d->id_customer }}">{{ $d->no_nik_customer }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -216,8 +232,15 @@
                             Harga
                         </label>
                         <div class="col-sm-9">
+                            <input type="text" name="real_price" id="real_price" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Harga Sales
+                        </label>
+                        <div class="col-sm-9">
                             <input type="text" name="harga" id="harga" class="form-control">
-                            <input type="hidden" name="real_price" id="real_price" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -260,7 +283,9 @@
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <button type="button" id="" class="btn btn-sm btn-primary reschedule">Reschedule</button>&nbsp;
-                        <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
+                        @if(auth()->user()->role == 1)
+                            <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
+                        @endif
                     </div>
                 </div>
             </div>

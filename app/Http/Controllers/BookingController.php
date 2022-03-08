@@ -40,8 +40,15 @@ class BookingController extends Controller
                 'name_customer' => $request->name,
                 'address_customer' => $request->alamat,
                 'phone_customer' => $request->no_telp,
-                'email_customer' => $request->email
+                'email_customer' => $request->email,
+                'no_nik_customer' => $request->nik,
+                'is_blacklist' => 0
             ]);
+        }
+
+        $customer = Customer::where('id_customer', $id_customer)->first();
+        if($customer-> is_blacklist == 1){
+            return back()->with("error", "Customer ".$customer->name_customer." dengan NIK ".$customer->no_nik_customer." telah diblokir");
         }
 
         $date_start = $request->start_date." ".$request->start_time;
@@ -53,7 +60,7 @@ class BookingController extends Controller
             'id_booking' => $id_booking,
             'id_customer' => $id_customer,
             'id_vehicles' => $request->vehicle,
-            // 'id_sales' =>
+            'id_sales' => auth()->user()->id,
             'date_start' => date("Y-m-d H:i:s", strtotime($date_start)),
             'date_finish' => date("Y-m-d H:i:s", strtotime($date_end)),
             'price_sales' => $request->harga,
@@ -240,7 +247,8 @@ class BookingController extends Controller
 
     public function approve($id){
         Booking::where('id_booking', $id)->update([
-            'status_booking' => 2 // status approved
+            'status_booking' => 2, // status approved
+            'id_employes' => auth()->user()->id
         ]);
 
         return response()->json(200);

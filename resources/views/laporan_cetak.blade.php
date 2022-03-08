@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Invoice {{ $id }}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    
+
     <style>
         @page {
             margin: 10px !important;
@@ -81,7 +81,7 @@
             margin:10px;
         }
         .gambar{
-            width: auto; 
+            width: auto;
             height: auto;
         }
         .bg{

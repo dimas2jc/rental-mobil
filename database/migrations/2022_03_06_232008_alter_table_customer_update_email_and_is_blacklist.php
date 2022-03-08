@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableCustomerUpdateDataTypePhone extends Migration
+class AlterTableCustomerUpdateEmailAndIsBlacklist extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,8 @@ class AlterTableCustomerUpdateDataTypePhone extends Migration
     public function up()
     {
         Schema::table('customer', function (Blueprint $table) {
-            $table->string('phone_customer', 13)->change();
+            $table->string('email_customer', 255)->nullable()->change();
+            $table->boolean('is_blacklist')->default(0)->change();
         });
     }
 
@@ -26,7 +27,8 @@ class AlterTableCustomerUpdateDataTypePhone extends Migration
     public function down()
     {
         Schema::table('customer', function (Blueprint $table) {
-            $table->decimal('phone_customer')->change();
+            $table->char('email_customer', 255)->change();
+            $table->boolean('is_blacklist')->change();
         });
     }
 }

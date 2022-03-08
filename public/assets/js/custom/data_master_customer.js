@@ -48,6 +48,7 @@ $(document).ready(function(){
                     }
                 }
             },
+            {data:"email_customer",name:"email_customer"},
             {
                 data:"is_blacklist",name:"is_blacklist",
                 render: function(data, type, row){
@@ -106,6 +107,7 @@ $(document).ready(function(){
                 $("#alamat").val(data.address_customer);
                 $("#phone").val("0"+data.phone_customer);
                 $("#sosmed").val(data.sosmed_customer);
+                $("#email").val(data.email_customer);
             },
             error:function(data){
                 console.log(data);
@@ -160,6 +162,7 @@ $(document).ready(function(){
                     }
                 }
             },
+            {data:"email_customer",name:"email_customer"},
             {
                 data:"is_blacklist",
                 name:"is_blacklist",
@@ -173,7 +176,7 @@ $(document).ready(function(){
             }
         ]
     });
-    
+
 });
 
 (function() {

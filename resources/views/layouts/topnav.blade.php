@@ -161,7 +161,7 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" title="User menu" data-toggle="dropdown">
                             <figure class="avatar avatar-sm">
-                                <img src="{{asset('assets/media/image/user/man_avatar3.jpg')}}"
+                                <img src="{{asset('assets/media/image/user/avatar-5.png')}}"
                                         class="rounded-circle"
                                         alt="avatar">
                             </figure>
@@ -170,7 +170,7 @@
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-big">
                             <div class="text-center py-4">
                                 <figure class="avatar avatar-lg mb-3 border-0">
-                                    <img src="{{asset('assets/media/image/user/man_avatar3.jpg')}}"
+                                    <img src="{{asset('assets/media/image/user/avatar-5.png')}}"
                                             class="rounded-circle" alt="image">
                                 </figure>
                                 <h5 class="text-center">{{auth()->user()->username}}</h5>
@@ -178,7 +178,8 @@
                                 <!-- <a href="#" class="btn btn-outline-light btn-rounded">Manage Your Account</a> -->
                             </div>
                             <div class="list-group">
-                                <a href="{{ url('logout') }}" class="list-group-item text-danger">Sign Out!</a>
+                                <a href="{{ url('change-password') }}" class="list-group-item">Ganti Password</a>
+                                <a href="{{ url('logout') }}" class="list-group-item text-danger">Keluar!</a>
                             </div>
                         </div>
                     </li>

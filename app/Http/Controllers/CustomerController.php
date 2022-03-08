@@ -24,6 +24,7 @@ class CustomerController extends Controller
             'alamat' => 'required|string|max:255',
             'phone' => 'required|max:15',
             'sosmed' => 'required',
+            'email' => 'required',
         ]);
 
         Customer::where('id_customer', $id)->update([
@@ -32,7 +33,8 @@ class CustomerController extends Controller
             'name_customer' => $request->name,
             'address_customer' => $request->alamat,
             'phone_customer' => $request->phone,
-            'sosmed_customer' => $request->sosmed
+            'sosmed_customer' => $request->sosmed,
+            'email_customer' => $request->email
         ]);
 
         return redirect()->back();
