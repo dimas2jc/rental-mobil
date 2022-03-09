@@ -68,55 +68,31 @@ $(document).ready(function(){
                         break;
                     }
                 }
-                // $("#modal-tambah-charge").modal("hide");
+                $("#modal-tambah-charge").modal("hide");
+                var table = document.getElementById("table-pos");
+                var row = table.insertRow(table.rows.length);
+                row.setAttribute('id','col'+colnum);
+                var id = 'col'+colnum;
+                colnum++;
+                
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
 
-                // var table = document.getElementById("table-pos");
-
-                // var flag=-1;
-        
-                // for(var z=1; z<table.rows.length; z++)
-                // {
-                //     var x=table.rows[z].childNodes[0].childNodes[0];
-                //     // console.log(x.value);
-                //     if(x.value == value[index].id_charge_vehicles)
-                //     {
-                //     flag = z;
-                //     break;
-                //     }
-                // }
-        
-                // if(flag != -1)
-                // {
-                //     var colQty = table.rows[flag].childNodes[2].childNodes[0];
-                //     colQty.value = parseInt(colQty.value) + 1;
-                //     var idrow = table.rows[flag].childNodes[0].childNodes[0].value;
-                //     console.log(idrow);
-                //     recount(idrow);
-                // }
-                // else
-                // {
-                // var row = table.insertRow(table.rows.length);
-                // row.setAttribute('id','col'+colnum);
-                // var id = 'col'+colnum;
-                // colnum++;
-        
-                // let rupiah = Intl.NumberFormat('id-ID');
-        
-                // var cell1 = row.insertCell(0);
-                // var cell2 = row.insertCell(1);
-                // var cell3 = row.insertCell(2);
-
-                // cell1.innerHTML = '<input type="hidden" name="id['+value[z].id_charge_vehicles+']" value="'+value[z].id_charge_vehicles+'">'+value[z].name_charge_vehicles;
-                // cell2.innerHTML = '<input type="hidden" id="harga'+value[z].id_charge_vehicles+'" name="harga['+value[z].id_charge_vehicles+']" value="'+value[z].price_charge_vehicles+'" >'+rupiah.format(value[z].price_charge_vehicles);
-                // cell3.innerHTML = '<i class="icon-copy fa fa-trash" onclick="hapusEl(\''+id+'\')" style="cursor:pointer"> Del</i>';
-        
-                // }
+                cell1.innerHTML = '<input type="hidden" name="id['+value[index].id_charge_vehicles+']" value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles;
+                cell2.innerHTML = '<input type="hidden" id="harga'+value[index].id_charge_vehicles+'" name="harga['+value[index].id_charge_vehicles+']" value="'+value[index].price_charge_vehicles+'" >'+value[index].price_charge_vehicles;
+                cell3.innerHTML = '<i class="icon-copy fa fa-trash" onclick="'+hapusEl+'(\''+id+'\')" style="cursor:pointer"> Del</i>';
+                
+                function hapusEl(idCol) {
+                    document.getElementById(idCol).remove();
+                }
         
             },
             error:function(data){
                 console.log(data);
             }
         });
+
     
     });
 
