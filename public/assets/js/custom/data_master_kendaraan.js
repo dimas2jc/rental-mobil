@@ -519,7 +519,6 @@ $(document).ready(function(){
 
         $("#modal-tambah-dokumen").modal("show");
     });
-    $('#type_dokumen').mask('0000000000')
 
 });
 

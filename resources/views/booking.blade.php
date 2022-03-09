@@ -12,7 +12,7 @@
 
 <div class="page-header d-md-flex justify-content-between">
     <div>
-        <h3>Selamat Datang, Bony</h3>
+        <h3>Selamat Datang, {{ auth()->user()->username }}</h3>
         <!-- <p class="text-muted">This page shows an overview for your account summary.</p> -->
     </div>
     <div class="mt-3 mt-md-0">
