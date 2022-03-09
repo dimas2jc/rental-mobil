@@ -138,20 +138,25 @@
         }
     </style>
 </head>
-    @foreach($data as $d)
+
         <body>
             <div class="header">
                 <table>
+                    @php
+                        $temp = explode(", ", $data['company']->address_company);
+                        $alamat = $temp[0];
+                        $kota = $temp[1];
+                    @endphp
                     <tr>
                         <td width="140px">
-                            <img src="assets/media/image/logo_invoice.jpg" style="width: 150px; height: 70px;">
+                            <img src="{{ asset('assets/media/image/logo_invoice.jpg') }}" style="width: 150px; height: 70px;">
                         </td>
                         <td>
-                            <h4 style="font-size: 15px;">CV. Mitra Asmoro Jaya</h4>
-                            <p style="font-size: 15px;">Taman Villa Meruya</p>
-                            <p style="font-size: 15px;">Surabaya</p>
-                            <p style="font-size: 15px;">Phone : 083847070417</p>
-                            <p style="font-size: 15px;">Email : muhammadteguh301@gmail.com</p>
+                            <h4 style="font-size: 15px;">{{ $data['company']->name_company }}</h4>
+                            <p style="font-size: 15px;">{{ $alamat }}</p>
+                            <p style="font-size: 15px;">{{ $kota }}</p>
+                            <p style="font-size: 15px;">Phone : {{ $data['company']->phone_company }}</p>
+                            <p style="font-size: 15px;">Email : {{ $data['company']->email_company }}</p>
                         </td>
                         <td width="100px">
                             <h4 style="font-size: 30px; padding-right:20px;">INVOICE</h4>
@@ -165,27 +170,27 @@
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>Id</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{ $d->id_booking }}</td>
+                        <td style="font-size: 15px;">{{ $data['data']->id_booking }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>User</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{ $d->user }}</td>
+                        <td style="font-size: 15px;">{{ $data['data']->user }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>Sales</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{ $d->name_sales }}</td>
+                        <td style="font-size: 15px;">{{ $data['data']->name_sales }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>Customer</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{ $d->name_customer }}</td>
+                        <td style="font-size: 15px;">{{ $data['data']->name_customer }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>Tanggal</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{\Carbon\Carbon::parse($d->date_start)->translatedFormat('l, d F Y')}}</p></td>
+                        <td style="font-size: 15px;">{{\Carbon\Carbon::parse($data['data']->date_start)->translatedFormat('l, d F Y')}}</p></td>
                     </tr>
                 </table>
             </div>
@@ -205,38 +210,38 @@
                                     <tr>
                                         <td style="font-size: 15px; width:100px;"><b>Type</b></td>
                                         <td style="font-size: 15px; width:10px;">:</td>
-                                        <td style="font-size: 15px;">{{ $d->type_unit }}</td>
+                                        <td style="font-size: 15px;">{{ $data['data']->type_unit }}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 15px; width:100px;"><b>No. Polisi</b></td>
                                         <td style="font-size: 15px; width:10px;">:</td>
-                                        <td style="font-size: 15px;">{{ $d->nopol }}</td>
+                                        <td style="font-size: 15px;">{{ $data['data']->nopol }}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 15px; width:100px;"><b>Tahun</b></td>
                                         <td style="font-size: 15px; width:10px;">:</td>
-                                        <td style="font-size: 15px;">{{ $d->tahun_pembuatan }}</td>
+                                        <td style="font-size: 15px;">{{ $data['data']->tahun_pembuatan }}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 15px; width:100px;"><b>Ambil</b></td>
                                         <td style="font-size: 15px; width:10px;">:</td>
-                                        <td style="font-size: 15px;">{{ $d->date_start }}</td>
+                                        <td style="font-size: 15px;">{{ $data['data']->date_start }}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 15px; width:100px;"><b>Kembali</b></td>
                                         <td style="font-size: 15px; width:10px;">:</td>
-                                        <td style="font-size: 15px;">{{ $d->date_finish }}</td>
+                                        <td style="font-size: 15px;">{{ $data['data']->date_finish }}</td>
                                     </tr>
                                 </table>
                             </td>
-                            <td style="font-size: 25px; text-align:right;">{{ $d->price_user }}</td>
+                            <td style="font-size: 25px; text-align:right;">{{ $data['data']->price_user }}</td>
                        </tr>
                    </tbody>
                 </table>
             </div>
 
             <div class="container2" style="text-align:right;">
-                <p id="total"><b>Total</b>: {{ $d->price_user }}</p>
+                <p id="total"><b>Total</b>: {{ $data['data']->price_user }}</p>
             </div>
 
             <div class="row">
@@ -248,12 +253,12 @@
                 </div>
                 <div class="column3">
                     <center>
-                        CV. Mitra Asmoro Jaya<br>
+                        {{ $data['company']->name_company }}<br>
                         Kantor Pusat
                     </center>
                 </div>
             </div>
         </body>
-    @endforeach
+
 
 </html>

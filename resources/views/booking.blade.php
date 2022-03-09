@@ -25,15 +25,17 @@
             <a href="#" class="dropdown-item">Print</a>
         </div> --}}
     </div>
-    @if(session()->has('error'))
+</div>
+@if(session()->has('error'))
+<div class="row col-md-12">
     <div class="alert alert-danger alert-dismissible" role="alert">
         {{ session('error') }}
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <i class="ti-close"></i>
         </button>
     </div>
-    @endif
 </div>
+@endif
 <div class="row no-gutters app-block">
     <!-- <div class="col-md-3 app-sidebar">
         <h3 class="mb-4">Calendar</h3>

@@ -12,7 +12,7 @@
                     <table id="table-laporan" class="table table-striped table-bordered" style="width: 100%">
                         <thead class="thead-dark">
                             <tr>
-                                <th rowspan="2">ID Booking</th>
+                                <th rowspan="2">No</th>
                                 <th rowspan="2">Type Unit</th>
                                 <th rowspan="2">Customer</th>
                                 <th rowspan="2">Sales</th>

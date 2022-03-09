@@ -21,6 +21,10 @@
             <div class="tab-pane fade show active" id="customer_tab" role="tabpanel" aria-labelledby="customer_tab-tab">
                 <div class="judul-tabel mb-3">
                     <h5>Daftar Customer</h5>
+                    <button class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-tambah-customer" data-toggle="modal" data-target="#modal-tambah-customer">
+                        <i class="fa fa-plus mr-1"></i>
+                        TAMBAH BARU
+                    </button>
                 </div>
                 <div style="overflow-x: auto;">
                     <table id="table-customer" class="table table-striped table-bordered responsive" style="width: 100%">
@@ -82,28 +86,28 @@
                         @csrf
                         <div class="form-group">
                             <label for="" class="col-form-label">
-                                No. KK
-                            </label>
-                            <input type="number" name="no_kk" id="no_kk" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-form-label">
-                            No. NIK
-                            </label>
-                            <input type="number" readonly name="no_nik" id="no_nik" class="form-control @error('no_nik') is-invalid @enderror" required>
-                            <div class="invalid-feedback">
-                                Mohon isi No. NIK dengan benar.
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="" class="col-form-label">
                                 Nama Customer
                             </label>
                             <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" required>
                             <div class="invalid-feedback">
                                 Mohon isi nama customer dengan benar.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-form-label">
+                                No. KK
+                            </label>
+                            <input type="text" name="no_kk" id="no_kk" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-form-label">
+                            NIK
+                            </label>
+                            <input type="text" name="no_nik" id="no_nik" class="form-control @error('no_nik') is-invalid @enderror" required>
+                            <div class="invalid-feedback">
+                                Mohon isi NIK dengan benar.
                             </div>
                         </div>
 
