@@ -78,26 +78,26 @@ $(document).ready(function () {
                 events[i].title = results[i].nopol,
                 events[i].id = results[i].id_booking,
                 events[i].status = results[i].status,
-                events[i].start = moment(results[i].date_start).toDate(),
-                events[i].end = moment(results[i].date_end).add(1, "days").toDate(),
+                events[i].start = new Date(results[i].date_start).toISOString().slice(0, 10),
+                events[i].end = new Date(results[i].date_finish).toISOString().slice(0, 10),
                 events[i].description = `<div class="form-group row">`+
                                             `<div class="col-sm-12">`+
                                                 `<table style="border: 0px">`+
                                                     `<tr>`+
                                                         `<td>Nopol</td>`+
-                                                        `<td>: nomor</td>`+
+                                                        `<td>: `+results[i].nopol+`</td>`+
                                                     `</tr>`+
                                                     `<tr>`+
                                                         `<td>Customer</td>`+
-                                                        `<td>: nomor</td>`+
+                                                        `<td>: `+results[i].name_customer+`</td>`+
                                                     `</tr>`+
                                                     `<tr>`+
                                                         `<td>Tgl Diambil</td>`+
-                                                        `<td>: nomor</td>`+
+                                                        `<td>: `+new Date(results[i].date_start).toISOString().slice(0, 10)+`</td>`+
                                                     `</tr>`+
                                                     `<tr>`+
                                                         `<td>Tgl Dikembalikan</td>`+
-                                                        `<td>: nomor</td>`+
+                                                        `<td>: `+new Date(results[i].date_finish).toISOString().slice(0, 10)+`</td>`+
                                                     `</tr>`+
                                                 `</table>`+
                                             `</div>`+
@@ -134,6 +134,7 @@ $(document).ready(function () {
                     var modal = $('#viewEventModal');
                     modal.find('.event-icon').html("<i class='fa fa-" + event.icon + "'></i>");
                     modal.find('.event-title').html(event.title);
+                    modal.find('.event-body div').remove();
                     modal.find('.event-body').append(event.description);
                     modal.find('.reschedule').attr('id', event.id);
                     modal.find('.approve').attr('id', event.id);

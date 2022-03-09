@@ -99,7 +99,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::resource('data_master/pegawai', PegawaiController::class);
 
     Route::get('data_master/get_customer/{id}', [CustomerController::class, 'get_customer']);
-    Route::post('data_master/customer/{id}', [CustomerController::class, 'update']);
+    Route::post('data_master/customer/{id?}', [CustomerController::class, 'store']);
     Route::put('data_master/edit_status_customer/{id}', [CustomerController::class, 'edit_status_customer']);
 
     Route::get('data_master/get_sales/{id}', [SalesController::class, 'get_sales']);

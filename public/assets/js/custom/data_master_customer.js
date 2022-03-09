@@ -88,6 +88,15 @@ $(document).ready(function(){
         });
     });
 
+    $('.tombol-tambah-customer').on('click', function () {
+        $("#judul-modal-customer").html("Tambah Customer");
+        url = baseUrl+"/data_master/customer";
+        $("#formCustomer").attr('action', url);
+        $("#formCustomer").attr('method', 'POST');
+
+        $("#modal-tambah-customer").modal("show");
+    });
+
     $('#table-customer tbody').on('click', '.tombol-edit-customer', function () {
         var id = $(this).attr("id");
         $("#judul-modal-customer").html("Edit Customer");

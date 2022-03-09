@@ -54,13 +54,19 @@ class BookingController extends Controller
         $date_start = $request->start_date." ".$request->start_time;
         $date_end = $request->end_date." ".$request->end_time;
 
+        // Cek user
+        $id_user = null;
+        if(auth()->user()->role == 2){
+            $id_user = auth()->user()->id;
+        }
+
         $id_booking = Uuid::uuid4();
         $id_payment = Uuid::uuid4();
         Booking::insert([
             'id_booking' => $id_booking,
             'id_customer' => $id_customer,
             'id_vehicles' => $request->vehicle,
-            'id_sales' => auth()->user()->id,
+            'id_sales' => $id_user,
             'date_start' => date("Y-m-d H:i:s", strtotime($date_start)),
             'date_finish' => date("Y-m-d H:i:s", strtotime($date_end)),
             'price_sales' => $request->harga,
@@ -162,6 +168,10 @@ class BookingController extends Controller
             END
         ) AS status"))
         ->get();
+
+        foreach ($data as $key => $value) {
+            $value->date_finish_temp = $value->date_finish->addDays(1);
+        }
 
         return response()->json($data, 200);
     }
