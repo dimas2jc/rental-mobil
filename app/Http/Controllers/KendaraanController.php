@@ -19,7 +19,7 @@ class KendaraanController extends Controller
         $data['dokumen'] = DocumentVehicle::select("id_doc_vehicles", "name_doc_vehicles")->get();
         $data['body'] = VehicleBody::select("id_vehicle_bodies", "name_vehicles_bodies")->get();
         $data['varian'] = VehiclesVarian::select("id_varian_vehicles", "nama_varian")->get();
-        $data['vehicles'] = Vehicle::select("id_vendors", "id_doc_vehicles", "id_vehicle_bodies", "id_varian_vehicles")->get();
+        $data['vehicles'] = Vehicle::select("id_vendors", "id_doc_vehicles", "id_varian_vehicles")->get();
 
         return view('data_master_kendaraan', compact('data'));
     }
@@ -34,7 +34,7 @@ class KendaraanController extends Controller
             'id_vehicles' => Uuid::uuid4(),
             'id_vendors' => $request->pemilik,
             'id_doc_vehicles' => $request->dokumen,
-            'id_vehicle_bodies' => $request->body,
+            // 'id_vehicle_bodies' => $request->body,
             'id_varian_vehicles' => $request->varian,
             'nopol' => $request->nopol,
             'no_rangka' => $request->no_rangka,
@@ -58,7 +58,7 @@ class KendaraanController extends Controller
         Vehicle::where('id_vehicles', $id)->update([
             'id_vendors' => $request->pemilik,
             'id_doc_vehicles' => $request->dokumen,
-            'id_vehicle_bodies' => $request->body,
+            // 'id_vehicle_bodies' => $request->body,
             'id_varian_vehicles' => $request->varian,
             'nopol' => $request->nopol,
             'no_rangka' => $request->no_rangka,
@@ -92,7 +92,8 @@ class KendaraanController extends Controller
         VehicleBody::insert([
             'id_vehicle_bodies' => Uuid::uuid4(),
             'name_vehicles_bodies' => $request->name,
-            'is_active' => $is_active
+            'is_active' => $is_active,
+            'id_vehicles' => $request->id_vehicles
         ]);
 
         return back();
@@ -113,7 +114,8 @@ class KendaraanController extends Controller
         }
         VehicleBody::where('id_vehicle_bodies', $id)->update([
             'name_vehicles_bodies' => $request->name,
-            'is_active' => $is_active
+            'is_active' => $is_active,
+            'id_vehicles' => $request->id_vehicles
         ]);
 
         return back();
@@ -246,6 +248,13 @@ class KendaraanController extends Controller
         ->leftJoin('document_vehicles as vd', 'vd.id_doc_vehicles', '=', 've.id_doc_vehicles')
         ->where('id_vehicles', $id)
         ->get();
+
+        return response()->json($data, 200);
+    }
+
+    public function get_all_kendaraan()
+    {
+        $data = Vehicle::all();
 
         return response()->json($data, 200);
     }

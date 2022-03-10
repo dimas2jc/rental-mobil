@@ -11,11 +11,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class VehicleBody
- * 
+ *
  * @property string $id_vehicle_bodies
  * @property string $name_vehicles_bodies
  * @property float $is_active
- * 
+ *
  * @property Collection|Vehicle[] $vehicles
  *
  * @package App\Models
@@ -33,11 +33,12 @@ class VehicleBody extends Model
 
 	protected $fillable = [
 		'name_vehicles_bodies',
-		'is_active'
+		'is_active',
+        'id_vehicles'
 	];
 
 	public function vehicles()
 	{
-		return $this->hasMany(Vehicle::class, 'id_vehicle_bodies');
+		return $this->belongsTo(Vehicle::class, 'id_vehicles');
 	}
 }

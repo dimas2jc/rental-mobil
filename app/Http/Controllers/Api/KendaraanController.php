@@ -17,7 +17,7 @@ class KendaraanController extends Controller
         $data = Vehicle::from('vehicles as ve')
             ->leftJoin('vendor as v', 'v.id_vendors', '=', 've.id_vendors')
             ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 've.id_varian_vehicles')
-            ->leftJoin('vehicle_bodies as vb', 'vb.id_vehicle_bodies', '=', 've.id_vehicle_bodies')
+            // ->leftJoin('vehicle_bodies as vb', 'vb.id_vehicle_bodies', '=', 've.id_vehicle_bodies')
             ->leftJoin('document_vehicles as vd', 'vd.id_doc_vehicles', '=', 've.id_doc_vehicles')
             ->get();
             return Datatables::of($data)

@@ -19,11 +19,16 @@ class HomeController extends Controller
     public function postlogin(Request $request)
     {
         if(Auth::attempt($request->only('username','password'))){
-            if(Auth::user()->role == 1){
-                return redirect()->route('pegawai');
+            if(Auth::user()->status == 0){
+                session()->flash('error', 'User telah non-aktif');
             }
-            elseif(Auth::user()->role == 2){
-                return redirect()->route('pegawai');
+            else{
+                if(Auth::user()->role == 1){
+                    return redirect()->route('pegawai');
+                }
+                elseif(Auth::user()->role == 2){
+                    return redirect()->route('pegawai');
+                }
             }
         }
         session()->flash('error', 'Invalid Username or Password');

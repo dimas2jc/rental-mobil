@@ -33,6 +33,9 @@
                         <i class="ti-car mr-2 list-group-icon"></i>Kendaraan
                         <span class="small ml-auto" id="total_kendaraan">0</span>
                     </a>
+                    <a href="{{url('/data_master/body')}}" class="list-group-item d-flex align-items-center" id="body">
+                        <i class="ti-car mr-2 list-group-icon"></i>Body
+                    </a>
                     <a href="{{url('/data_master/harga-kendaraan')}}" class="list-group-item d-flex align-items-center" id="harga_kendaraan">
                         <i class="ti-money mr-2 list-group-icon"></i>Harga Kendaraan
                     </a>

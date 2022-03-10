@@ -25,10 +25,10 @@
                 <a class="nav-link" id="varian_tab-tab" data-toggle="tab" href="#varian_tab" role="tab"
                 aria-controls="varian_tab" aria-selected="false">Varian</a>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link" id="bodi_tab-tab" data-toggle="tab" href="#bodi_tab" role="tab"
                 aria-controls="bodi_tab" aria-selected="false">Bodi</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
                 <a class="nav-link" id="dokumen_tab-tab" data-toggle="tab" href="#dokumen_tab" role="tab"
                 aria-controls="dokumen_tab" aria-selected="false">Dokumen</a>
@@ -51,7 +51,7 @@
                                 <th>No. Polisi</th>
                                 <th>Pemilik</th>
                                 <th>Varian</th>
-                                <th>Body</th>
+                                {{-- <th>Body</th> --}}
                                 <th>Document</th>
                                 <th>Warna</th>
                                 <th>No Rangka</th>
@@ -178,7 +178,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <label for="" class="col-form-label">
                                 Body
                             </label>
@@ -187,7 +187,7 @@
                             <div class="invalid-feedback">
                                 Mohon pilih body dulu.
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="form-group">
                             <label for="" class="col-form-label">

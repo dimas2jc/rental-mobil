@@ -23,7 +23,6 @@ $(document).ready(function(){
             {data:"nopol",name:"nopol"},
             {data:"name_vendrs",name:"name_vendrs"},
             {data:"nama_varian",name:"nama_varian"},
-            {data:"name_vehicles_bodies",name:"name_vehicles_bodies"},
             {data:"name_doc_vehicles",name:"name_doc_vehicles"},
             {data:"warna",name:"warna"},
             {data:"no_rangka",name:"no_rangka"},
@@ -105,23 +104,23 @@ $(document).ready(function(){
             }
         });
 
-        $.ajax({
-            type: 'GET',
-            url: baseUrl+'/data_master/get_body_kendaraan',
-            dataType: 'json',
-            success: function (data) {
-                $('#body').empty();
-                $('#body').append('<option selected disabled>Pilih Body . . </option>');
-                for(let i=0;i<data.length;i++){
-                    $('#body').append(
-                        '<option value="'+data[i].id_vehicle_bodies+'" >'+data[i].name_vehicles_bodies+'</option>'
-                    );
-                }
-            },
-            error:function(data){
-                console.log(data);
-            }
-        });
+        // $.ajax({
+        //     type: 'GET',
+        //     url: baseUrl+'/data_master/get_body_kendaraan',
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         $('#body').empty();
+        //         $('#body').append('<option selected disabled>Pilih Body . . </option>');
+        //         for(let i=0;i<data.length;i++){
+        //             $('#body').append(
+        //                 '<option value="'+data[i].id_vehicle_bodies+'" >'+data[i].name_vehicles_bodies+'</option>'
+        //             );
+        //         }
+        //     },
+        //     error:function(data){
+        //         console.log(data);
+        //     }
+        // });
 
         $.ajax({
             type: 'GET',
@@ -162,15 +161,15 @@ $(document).ready(function(){
                 console.log(data);
                 id_pemilik = data[0].id_vendors;
                 id_dokumen = data[0].id_doc_vehicles;
-                id_body = data[0].id_vehicle_bodies;
+                // id_body = data[0].id_vehicle_bodies;
                 id_varian = data[0].id_varian_vehicles;
                 $('#pemilik').empty();
                 $('#dokumen').empty();
-                $('#body').empty();
+                // $('#body').empty();
                 $('#varian').empty();
                 $('#pemilik').append(new Option(data[0].name_vendrs, data[0].id_vendors));
                 $('#dokumen').append(new Option(data[0].name_doc_vehicles, data[0].id_doc_vehicles));
-                $('#body').append(new Option(data[0].name_vehicles_bodies, data[0].id_vehicle_bodies));
+                // $('#body').append(new Option(data[0].name_vehicles_bodies, data[0].id_vehicle_bodies));
                 $('#varian').append(new Option(data[0].nama_varian, data[0].id_varian_vehicles));
                 $("#nopol").val(data[0].nopol);
                 $("#no_rangka").val(data[0].no_rangka);
@@ -227,23 +226,23 @@ $(document).ready(function(){
             }
         });
 
-        $.ajax({
-            type: 'GET',
-            url: baseUrl+'/data_master/get_body_kendaraan',
-            dataType: 'json',
-            success: function (data) {
-                for(let i=0;i<data.length;i++){
-                    if(data[i].id_vehicle_bodies != id_body){
-                        $('#body').append(
-                            '<option value="'+data[i].id_vehicle_bodies+'" >'+data[i].name_vehicles_bodies+'</option>'
-                        );
-                    }
-                }
-            },
-            error:function(data){
-                console.log(data);
-            }
-        });
+        // $.ajax({
+        //     type: 'GET',
+        //     url: baseUrl+'/data_master/get_body_kendaraan',
+        //     dataType: 'json',
+        //     success: function (data) {
+        //         for(let i=0;i<data.length;i++){
+        //             if(data[i].id_vehicle_bodies != id_body){
+        //                 $('#body').append(
+        //                     '<option value="'+data[i].id_vehicle_bodies+'" >'+data[i].name_vehicles_bodies+'</option>'
+        //                 );
+        //             }
+        //         }
+        //     },
+        //     error:function(data){
+        //         console.log(data);
+        //     }
+        // });
 
         $.ajax({
             type: 'GET',
@@ -362,86 +361,6 @@ $(document).ready(function(){
         });
 
         $("#modal-tambah-varian").modal("show");
-    });
-
-    // Body
-    var table_body = $('#table-body').DataTable({
-        processing: true,
-        serverSide: true,
-        paging: true,
-        ajax : {
-            // headers : {'Authorization' : 'Bearer '+authUser.api_token},
-            url : baseUrl+'/api/body_datatable',
-            data: function(d) {
-
-            }
-        },
-        columns:[
-            {data:"name_vehicles_bodies",name:"name_vehicles_bodies"},
-            {
-                data: null,
-                className: "text-center",
-                orderable: true,
-                searchable: false,
-                render: function ( data, type, row ) {
-                    let html = ''
-                    if(data.is_active == 1){
-                        html = 'Active';
-                    }
-                    else{
-                        html = 'Non-Active';
-                    }
-
-                    return html;
-                }
-            },
-            {
-                data: null,
-                className: "text-center",
-                orderable: false,
-                searchable: false,
-                render: function ( data, type, row ) {
-                return '<a id="'+data.id_vehicle_bodies+'" class="btn btn-primary btn-sm tombol-edit-body"><i class="fa fa-pencil"></i></a>';
-                }
-            }
-        ]
-    });
-
-    $(".tombol-tambah-body").on("click", function(){
-        $("#name").val("");
-
-        $("#judul-modal-body").html("Tambah Body");
-        url = baseUrl+"/data_master/body_kendaraan"
-        $("#formBody").attr('action', url);
-        $("#formBody").attr('method', 'POST');
-    });
-
-    $('#table-body tbody').on('click', '.tombol-edit-body', function () {
-        var id = $(this).attr("id");
-        $("#judul-modal-body").html("Edit Body");
-        url = baseUrl+"/data_master/body_kendaraan/"+id;
-        $("#formBody").attr('action', url);
-        $("#formBody").attr('method', 'POST');
-
-        $.ajax({
-            type: 'GET',
-            url: baseUrl+'/data_master/get_body_kendaraan/'+id,
-            dataType: 'json',
-            success: function (data) {
-                $("#name").val(data.name_vehicles_bodies);
-                if(data.is_active == 1){
-                    $("#customCheck").prop("checked", true);
-                }
-                else{
-                    $("#customCheck").prop("checked", false);
-                }
-            },
-            error:function(){
-                console.log(data);
-            }
-        });
-
-        $("#modal-tambah-body").modal("show");
     });
 
     // Dokumen
