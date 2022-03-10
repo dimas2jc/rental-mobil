@@ -51,3 +51,5 @@ Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_dat
 Route::get('laporan_datatable', [LaporanController::class, 'laporan_datatable']);
 
 Route::get('get_charge', [PembayaranController::class, 'get_charge']);
+
+Route::get('get_booking', [PembayaranController::class, 'get_booking']);

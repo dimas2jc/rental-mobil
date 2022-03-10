@@ -20,6 +20,53 @@ $(document).ready(function(){
     });
 
 
+        var table_booking = $('#table-booking').DataTable({
+            processing: true,
+            serverSide: true,
+            paging: true,
+            ajax : {
+                // headers : {'Authorization' : 'Bearer '+authUser.api_token},
+                url : baseUrl+'/api/get_booking',
+                data: function(d) {
+
+                }
+            },
+            columns:[
+                {data:"nopol",name:"nopol"},
+                {data:"name",name:"name"},
+                {
+                    data:"date_start",
+                    name:"date_start",
+                    render  : function(data,type,row) {
+                        return data.substring(0, 10);
+                    }
+                },
+                {
+                    data:"date_finish",
+                    name:"date_finish",
+                    render  : function(data,type,row) {
+                        return data.substring(0, 10);
+                    }
+                },
+                {data:"price",name:"price"},
+                {
+                    data:"price",
+                    name:"price",
+                    render: function(data, type, row){
+                        return row.price_sales - data;
+                    }
+                },
+                {data:"price_sales",name:"price_sales"},
+                {
+                    data:"id",
+                    name:"id",
+                    render: function(data, type, row){
+                        return '<center><a id="'+data+'" class="pilih-charge"> <i class="fa fa-plus mr-1" style="cursor: pointer;"></i></a></center>'
+                    }
+                },
+            ]
+        });      
+
     $(".tombol-tambah-charge").on("click", function(){
         $('#table-charge').DataTable().clear().destroy();
         var table_charge = $('#table-charge').DataTable({
@@ -41,7 +88,7 @@ $(document).ready(function(){
                     data:"id_charge_vehicles",
                     name:"id_charge_vehicles",
                     render: function(data, type, row){
-                        return '<center><a id="'+data+'" class="btn btn-primary btn-sm pilih-charge"> <i class="fa fa-plus mr-1"></i>TAMBAH CHARGE</a></center>'
+                        return '<center><a id="'+data+'" class="pilih-charge"> <i class="fa fa-plus mr-1" style="cursor: pointer;"></i></a></center>'
                     }
                 },
             ]
@@ -58,42 +105,32 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                 var value = data.data;
-                // console.log(value[1].id_charge_vehicles);
                 var index;
                 var colnum=0;
                 for(var i=0;i<=value.length;i++){
                     if(value[i].id_charge_vehicles == id_charge){
                         index=i;
-                        // console.log('id 2 '+index);
                         break;
                     }
                 }
                 $("#modal-tambah-charge").modal("hide");
-                var table = document.getElementById("table-pos");
-                var row = table.insertRow(table.rows.length);
-                row.setAttribute('id','col'+colnum);
-                var id = 'col'+colnum;
-                colnum++;
-                
-                var cell1 = row.insertCell(0);
-                var cell2 = row.insertCell(1);
-                var cell3 = row.insertCell(2);
-
-                cell1.innerHTML = '<input type="hidden" name="id['+value[index].id_charge_vehicles+']" value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles;
-                cell2.innerHTML = '<input type="hidden" id="harga'+value[index].id_charge_vehicles+'" name="harga['+value[index].id_charge_vehicles+']" value="'+value[index].price_charge_vehicles+'" >'+value[index].price_charge_vehicles;
-                cell3.innerHTML = '<i class="icon-copy fa fa-trash" onclick="'+hapusEl+'(\''+id+'\')" style="cursor:pointer"> Del</i>';
-                
-                function hapusEl(idCol) {
-                    document.getElementById(idCol).remove();
-                }
-        
+                $('#table-pos tbody').append(
+                    '<tr id="idTr'+value[index].id_charge_vehicles+'">\
+                      <td>'+value[index].name_charge_vehicles+'</td>\
+                      <td>'+value[index].price_charge_vehicles+'</td>\
+                      <td><button type="button" onclick="hapusEl('+value[index].id_charge_vehicles+')" class="btn btn-danger hapus">Delete</button></td>\
+                    </tr>'
+                );
             },
             error:function(data){
                 console.log(data);
             }
         });
-
-    
+        
     });
 
 })
+
+function hapusEl(id){
+    $('#idTr'+id).remove();
+}
