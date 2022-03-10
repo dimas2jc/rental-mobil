@@ -63,6 +63,9 @@ Route::group(['middleware' => ['auth']],function(){
         return view('data_master_pemilik_kendaraan');
     });
     Route::get('/data_master/kendaraan', [KendaraanController::class, 'index']);
+    Route::get('/data_master/body', function () {
+        return view('data_master_body');
+    });
     Route::get('/data_master/harga-kendaraan', function () {
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
@@ -118,6 +121,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::resource('data_master/harga_kendaraan', HargaKendaraanController::class);
 
     Route::get('data_master/get_kendaraan/{id}', [KendaraanController::class, 'get_kendaraan']);
+    Route::get('data_master/get_all_kendaraan', [KendaraanController::class, 'get_all_kendaraan']);
     Route::post('data_master/kendaraan/{id}', [KendaraanController::class, 'update_kendaraan']);
     Route::post('data_master/kendaraan', [KendaraanController::class, 'store_kendaraan']);
 

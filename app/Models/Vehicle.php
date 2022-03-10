@@ -15,7 +15,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $id_vehicles
  * @property string|null $id_varian_vehicles
  * @property string|null $id_vendors
- * @property string|null $id_vehicle_bodies
  * @property string|null $id_doc_vehicles
  * @property string|null $nopol
  * @property string|null $no_rangka
@@ -32,7 +31,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property Vendor|null $vendor
  * @property VehiclesVarian|null $vehicles_varian
  * @property DocumentVehicle|null $document_vehicle
- * @property VehicleBody|null $vehicle_body
  * @property Collection|Booking[] $bookings
  * @property Collection|PriceVehicle[] $price_vehicles
  *
@@ -48,7 +46,6 @@ class Vehicle extends Model
 	protected $fillable = [
 		'id_varian_vehicles',
 		'id_vendors',
-		'id_vehicle_bodies',
 		'id_doc_vehicles',
 		'nopol',
 		'no_rangka',
@@ -80,7 +77,7 @@ class Vehicle extends Model
 
 	public function vehicle_body()
 	{
-		return $this->belongsTo(VehicleBody::class, 'id_vehicle_bodies');
+		return $this->hasMany(VehicleBody::class, 'id_vehicles');
 	}
 
 	public function bookings()
