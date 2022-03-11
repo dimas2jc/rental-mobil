@@ -19,53 +19,81 @@ $(document).ready(function(){
         }
     });
 
+    var table_booking = $('#table-booking').DataTable({
+        processing: true,
+        serverSide: true,
+        paging: true,
+        ajax : {
+            // headers : {'Authorization' : 'Bearer '+authUser.api_token},
+            url : baseUrl+'/api/get_booking',
+            data: function(d) {
 
-        var table_booking = $('#table-booking').DataTable({
-            processing: true,
-            serverSide: true,
-            paging: true,
-            ajax : {
-                // headers : {'Authorization' : 'Bearer '+authUser.api_token},
-                url : baseUrl+'/api/get_booking',
-                data: function(d) {
-
+            }
+        },
+        columns:[
+            {data:"nopol",name:"nopol"},
+            {data:"name",name:"name"},
+            {
+                data:"date_start",
+                name:"date_start",
+                render  : function(data,type,row) {
+                    return data.substring(0, 10);
                 }
             },
-            columns:[
-                {data:"nopol",name:"nopol"},
-                {data:"name",name:"name"},
-                {
-                    data:"date_start",
-                    name:"date_start",
-                    render  : function(data,type,row) {
-                        return data.substring(0, 10);
+            {
+                data:"date_finish",
+                name:"date_finish",
+                render  : function(data,type,row) {
+                    return data.substring(0, 10);
+                }
+            },
+            {data:"price",name:"price"},
+            {
+                data:"price",
+                name:"price",
+                render: function(data, type, row){
+                    return row.price_sales - data;
+                }
+            },
+            {data:"price_sales",name:"price_sales"},
+            {
+                data:"id",
+                name:"id",
+                render: function(data, type, row){
+                    return '<center><a id="'+data+'" class="pilih-booking"> <i class="fa fa-plus mr-1" style="cursor: pointer;"></i></a></center>'
+                }
+            },
+        ]
+    });
+
+    $('#table-booking tbody').on('click', '.pilih-booking', function () {
+        let id_booking = $(this).attr("id");
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/get_booking',
+            dataType: 'json',
+            success: function (data) {
+                var value = data.data;
+                for(var i=0;i<value.length;i++){
+                    if(value[i].id == id_booking){
+                        $('#input-booking').val(value[i].nopol);
+                        $('#label-booking').html(value[i].nopol);
+                        $('#input-subTotal').val(value[i].price_sales);
+                        $('#label-subTotal').html(value[i].price_sales);
+                        $('#input-total').val(value[i].price_sales);
+                        $('#label-total').html(value[i].price_sales);
+                        subtotal(value[i].price_sales);
+                        $("#modal-booking").modal("hide");
+                        break;
                     }
-                },
-                {
-                    data:"date_finish",
-                    name:"date_finish",
-                    render  : function(data,type,row) {
-                        return data.substring(0, 10);
-                    }
-                },
-                {data:"price",name:"price"},
-                {
-                    data:"price",
-                    name:"price",
-                    render: function(data, type, row){
-                        return row.price_sales - data;
-                    }
-                },
-                {data:"price_sales",name:"price_sales"},
-                {
-                    data:"id",
-                    name:"id",
-                    render: function(data, type, row){
-                        return '<center><a id="'+data+'" class="pilih-charge"> <i class="fa fa-plus mr-1" style="cursor: pointer;"></i></a></center>'
-                    }
-                },
-            ]
-        });      
+                }
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+
+    });
 
     $(".tombol-tambah-charge").on("click", function(){
         $('#table-charge').DataTable().clear().destroy();
@@ -97,8 +125,6 @@ $(document).ready(function(){
     
     $('#table-charge tbody').on('click', '.pilih-charge', function () {
         let id_charge = $(this).attr("id");
-        // console.log('id 1 '+ id_charge);
-       
         $.ajax({
             type: 'GET',
             url: baseUrl+'/get_charge',
@@ -106,21 +132,22 @@ $(document).ready(function(){
             success: function (data) {
                 var value = data.data;
                 var index;
-                var colnum=0;
                 for(var i=0;i<=value.length;i++){
                     if(value[i].id_charge_vehicles == id_charge){
                         index=i;
                         break;
                     }
                 }
+                
                 $("#modal-tambah-charge").modal("hide");
                 $('#table-pos tbody').append(
                     '<tr id="idTr'+value[index].id_charge_vehicles+'">\
                       <td>'+value[index].name_charge_vehicles+'</td>\
-                      <td>'+value[index].price_charge_vehicles+'</td>\
+                      <td><input class="price_charge" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
                       <td><button type="button" onclick="hapusEl('+value[index].id_charge_vehicles+')" class="btn btn-danger hapus">Delete</button></td>\
                     </tr>'
                 );
+                total();
             },
             error:function(data){
                 console.log(data);
@@ -133,4 +160,33 @@ $(document).ready(function(){
 
 function hapusEl(id){
     $('#idTr'+id).remove();
+    total();
 }
+
+var subTotal = 0;
+function subtotal(subtotal){
+    subTotal = 0;
+    subTotal += Number(subtotal);
+    total();
+}
+
+var inputDiskon = 0;
+function diskon(){
+    inputDiskon = $('#input-diskon').val();
+    total();
+}
+
+function total(){
+    var totalCharge = 0;
+    var subtotals = $('.price_charge');
+    for(var i=0; i<subtotals.length;++i){
+        totalCharge = totalCharge + Number(subtotals[i].value);
+    }
+    totalCharge += Number(subTotal);
+    totalCharge = totalCharge - inputDiskon;
+    $('#input-subTotal').val(totalCharge);
+    $('#label-subTotal').html(totalCharge);
+    $('#input-total').val(totalCharge);
+    $('#label-total').html(totalCharge);
+}
+
