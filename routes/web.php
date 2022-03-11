@@ -70,11 +70,11 @@ Route::group(['middleware' => ['auth']],function(){
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
     });
-    Route::get('/board_monitoring', function () {
-        return view('board_monitoring');
-    });
+    // Route::get('/board_monitoring', function () {
+    //     return view('board_monitoring');
+    // });
 
-    Route::get('get_board_monitoring', [MonitoringController::class, 'get_board_monitoring']);
+    Route::get('board_monitoring', [MonitoringController::class, 'get_board_monitoring']);
 
     Route::get('keuangan', [MonitoringController::class, 'index_keuangan']);
     Route::get('get_monitoring', [MonitoringController::class, 'get_monitoring']);
