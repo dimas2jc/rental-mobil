@@ -47,7 +47,40 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($data as $vehicle)
+                        <tr>
+                            <td rowspan="4">{{ $loop->iteration }}</td>
+                            <td rowspan="4">{{ $vehicle['vehicle'] }}</td>
+                            <td>Penyewa</td>
+                            @foreach ($vehicle['detail'] as $detail)
+                                <td>{{ $detail->name_customer }}</td>
+                                <td rowspan="2">{{ date("H:i", strtotime($detail->date_start)) }}</td>
+                                <td rowspan="2">{{ date("H:i", strtotime($detail->date_finish)) }}</td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td>Sales</td>
+                            @foreach ($vehicle['detail'] as $detail)
+                                <td>{{ $detail->name_sales }}</td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td>DP</td>
+                            @foreach ($vehicle['detail'] as $detail)
+                                <td>{{ $detail->dp }}</td>
+                                <td></td>
+                                <td></td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td>Pelunasan</td>
+                            @foreach ($vehicle['detail'] as $detail)
+                                <td>{{ $detail->pelunasan }}</td>
+                                <td></td>
+                                <td></td>
+                            @endforeach
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
