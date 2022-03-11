@@ -52,32 +52,62 @@
                             <td rowspan="4">{{ $loop->iteration }}</td>
                             <td rowspan="4">{{ $vehicle['vehicle'] }}</td>
                             <td>Penyewa</td>
-                            @foreach ($vehicle['detail'] as $detail)
-                                <td>{{ $detail->name_customer }}</td>
-                                <td rowspan="2">{{ date("H:i", strtotime($detail->date_start)) }}</td>
-                                <td rowspan="2">{{ date("H:i", strtotime($detail->date_finish)) }}</td>
+                            @foreach ($vehicle['detail'] as $index => $detail)
+                                @foreach ($date as $i => $tgl)
+                                    @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
+                                        <td>{{ $detail->name_customer }}</td>
+                                        <td rowspan="2">{{ date("H:i", strtotime($detail->date_start)) }}</td>
+                                        <td rowspan="2">{{ date("H:i", strtotime($detail->date_finish)) }}</td>
+                                    @else
+                                        <td></td>
+                                        <td rowspan="2"></td>
+                                        <td rowspan="2"></td>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </tr>
                         <tr>
                             <td>Sales</td>
                             @foreach ($vehicle['detail'] as $detail)
-                                <td>{{ $detail->name_sales }}</td>
+                                @foreach ($date as $i => $tgl)
+                                    @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
+                                        <td>{{ $detail->name_sales }}</td>
+                                    @else
+                                        <td></td>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </tr>
                         <tr>
                             <td>DP</td>
                             @foreach ($vehicle['detail'] as $detail)
-                                <td>{{ $detail->dp }}</td>
-                                <td></td>
-                                <td></td>
+                                @foreach ($date as $i => $tgl)
+                                    @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
+                                        <td>{{ $detail->dp }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    @else
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </tr>
                         <tr>
                             <td>Pelunasan</td>
                             @foreach ($vehicle['detail'] as $detail)
-                                <td>{{ $detail->pelunasan }}</td>
-                                <td></td>
-                                <td></td>
+                                @foreach ($date as $i => $tgl)
+                                    @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
+                                        <td>{{ $detail->pelunasan }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    @else
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    @endif
+                                @endforeach
                             @endforeach
                         </tr>
                     @endforeach

@@ -76,6 +76,16 @@ class MonitoringController extends Controller
         $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
 
+        $date = [];
+        for($i = 0; $i < 7; $i++){
+            if($i != 0){
+                $date[$i] = date("d-m-Y", strtotime($startOfWeek.'+'.$i.' days'));
+            }
+            else{
+                $date[$i] = date("d-m-Y", strtotime($startOfWeek));
+            }
+        }
+
         // $payment = DetailPayment::leftJoin('payment_rent as pr', 'pr.id_payment_rent', 'detail_payment.id_payment_rent')
         // ->select('detail_payment.id_booking', DB::raw("detail_payment.price AS dp"))
         // ->where('detail_payment.description', 'like', '%DP%')->first();
@@ -155,6 +165,6 @@ class MonitoringController extends Controller
         // dd($data);
 
         // return response()->json($data, 200);
-        return view('board_monitoring', compact('data'));
+        return view('board_monitoring', compact('data','date'));
     }
 }
