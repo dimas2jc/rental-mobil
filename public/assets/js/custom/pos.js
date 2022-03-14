@@ -76,13 +76,16 @@ $(document).ready(function(){
                 var value = data.data;
                 for(var i=0;i<value.length;i++){
                     if(value[i].id == id_booking){
-                        $('#input-booking').val(value[i].nopol);
+                        var price = parseInt(value[i].price_sales) - parseInt(value[i].dp_sales);
+                        console.log(price);
+                        $('#inputBooking').val(value[i].nopol);
                         $('#label-booking').html(value[i].nopol);
-                        $('#input-subTotal').val(value[i].price_sales);
-                        $('#label-subTotal').html(value[i].price_sales);
-                        $('#input-total').val(value[i].price_sales);
+                        $('#inputSubtotal').val(price);
+                        $('#label-subTotal').html(price);
+                        $('#inputTotal').val(value[i].price_sales);
                         $('#label-total').html(value[i].price_sales);
-                        subtotal(value[i].price_sales);
+                        $('#idBooking').val(value[i].id);
+                        subtotal(price);
                         $("#modal-booking").modal("hide");
                         break;
                     }
@@ -138,12 +141,15 @@ $(document).ready(function(){
                         break;
                     }
                 }
-                
+                // var arrayCharge = [];
+                // arrayCharge.push(value[index].id_charge_vehicles);
+                // console.log(arrayCharge);
+
                 $("#modal-tambah-charge").modal("hide");
                 $('#table-pos tbody').append(
                     '<tr id="idTr'+value[index].id_charge_vehicles+'">\
-                      <td>'+value[index].name_charge_vehicles+'</td>\
-                      <td><input class="price_charge" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
+                      <td><input class="id_charge" id="id_charge['+value[index].id_charge_vehicles+']" name="id_charge[]" hidden value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles+'</td>\
+                      <td><input class="price_charge" id="price_charge['+value[index].id_charge_vehicles+']" name="price_charge[]" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
                       <td><button type="button" onclick="hapusEl('+value[index].id_charge_vehicles+')" class="btn btn-danger hapus">Delete</button></td>\
                     </tr>'
                 );
@@ -172,21 +178,43 @@ function subtotal(subtotal){
 
 var inputDiskon = 0;
 function diskon(){
-    inputDiskon = $('#input-diskon').val();
+    inputDiskon = $('#inputDiskon').val();
     total();
 }
 
+var arrayCharge = [];
 function total(){
-    var totalCharge = 0;
+    arrayCharge = [];
+    var subTotalCharge = 0;
     var subtotals = $('.price_charge');
+    var id_charge = $('.id_charge');
     for(var i=0; i<subtotals.length;++i){
-        totalCharge = totalCharge + Number(subtotals[i].value);
+        subTotalCharge = subTotalCharge + Number(subtotals[i].value);
     }
-    totalCharge += Number(subTotal);
-    totalCharge = totalCharge - inputDiskon;
-    $('#input-subTotal').val(totalCharge);
-    $('#label-subTotal').html(totalCharge);
-    $('#input-total').val(totalCharge);
+    for(var i=0; i<id_charge.length;++i){
+        arrayCharge.push(id_charge[i].value);
+    }
+    subTotalCharge += Number(subTotal);
+    totalCharge = subTotalCharge - inputDiskon;
+    $('#inputSubtotal').val(subTotalCharge);
+    $('#label-subTotal').html(subTotalCharge);
+    $('#inputTotal').val(totalCharge);
     $('#label-total').html(totalCharge);
 }
+
+$("#bayar").on("click", function(){
+    var sub = $('#inputSubtotal').val();
+    var diskon = $('#inputDiskon').val();
+    var total = $('#inputTotal').val();
+    console.log(arrayCharge, sub, diskon, total);
+    urlPembayaran = baseUrl+"/pembayaran/insert"
+    $("#formPembayaran").attr('action', urlPembayaran);
+    $("#formPembayaran").attr('method', 'POST');
+
+    // array = charge;
+    // for(var i=0; i<array.length;++i){
+    //     console.log(array[i]);
+    // }
+});
+
 

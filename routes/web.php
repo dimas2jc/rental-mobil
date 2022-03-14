@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('laporan/cetak/{id}', [LaporanController::class, 'cetak']);
 
     Route::get('pembayaran', [PembayaranController::class, 'index']);
+    Route::post('pembayaran/insert', [PembayaranController::class, 'insert']);
     Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
     Route::get('get_booking', [BookingController::class, 'get_booking']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);

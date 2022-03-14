@@ -9,67 +9,68 @@
 <div class="card">
     <div class="card-body">
         <div class="tab-content">
-            <div class="tab-pane fade show active mb-3" id="pos_tab" role="tabpanel" aria-labelledby="pos_tab-tab">
-                <div class="judul-tabel mb-3">
-                    <h5>Pembayaran</h5>
-                </div>
-                <form action="" id="formPembayaran" method="POST" class="needs-validation" novalidate>
-                    @csrf
-                    <div class="form-group row">
-                        <label for="" class="col-sm-2 col-form-label">
-                            Booking
-                        </label>
-                        <div class="col-sm-4">
-                            <label name="label-booking" id="label-booking" class="form-control" style="cursor: pointer;" data-toggle="modal" data-target="#modal-booking">-- Pilih Booking --</label>
-                            <input name="input-booking" id="input-booking" class="form-control" hidden>
-                        </div>
-                        <div class="col-1"></div>
-                        <label for="" class="col-sm-1 col-form-label">
-                            Sub Total
-                        </label>
-                        <div class="col-sm-4">
-                            <label name="label-subTotal" id="label-subTotal" class="form-control"></label>
-                            <input name="input-subTotal" id="input-subTotal" class="form-control" hidden>
-                        </div>
+            <form action="" id="formPembayaran" method="POST" class="needs-validation" novalidate>
+                @csrf
+                <div class="tab-pane fade show active mb-3" id="pos_tab" role="tabpanel" aria-labelledby="pos_tab-tab">
+                    <div class="judul-tabel mb-3">
+                        <h5>Pembayaran</h5>
                     </div>
-                </form>
-                <button class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-tambah-charge" data-toggle="modal" data-target="#modal-tambah-charge">
-                    <i class="fa fa-plus mr-1"></i>
-                    TAMBAH CHARGE
-                </button>
-            </div>
-            <table id="table-pos" class="table table-striped table-bordered responsive" style="width: 100%">
-                <thead class="thead-dark">
-                    <th>Charge</th>
-                    <th>Price</th>
-                    <th style="width: 10%;">Actions</th>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <div class="form-group row">
-                <label for="" class="col-sm-8 col-form-label"></label>
-                <label for="" class="col-sm-1 col-form-label">
-                    Diskon
-                </label>
-                <div class="col-sm-3">
-                    <input name="input-diskon" type="number" id="input-diskon" class="form-control" oninput="diskon()">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-2 col-form-label">
+                                Booking
+                            </label>
+                            <div class="col-sm-4">
+                                <label name="label-booking" id="label-booking" class="form-control" style="cursor: pointer;" data-toggle="modal" data-target="#modal-booking">-- Pilih Booking --</label>
+                                <input name="inputBooking" id="inputBooking" class="form-control" hidden>
+                                <input name="idBooking" id="idBooking" class="form-control">
+                            </div>
+                            <div class="col-1"></div>
+                            <label for="" class="col-sm-1 col-form-label">
+                                Sub Total
+                            </label>
+                            <div class="col-sm-4">
+                                <label name="label-subTotal" id="label-subTotal" class="form-control"></label>
+                                <input name="inputSubtotal" id="inputSubtotal" class="form-control" hidden>
+                            </div>
+                        </div>
+                    <button type="button" class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-tambah-charge" data-toggle="modal" data-target="#modal-tambah-charge">
+                        <i class="fa fa-plus mr-1"></i>
+                        TAMBAH CHARGE
+                    </button>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="" class="col-sm-8 col-form-label"></label>
-                <label for="" class="col-sm-1 col-form-label">
-                    Total
-                </label>
-                <div class="col-sm-3">
-                    <label name="label-total" id="label-total" class="form-control"></label>
-                    <input name="input-total" id="input-total" class="form-control" hidden>
+                <table id="table-pos" class="table table-striped table-bordered responsive" style="width: 100%">
+                    <thead class="thead-dark">
+                        <th>Charge</th>
+                        <th>Price</th>
+                        <th style="width: 10%;">Actions</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div class="form-group row">
+                    <label for="" class="col-sm-8 col-form-label"></label>
+                    <label for="" class="col-sm-1 col-form-label">
+                        Diskon
+                    </label>
+                    <div class="col-sm-3">
+                        <input name="inputDiskon" type="text" id="inputDiskon" class="form-control" oninput="diskon()">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label for="" class="col-sm-10 col-form-label"></label>
-                    <button type="button" style="width:15%; justify-content:center;" class="btn btn-danger ml-1">Bayar</button>
-            </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-8 col-form-label"></label>
+                    <label for="" class="col-sm-1 col-form-label">
+                        Total
+                    </label>
+                    <div class="col-sm-3">
+                        <label name="label-total" id="label-total" class="form-control"></label>
+                        <input name="inputTotal" id="inputTotal" class="form-control" hidden>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="" class="col-sm-10 col-form-label"></label>
+                    <button type="submit" style="width:15%; justify-content:center;" class="btn btn-danger ml-1" id="bayar">Bayar</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

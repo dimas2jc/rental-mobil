@@ -30,8 +30,8 @@ class PembayaranController extends Controller
                     $join->on('d.id_booking', '=', 'b.id_booking');
                 })
                 ->select('b.id_booking as id', 'v.nopol as nopol', 'c.name_customer as name', 'b.date_start as date_start', 
-                        'b.date_finish as date_finish', 'd.price as price', 'b.price_sales as price_sales')
-                ->groupBy('id', 'nopol', 'name', 'date_start', 'date_finish', 'price', 'price_sales')
+                        'b.date_finish as date_finish', 'd.price as price', 'b.price_sales as price_sales', 'b.dp_sales as dp_sales')
+                ->groupBy('id', 'nopol', 'name', 'date_start', 'date_finish', 'price', 'price_sales', 'dp_sales')
                 ->get();
             return Datatables::of($data)
                 ->make(true);
