@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,9 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('/data_master/body', function () {
         return view('data_master_body');
     });
+    Route::get('/data_master/services', function () {
+        return view('data_master_service');
+    });
     Route::get('/data_master/harga-kendaraan', function () {
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
@@ -86,6 +90,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('pembayaran/insert', [PembayaranController::class, 'insert']);
     Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
     Route::get('get_booking', [BookingController::class, 'get_booking']);
+    Route::get('get_all_service', [BookingController::class, 'get_all_service']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);
     Route::post('get_kendaraan', [BookingController::class, 'get_kendaraan']);
@@ -105,6 +110,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('data_master/get_customer/{id}', [CustomerController::class, 'get_customer']);
     Route::post('data_master/customer/{id?}', [CustomerController::class, 'store']);
     Route::put('data_master/edit_status_customer/{id}', [CustomerController::class, 'edit_status_customer']);
+    Route::put('data_master/unblacklist_customer/{id}', [CustomerController::class, 'unblacklist']);
 
     Route::get('data_master/get_sales/{id}', [SalesController::class, 'get_sales']);
     Route::post('data_master/sales/{id}', [SalesController::class, 'update']);
@@ -140,8 +146,10 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('data_master/dokumen_kendaraan/{id}', [KendaraanController::class, 'update_dokumen_kendaraan']);
     Route::post('data_master/dokumen_kendaraan', [KendaraanController::class, 'store_dokumen_kendaraan']);
 
-    Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+    Route::put('data_master/service/{id}', [ServiceController::class, 'update_status']);
+    Route::post('data_master/service', [ServiceController::class, 'store']);
 
+    Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
 });
 
 require dirname(__FILE__).'/api.php';

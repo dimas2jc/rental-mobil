@@ -39,6 +39,9 @@
                     <a href="{{url('/data_master/harga-kendaraan')}}" class="list-group-item d-flex align-items-center" id="harga_kendaraan">
                         <i class="ti-money mr-2 list-group-icon"></i>Harga Kendaraan
                     </a>
+                    <a href="{{url('/data_master/services')}}" class="list-group-item d-flex align-items-center" id="services">
+                        <i class="ti-star mr-2 list-group-icon"></i>Pelayanan
+                    </a>
                 </div>
             </div>
         </div>

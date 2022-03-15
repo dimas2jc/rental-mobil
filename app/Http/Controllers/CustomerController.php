@@ -11,7 +11,9 @@ class CustomerController extends Controller
 {
     public function get_customer($id)
     {
-        $data = Customer::find($id);
+        $data = Customer::where('id_customer', $id)
+        ->leftJoin('sales', 'sales.id_sales', 'customer.id_sales')
+        ->first();
 
         return response()->json($data, 200);
     }
@@ -38,16 +40,22 @@ class CustomerController extends Controller
             ]);
         }
         else{
-            Customer::insert([
-                'id_customer' => Uuid::uuid4(),
-                'no_kk_customer' => $request->no_kk,
-                'no_nik_customer' => $request->no_nik,
-                'name_customer' => $request->name,
-                'address_customer' => $request->alamat,
-                'phone_customer' => $request->phone,
-                'sosmed_customer' => $request->sosmed,
-                'email_customer' => $request->email
-            ]);
+            $data = Customer::where('no_nik_customer', $request->no_nik)->first();
+            if($data != null){
+                return back()->with('message', 'NIK sudah ada!');
+            }
+            else{
+                Customer::insert([
+                    'id_customer' => Uuid::uuid4(),
+                    'no_kk_customer' => $request->no_kk,
+                    'no_nik_customer' => $request->no_nik,
+                    'name_customer' => $request->name,
+                    'address_customer' => $request->alamat,
+                    'phone_customer' => $request->phone,
+                    'sosmed_customer' => $request->sosmed,
+                    'email_customer' => $request->email
+                ]);
+            }
         }
 
         return redirect()->back();
@@ -73,6 +81,32 @@ class CustomerController extends Controller
         }else{
             Customer::where('id_customer', $id)->update([
                 'is_blacklist' => 1
+            ]);
+            return response()->json($id_customer, 200);
+        }
+    }
+
+    public function unblacklist(Request $request, $id)
+    {
+        $id_customer = DB::table('customer')->where('id_customer', $id)->first();
+        $status_customer = DB::table('customer')->select('no_kk_customer')->where('id_customer', $id)->max('no_kk_customer');
+        // dd($status_customer);
+        $customer = DB::table('customer')->where('no_kk_customer', $status_customer)->get();
+        // $all_customer = Customer::all();
+        if($id_customer->no_kk_customer != null){
+            // dd($status_customer);
+            for($i=0;$i<count($customer);$i++){
+                if($customer[$i]->is_blacklist == 1){
+                    Customer::where('no_kk_customer', $status_customer)->update([
+                        'is_blacklist' => 0
+                    ]);
+                }
+                return response()->json($id_customer, 200);
+
+            }
+        }else{
+            Customer::where('id_customer', $id)->update([
+                'is_blacklist' => 0
             ]);
             return response()->json($id_customer, 200);
         }

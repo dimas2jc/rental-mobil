@@ -75,7 +75,7 @@ $(document).ready(function () {
                 // }
 
                 events[i] = new Object();
-                events[i].title = results[i].nopol,
+                events[i].title = results[i].name_customer,
                 events[i].id = results[i].id_booking,
                 events[i].status = results[i].status,
                 events[i].start = new Date(results[i].date_start).toISOString().slice(0, 10),
@@ -84,12 +84,20 @@ $(document).ready(function () {
                                             `<div class="col-sm-12">`+
                                                 `<table style="border: 0px">`+
                                                     `<tr>`+
-                                                        `<td>Nopol</td>`+
-                                                        `<td>: `+results[i].nopol+`</td>`+
-                                                    `</tr>`+
-                                                    `<tr>`+
                                                         `<td>Customer</td>`+
                                                         `<td>: `+results[i].name_customer+`</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Sales</td>`+
+                                                        `<td>: `+results[i].name_sales+`</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Kendaraan</td>`+
+                                                        `<td>: `+results[i].kendaraan+`</td>`+
+                                                    `</tr>`+
+                                                    `<tr>`+
+                                                        `<td>Nopol</td>`+
+                                                        `<td>: `+results[i].nopol+`</td>`+
                                                     `</tr>`+
                                                     `<tr>`+
                                                         `<td>Tgl Diambil</td>`+

@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\MonitoringController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\LaporanController;
 use App\Http\Controllers\Api\PembayaranController;
+use App\Http\Controllers\Api\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -53,3 +54,4 @@ Route::get('laporan_datatable', [LaporanController::class, 'laporan_datatable'])
 Route::get('get_charge', [PembayaranController::class, 'get_charge']);
 
 Route::get('get_booking', [PembayaranController::class, 'get_booking']);
+Route::get('service_datatable', [ServiceController::class, 'service_datatable']);

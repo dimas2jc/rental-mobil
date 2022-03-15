@@ -177,13 +177,30 @@ $(document).ready(function(){
                 name:"is_blacklist",
                 render: function(data, type, row){
                     if(data == 0){
-                        return '<button type="submit" class="btn btn-linkedin btn-sm" id="'+row.id_customer+'">No</button>';
+                        return '<button type="submit" class="btn btn-linkedin btn-sm btn-status-customer" id="'+row.id_customer+'">No</button>';
                     }else{
-                        return '<button type="submit" class="btn btn-google btn-sm" id="'+row.id_customer+'">Yes</button>';
+                        return '<button type="submit" class="btn btn-google btn-sm btn-status-customer" id="'+row.id_customer+'">Yes</button>';
                     }
                 }
             }
         ]
+    });
+
+    $('#table-customer-b tbody').on('click', '.btn-status-customer', function () {
+        var id = $(this).attr("id");
+        $.ajax({
+            type: 'PUT',
+            url: baseUrl+'/data_master/unblacklist_customer/'+id,
+            dataType: 'json',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            success: function (data) {
+                alert('Customer Berhasil di Unblacklist');
+                window.location.href = "/data_master/customer";
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
     });
 
 });

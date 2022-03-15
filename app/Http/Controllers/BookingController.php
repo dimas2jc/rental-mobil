@@ -23,16 +23,30 @@ class BookingController extends Controller
             'start_date' => 'required',
             'end_date' => 'required',
             'harga' => 'required',
-            'dp' => 'required'
+            'dp' => 'required',
+            'bukti_bayar' => 'required|max:2048'
         ]);
+
+        $id_sales = null;
+        if(auth()->user()->role == 2){
+            $id_sales = auth()->user()->id;
+        }
 
         DB::beginTransaction();
         $nopol = Vehicle::find($request->vehicle);
+
+        $file = $request->file('bukti_bayar');
+        $nama_file = time()."_".$file->getClientOriginalName();
+        $file->move('document/bukti_bayar/', $nama_file);
 
         if($request->sudah_ada == 1){
             $id_customer = $request->customer;
         }
         else{
+            $data = Customer::where('no_nik_customer', $request->no_nik)->first();
+            if($data != null){
+                return back()->with('error', 'NIK sudah ada!');
+            }
             $id_customer = Uuid::uuid4();
             Customer::insert([
                 'id_customer' => $id_customer,
@@ -42,6 +56,7 @@ class BookingController extends Controller
                 'phone_customer' => $request->no_telp,
                 'email_customer' => $request->email,
                 'no_nik_customer' => $request->nik,
+                'id_sales' => $id_sales,
                 'is_blacklist' => 0
             ]);
         }
@@ -73,7 +88,8 @@ class BookingController extends Controller
             'dp_sales' => $request->dp,
             'status_booking' => 1, // init (belum di approve)
             'komisi_sales' => $request->harga - $request->real_price,
-            'real_price' => $request->real_price
+            'real_price' => $request->real_price,
+            'id_service' => $request->service
         ]);
 
         PaymentRent::insert([
@@ -88,6 +104,7 @@ class BookingController extends Controller
             'id_payment_rent' => $id_payment,
             'price' => $request->dp,
             'description' => "DP - ".$nopol->nopol." - Untuk tgl ".$date_start." sampai ".$date_end,
+            'bukti' => $nama_file,
             'timestamps' => Carbon::now()
         ]);
 
@@ -159,7 +176,11 @@ class BookingController extends Controller
     {
         $data = Booking::leftJoin('customer', 'customer.id_customer', 'booking.id_customer')
         ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
-        ->select('booking.*', 'vehicles.nopol', 'vehicles.id_vehicleS', 'customer.name_customer', DB::raw("(
+        ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        ->select('booking.*', 'vehicles.nopol', 'vehicles.id_vehicles', 'customer.name_customer', 'sales.name_sales',
+        DB::raw("CONCAT(vv.nama_varian, ' ', vv.vehicles_type) AS kendaraan"),
+        DB::raw("(
             CASE
                 WHEN status_booking = 0 THEN '0'
                 WHEN status_booking = 1 THEN '1'
@@ -216,7 +237,10 @@ class BookingController extends Controller
         }
         // dd($id_vehicle);
 
-        $data = Vehicle::whereNotIn('id_vehicles', $id_vehicle)->get();
+        $data = Vehicle::whereNotIn('id_vehicles', $id_vehicle)
+        ->leftJoin('vehicles_variants as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        ->select('vehicles.id_vehicles', DB::raw("CONCAT(vv.nama_varian, ' ', vv.vehicles_type) AS name"), 'vehicles.nopol')
+        ->get();
 
         return response()->json($data, 200);
     }
@@ -262,5 +286,12 @@ class BookingController extends Controller
         ]);
 
         return response()->json(200);
+    }
+
+    public function get_all_service()
+    {
+        $data = DB::table('services')->where('status', 1)->get();
+
+        return response()->json($data, 200);
     }
 }

@@ -130,7 +130,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Nama</th>
-                            <th>Tipe</th>
+                            {{-- <th>Tipe</th> --}}
                             <th>Kadaluarsa</th>
                             <th>Deskripsi</th>
                             <th style="width: 10%">Actions</th>
@@ -531,7 +531,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="" class="col-form-label">
                             Tipe
                         </label>
@@ -539,7 +539,7 @@
                         <div class="invalid-feedback">
                             Mohon isi tipe dokumen dengan benar.
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group">
                         <label for="" class="col-form-label">

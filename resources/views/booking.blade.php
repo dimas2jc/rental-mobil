@@ -170,8 +170,34 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Customer
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="cust" class="form-control" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">
+                                Sales
+                            </label>
+                            <div class="col-sm-9">
+                                <input type="text" id="cust" class="form-control" readonly>
+                            </div>
+                        </div>
                     </div>
                     <hr>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Pelayanan
+                        </label>
+                        <div class="col-sm-9">
+                            <select class="form-control select-component select-service" id="service" name="service" required>
+                                {{-- <option selected disabled>Pilih Pelayanan . . </option> --}}
+                            </select>
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">
                             Mulai
@@ -251,6 +277,15 @@
                         </label>
                         <div class="col-sm-9">
                             <input type="text" name="dp" id="dp" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Bukti Bayar
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="file" name="bukti_bayar" id="bukti_bayar">
+                            <small style="color: red; font-style: italic">Maksimal 2MB.</small>
                         </div>
                     </div>
                     <div class="form-group row">
