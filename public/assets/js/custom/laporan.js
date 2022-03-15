@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#laporan").addClass("active");
+    $("#pembayaran").addClass("active");
 
     // $.ajax({
     //     type: 'GET',

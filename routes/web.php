@@ -14,6 +14,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\ChargeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +140,8 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('data_master/get_dokumen_kendaraan', [KendaraanController::class, 'get_all_dokumen_kendaraan']);
     Route::post('data_master/dokumen_kendaraan/{id}', [KendaraanController::class, 'update_dokumen_kendaraan']);
     Route::post('data_master/dokumen_kendaraan', [KendaraanController::class, 'store_dokumen_kendaraan']);
+
+    Route::post('data_master/charge', [ChargeController::class, 'store']);
 
     Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
 
