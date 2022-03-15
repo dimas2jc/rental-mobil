@@ -46,6 +46,7 @@
                     <div class="form-group">
                         <label for="">Alamat Perusahaan</label>
                         <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="name" name="alamat" required value="{{ $d->address_company }}">
+                        <small style="color: red">Mohon isi alamat sesuai format berikut. Jalan Wonokitri, Surabaya</small>
                         <div class="invalid-feedback">
                             Mohon isi alamat dengan benar.
                         </div>
@@ -113,9 +114,9 @@
                 src = URL.createObjectURL(file)
 
                 $('#image').remove();
-                document.getElementById('output').innerHTML = 
+                document.getElementById('output').innerHTML =
                 '<img src="'+src+'" id="hasil" style="width:150px; height:150px;"/>';
-                
+
                 var hasil = $('#hasil').attr('src');
                 $('#path').val(hasil);
             }

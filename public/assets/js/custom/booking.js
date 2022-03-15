@@ -34,6 +34,22 @@ $(document).ready(function(){
         }
     })
 
+    $("#customer").on("change", function(){
+        let id_cust = $(this).val();
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/data_master/get_customer/'+id_cust,
+            dataType: 'json',
+            success: function (data) {
+                $("#cust").val(data.name_customer);
+                $("#sales").val(data.name_sales);
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+    })
+
     var start_date;
     var end_date;
     var start_time;
@@ -133,7 +149,7 @@ $(document).ready(function(){
 
     $(".approve").on("click", function(){
         var id = $(this).attr('id');
-        console.log(id);
+        // console.log(id);
         $.ajax({
             type: 'GET',
             url: baseUrl+'/approve/'+id,
@@ -168,24 +184,35 @@ $(document).ready(function(){
                 _token: token
             },
             success: function (results) {
-                $("#vehicle option").remove();
-                let text1 = "Pilih Kendaraan ..";
-                let val1 = "";
-                var option1 = new Option(text1, val1);
-                $("#vehicle").append(option1);
-                $("#vehicle option").addClass("selected disabled");
-                results.forEach(addOption);
-                function addOption(item, index, arr){
-                    let text = item.nopol;
-                    let val = item.id_vehicles;
-                    var option = new Option(text, val);
-                    $(option).html(text);
-                    $("#vehicle").append(option);
+                $('#vehicle').empty();
+                $('#vehicle').append('<option selected disabled>Pilih kendaraan . . </option>');
+                for(let i=0;i<results.length;i++){
+                    $('#vehicle').append(
+                        '<option value="'+results[i].id_vehicles+'" >'+results[i].name+' / '+results[i].nopol+'</option>'
+                    );
                 }
             },
-            error:function(data){
-                console.log(data);
+            error:function(results){
+                console.log(results);
             }
         });
     }
+
+    $.ajax({
+        type: 'GET',
+        url: baseUrl+'/get_all_service',
+        dataType: 'json',
+        success: function (data) {
+            $('#service').empty();
+            $('#service').append('<option selected disabled>Pilih pelayanan . . </option>');
+            for(let i=0;i<data.length;i++){
+                $('#service').append(
+                    '<option value="'+data[i].id+'" >'+data[i].name_service+'</option>'
+                );
+            }
+        },
+        error:function(data){
+            console.log(data);
+        }
+    });
 })

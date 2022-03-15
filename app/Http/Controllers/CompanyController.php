@@ -29,7 +29,8 @@ class CompanyController extends Controller
 
     public function setting2(Request $request, $id)
     {
-        if($request->logo)
+        $data = Company::where('id_company', $id)->first();
+        if($request->file('logo'))
         {
             $file = $request->file('logo');
             $nama_file = time()."_".$file->getClientOriginalName();
@@ -37,11 +38,11 @@ class CompanyController extends Controller
         }
         else
         {
-            $nama_file = $request->logo;
+            $nama_file = $data->logo_company;
         }
 
         Company::where('id_company', $id)->update([
-            'id_company' => Uuid::uuid4(),
+            // 'id_company' => Uuid::uuid4(),
             'name_company' => $request->name,
             'address_company' => $request->alamat,
             'phone_company' => $request->no_telp,

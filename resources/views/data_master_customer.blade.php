@@ -3,6 +3,16 @@
 
 <div class="card">
     <div class="card-body">
+        @if(session()->has('message'))
+        {{-- <div class="row col-md-12"> --}}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="ti-close"></i>
+                </button>
+            </div>
+        {{-- </div> --}}
+        @endif
         <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
             <i data-feather="menu"></i>
         </a>

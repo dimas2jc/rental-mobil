@@ -377,7 +377,7 @@ $(document).ready(function(){
         },
         columns:[
             {data:"name_doc_vehicles",name:"name_doc_vehicles"},
-            {data:"type_doc_vehicles",name:"type_doc_vehicles"},
+            // {data:"type_doc_vehicles",name:"type_doc_vehicles"},
             {
                 data:"expired_doc_vehicles",
                 name:"expired_doc_vehicles",
