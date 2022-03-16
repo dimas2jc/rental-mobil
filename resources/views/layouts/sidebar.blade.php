@@ -55,6 +55,9 @@
                 </a>
                 <ul>
                     <li>
+                        <a href="{{url('/list_booking')}}">Daftar Sewa</a>
+                    </li>
+                    <li>
                         <a href="{{url('/board_monitoring')}}">Monitoring</a>
                     </li>
                     <li>
@@ -62,24 +65,31 @@
                     </li>
                 </ul>
             </li>
-
             <li>
-                <a href="{{url('/pembayaran')}}" id="pembayaran">
+                <a href="#" id="pembayaran">
                     <span class="nav-link-icon">
                         <i data-feather="dollar-sign"></i>
                     </span>
                     <span>Pembayaran</span>
                 </a>
+                <ul>
+                    <li>
+                        <a href="{{url('/pembayaran')}}">Pembayaran</a>
+                    </li>
+                    <li>
+                        <a href="{{url('/laporan')}}">Invoice</a>
+                    </li>
+                </ul>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="{{url('/laporan')}}" id="laporan">
                     <span class="nav-link-icon">
                         <i data-feather="file-text"></i>
                     </span>
                     <span>Laporan</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li>
                 <a href="{{url('/data_master')}}" id="data_master">

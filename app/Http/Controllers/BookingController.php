@@ -294,4 +294,99 @@ class BookingController extends Controller
 
         return response()->json($data, 200);
     }
+
+    public function detail_booking($id)
+    {
+        $detail = Booking::where('id_booking', $id)
+        ->leftJoin('customer' , 'customer.id_customer', 'booking.id_customer')
+        ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        ->select(
+            'booking.*',
+            DB::raw("(
+                CASE
+                    WHEN booking.status_booking = 1 THEN 'Belum Disetujui'
+                    WHEN booking.status_booking = 2 THEN 'Disetujui'
+                    WHEN booking.status_booking = 3 THEN 'Dijadwalkan Ulang'
+                    WHEN booking.status_booking = 4 THEN 'Diambil'
+                    WHEN booking.status_booking = 5 THEN 'Dikembalikan/Selesai'
+                END
+            ) AS status"),
+            'customer.name_customer',
+            'sales.name_sales'
+        )
+        ->first();
+        $checklist = DB::table('checklist')->where('id_booking', $id)->orderBy('nama', 'ASC')->get();
+        $form_checklist = DB::table('vehicle_bodies')->where(['id_vehicles' => $detail->id_vehicles, 'is_active' => 1])->orderBy('name_vehicles_bodies', 'ASC')->get();
+
+        return view('detail_list_booking', compact('detail', 'checklist', 'form_checklist'));
+    }
+
+    public function checklist(Request $request, $id)
+    {
+        DB::table('checklist')->where(['id_booking' => $id, 'status' => $request->status])->delete();
+        $form_checklist = DB::table('vehicle_bodies')->where('vehicles.is_active', 1)
+        ->leftJoin('booking', 'booking.id_vehicles', 'vehicle_bodies.id_vehicles')
+        ->orderBy('name_vehicles_bodies', 'ASC')
+        ->select('vehicle_bodies.name_vehicles_bodies as name')
+        ->get();
+
+        $params = [];
+        for ($i=0; $i < count($form_checklist); $i++) {
+            if($request->checklist[$i] == on){
+                $cek = 1;
+            }
+            else{
+                $cek = 0;
+            }
+            $params[] = [
+                'id_booking' => $id,
+                'nama' => $form_checklist[$i]->name,
+                'cek' => $cek,
+                'status' => $request->status
+            ];
+        }
+
+        if($request->status == 0){
+            $status_booking = 4;
+        }
+        else if($request->status == 1){
+            $status_booking = 5;
+        }
+
+        DB::table('checklist')->insert($params);
+        DB::table('booking')->where('id_booking', $id)->update([
+            'status_booking' => $status_booking
+        ]);
+
+        return back();
+    }
+
+    public function closing()
+    {
+        $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+        $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
+        // dd(date("Y-m-d", strtotime($endOfWeek)));
+
+        $booking = Booking::leftJoin('detail_payment as dp', 'dp.id_booking', 'booking.id_booking')
+        ->leftJoin('payment_rent as pr', 'pr.id_payment_rent', 'dp.id_payment_rent')
+        ->whereBetween('booking.date_finish', [$startOfWeek, $endOfWeek])
+        ->where('booking.is_closing', 0)
+        ->where('pr.status_payment', 1)
+        ->orWhereRaw("DATE(booking.date_finish) < ".date("Y-m-d H:i:s", strtotime($endOfWeek))." AND booking.is_closing = 0 AND pr.status_payment = 1")
+        ->groupBy('booking.id_booking')
+        ->select('booking.id_booking')
+        ->get()->toArray();
+
+        $id = [];
+        for ($i=0; $i < count($booking); $i++) {
+            $id[$i] = $booking[$i]['id_booking'];
+        }
+
+        Booking::whereIn('id_booking', $id)->update([
+            'is_closing' => 1,
+            'tanggal_closing' => Carbon::now()->format("Y-m-d")
+        ]);
+
+        return back();
+    }
 }

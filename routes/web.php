@@ -74,6 +74,9 @@ Route::group(['middleware' => ['auth']],function(){
         $data = DB::table('vehicles')->select('ID_VEHICLES', 'NOPOL')->get();
         return view('data_master_harga_kendaraan', compact('data'));
     });
+    Route::get('/list_booking', function(){
+        return view('list_booking');
+    });
     // Route::get('/board_monitoring', function () {
     //     return view('board_monitoring');
     // });
@@ -93,6 +96,9 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('get_all_service', [BookingController::class, 'get_all_service']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);
+    Route::get('/detail_booking/{id}', [BookingController::class, 'detail_booking']);
+    Route::get('/closing', [BookingController::class, 'closing']);
+    Route::post('/checklist/{id}', [BookingController::class, 'checklist']);
     Route::post('get_kendaraan', [BookingController::class, 'get_kendaraan']);
     Route::post('get_harga', [BookingController::class, 'get_harga']);
     Route::post('store_booking', [BookingController::class, 'store_booking']);
@@ -150,6 +156,14 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('data_master/service', [ServiceController::class, 'store']);
 
     Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+
+    Route::get('/bukti/{id}', function($id){
+        $data = DB::table('booking')->where('id_booking', $id)->first();
+        $file = '/document/bukti/'.$data->bukti;
+        return response()->file($file);
+    });
+
+    Route::get('print/checklist/{id}', [BookingController::class, 'print_checklist']);
 });
 
 require dirname(__FILE__).'/api.php';

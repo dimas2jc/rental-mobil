@@ -5,6 +5,10 @@
     <div class="card-body">
         <div class="judul-tabel mb-3">
             <h5>Monitoring</h5>
+            <button class="btn btn-sm btn-rounded bg-dribbble ml-auto"><a href="{{ url('closing') }}">
+                <i class="fa fa-plus mr-1"></i>
+                Tutup
+            </a></button>
         </div>
         <div style="overflow-x: auto;">
             <table id="table-monitoring" class="table table-striped table-bordered responsive" style="width: 100%">
@@ -52,7 +56,7 @@
                             <td rowspan="4">{{ $loop->iteration }}</td>
                             <td rowspan="4">{{ $vehicle['vehicle'] }}</td>
                             <td>Penyewa</td>
-                            @foreach ($vehicle['detail'] as $index => $detail)
+                            @foreach ($data['detail'] as $index => $detail)
                                 @foreach ($date as $i => $tgl)
                                     @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
                                         <td>{{ $detail->name_customer }}</td>
@@ -68,7 +72,7 @@
                         </tr>
                         <tr>
                             <td>Sales</td>
-                            @foreach ($vehicle['detail'] as $detail)
+                            @foreach ($data['detail'] as $detail)
                                 @foreach ($date as $i => $tgl)
                                     @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
                                         <td>{{ $detail->name_sales }}</td>
@@ -80,7 +84,7 @@
                         </tr>
                         <tr>
                             <td>DP</td>
-                            @foreach ($vehicle['detail'] as $detail)
+                            @foreach ($data['detail'] as $detail)
                                 @foreach ($date as $i => $tgl)
                                     @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
                                         <td>{{ $detail->dp }}</td>
@@ -96,7 +100,7 @@
                         </tr>
                         <tr>
                             <td>Pelunasan</td>
-                            @foreach ($vehicle['detail'] as $detail)
+                            @foreach ($data['detail'] as $detail)
                                 @foreach ($date as $i => $tgl)
                                     @if($tgl[i] == date("d-m-Y", strtotime($detail[$index]->date_start)))
                                         <td>{{ $detail->pelunasan }}</td>

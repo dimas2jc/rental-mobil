@@ -147,17 +147,17 @@ class MonitoringController extends Controller
                 if($booking[$key]->id_vehicles == $booking[$key - 1]->id_vehicles){
                     $no = 0;
                     $data[$index]['vehicle'] = $booking[$key]->vehicle_name;
-                    $data[$index][$no]['detail'] = $booking[$key];
+                    $data[$index]['detail'][$no] = $booking[$key];
                     $no += 1;
                 }
                 else{
-                    $data[$index][$no]['detail'] = $booking[$key];
+                    $data[$index]['detail'][$no] = $booking[$key];
                     $no += 1;
                 }
             }
             else{
                 $data[$index]['vehicle'] = $booking[$key]->vehicle_name;
-                $data[$index][$no]['detail'] = $booking[$key];
+                $data[$index]['detail'][$no] = $booking[$key];
                 $no += 1;
             }
         }

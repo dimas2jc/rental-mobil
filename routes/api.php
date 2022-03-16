@@ -48,6 +48,7 @@ Route::get('varian_datatable', [KendaraanController::class, 'varian_kendaraan_da
 Route::get('dokumen_datatable', [KendaraanController::class, 'dokumen_kendaraan_datatable']);
 
 Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+Route::get('list_booking_datatable', [MonitoringController::class, 'list_booking_datatable']);
 
 Route::get('laporan_datatable', [LaporanController::class, 'laporan_datatable']);
 

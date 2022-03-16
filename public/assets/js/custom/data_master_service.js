@@ -46,10 +46,10 @@ $(document).ready(function(){
                 render: function ( data, type, row ) {
                     let btn = '';
                     if(data.status == 0){
-                        btn += '<button type="button" id="'+data.id+'" class="btn btn-primary btn-sm tombol-status">On</i></button>'
+                        btn += '<button type="button" id="'+data.id+'" class="btn btn-primary btn-sm tombol-status">On</button>'
                     }
                     else{
-                        btn = '<button type="button" id="'+data.id+'" class="btn btn-danger btn-sm tombol-status">Off</i></button>'
+                        btn = '<button type="button" id="'+data.id+'" class="btn btn-danger btn-sm tombol-status">Off</button>'
                     }
                     return btn;
                 }
