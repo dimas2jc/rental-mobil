@@ -211,7 +211,7 @@ function total(){
     $('#inputSubtotal').val(subTotalCharge);
     $('#label-subTotal').html(subTotalCharge);
     $('#inputTotal').val(totalCharge);
-    $('#label-total').html(totalCharge);
+    $('#label-total').html(totalCharge); 
 }
 
 $("#bayar").on("click", function(){

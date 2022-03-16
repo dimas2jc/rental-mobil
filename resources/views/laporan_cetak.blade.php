@@ -209,7 +209,7 @@
                         <tr>
                         <td style="font-size: 15px; width:50px;"><b>Service</b></td>
                         <td style="font-size: 15px; width:10px;">:</td>
-                        <td style="font-size: 15px;">{{ $data['data']->name_employess }}</td>
+                        <td style="font-size: 15px;">{{ $data['data']->name_service }}</td>
                     </tr>
                     <tr>
                         <td style="font-size: 15px; width:50px;"><b>Sales</b></td>
