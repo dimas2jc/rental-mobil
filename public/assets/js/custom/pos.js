@@ -77,7 +77,6 @@ $(document).ready(function(){
                 for(var i=0;i<value.length;i++){
                     if(value[i].id == id_booking){
                         var price = parseInt(value[i].price_sales) - parseInt(value[i].dp_sales);
-                        console.log(price);
                         $('#inputBooking').val(value[i].nopol);
                         $('#label-booking').html(value[i].nopol);
                         $('#inputSubtotal').val(price);
@@ -98,7 +97,20 @@ $(document).ready(function(){
 
     });
 
-    $(".tombol-tambah-charge").on("click", function(){
+    $("#modalCharge").on("click", function(){
+        $("#modal-charge").modal('hide');
+        $("#modal-tambah-charge").modal('show');
+
+        $("#name").val("");
+        $("#harga").val("");
+
+        urlCharge = baseUrl+"/data_master/charge"
+        $("#formCharge").attr('action', urlCharge);
+        $("#formCharge").attr('method', 'POST');
+
+    });
+
+    $(".tombol-charge").on("click", function(){
         $('#table-charge').DataTable().clear().destroy();
         var table_charge = $('#table-charge').DataTable({
             processing: true,
@@ -199,14 +211,14 @@ function total(){
     $('#inputSubtotal').val(subTotalCharge);
     $('#label-subTotal').html(subTotalCharge);
     $('#inputTotal').val(totalCharge);
-    $('#label-total').html(totalCharge);
+    $('#label-total').html(totalCharge); 
 }
 
 $("#bayar").on("click", function(){
     var sub = $('#inputSubtotal').val();
     var diskon = $('#inputDiskon').val();
     var total = $('#inputTotal').val();
-    console.log(arrayCharge, sub, diskon, total);
+    // console.log(arrayCharge, sub, diskon, total);
     urlPembayaran = baseUrl+"/pembayaran/insert"
     $("#formPembayaran").attr('action', urlPembayaran);
     $("#formPembayaran").attr('method', 'POST');

@@ -151,7 +151,7 @@ $(document).ready(function(){
         $("#name").val("");
         $("#alamat").val("");
         $("#phone").val("");
-        $("#email_sales").val("");
+        $("#email_sales").val(""); 
 
         $("#judul-modal-sales").html("Tambah Sales");
         urlSales = baseUrl+"/data_master/sales"
