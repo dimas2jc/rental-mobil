@@ -317,14 +317,14 @@
             <div class="modal-body">
                 <div class="event-body"></div>
                 <br>
-                <div class="form-group row">
+                {{-- <div class="form-group row">
                     <div class="col-sm-12">
                         <button type="button" id="" class="btn btn-sm btn-primary reschedule">Reschedule</button>&nbsp;
                         @if(auth()->user()->role == 1)
                             <button type="button" id="" class="btn btn-sm btn-warning approve">Approve</button>
                         @endif
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

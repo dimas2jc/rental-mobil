@@ -3,6 +3,10 @@ $(document).ready(function(){
     $("#data_master").addClass("active")
     var url = "";
 
+    // Select2
+    const selectComponent = document.getElementsByClassName("select-component");
+    $(selectComponent).select2();
+
     //Customer
     var table_customer = $('#table-customer').DataTable({
         processing: true,
@@ -117,6 +121,7 @@ $(document).ready(function(){
                 $("#phone").val("0"+data.phone_customer);
                 $("#sosmed").val(data.sosmed_customer);
                 $("#email").val(data.email_customer);
+                $("#sales").val(data.id_sales);
             },
             error:function(data){
                 console.log(data);

@@ -36,7 +36,8 @@ class CustomerController extends Controller
                 'address_customer' => $request->alamat,
                 'phone_customer' => $request->phone,
                 'sosmed_customer' => $request->sosmed,
-                'email_customer' => $request->email
+                'email_customer' => $request->email,
+                'id_sales' => $request->sales
             ]);
         }
         else{
@@ -53,7 +54,8 @@ class CustomerController extends Controller
                     'address_customer' => $request->alamat,
                     'phone_customer' => $request->phone,
                     'sosmed_customer' => $request->sosmed,
-                    'email_customer' => $request->email
+                    'email_customer' => $request->email,
+                    'id_sales' => $request->sales
                 ]);
             }
         }

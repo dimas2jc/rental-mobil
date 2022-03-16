@@ -9,10 +9,10 @@
                     <div class="judul-tabel mb-3">
                         <h5>Detail Booking</h5>
                         @if($detail->status_booking == "Diambil")
-                        <a href="{{ url('print/checklist/'.$detail->id_booking) }}"><button class="btn btn-sm btn-rounded bg-dribbble ml-auto cetak-checklist">
+                        <button class="btn btn-sm btn-rounded bg-dribbble ml-auto cetak-checklist"><a href="{{ url('print/checklist/'.$detail->id_booking) }}">
                             <i class="fa fa-plus mr-1"></i>
                             Print Checklist
-                        </button></a>
+                        </a></button>
                         @endif
                     </div>
                     <div style="overflow-x: auto;">

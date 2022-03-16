@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AlterTableBookingAddFkIdService extends Migration
+class CreateKetentuan extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class AlterTableBookingAddFkIdService extends Migration
      */
     public function up()
     {
-        // Schema::table('booking', function (Blueprint $table) {
-
-        //     $table->foreign('id_service')->references('id')
-        //     ->on('services')->onUpdate('cascade')->onDelete('cascade')->change();
-        // });
+        Schema::create('ketentuan', function (Blueprint $table) {
+            $table->id();
+            $table->string('ketentuan');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -27,6 +27,6 @@ class AlterTableBookingAddFkIdService extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('ketentuan');
     }
 }

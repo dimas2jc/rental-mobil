@@ -42,6 +42,9 @@
                     <a href="{{url('/data_master/services')}}" class="list-group-item d-flex align-items-center" id="services">
                         <i class="ti-star mr-2 list-group-icon"></i>Pelayanan
                     </a>
+                    <a href="{{url('/data_master/ketentuan')}}" class="list-group-item d-flex align-items-center" id="ketentuan">
+                        <i class="ti-file mr-2 list-group-icon"></i>Syarat & Ketentuan
+                    </a>
                 </div>
             </div>
         </div>

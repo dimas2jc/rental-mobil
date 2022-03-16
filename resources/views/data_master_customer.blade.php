@@ -1,4 +1,9 @@
 @extends('data_master')
+
+@section('extra-css')
+    <link rel="stylesheet" href="{{ asset('vendors/select2/css/select2.min.css') }}">
+@endsection
+
 @section('content-data-master')
 
 <div class="card">
@@ -106,6 +111,23 @@
 
                         <div class="form-group">
                             <label for="" class="col-form-label">
+                                Sales
+                            </label>
+                            {{-- <div class="col-sm-9"> --}}
+                                <select class="form-control select-component select-sales @error('sales') is-invalid @enderror" id="sales" name="sales" required>
+                                    <option selected disabled>Pilih Sales . . </option>
+                                    @foreach ($data['sales'] as $d)
+                                        <option value="{{ $d->id_sales }}">{{ $d->name_sales }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="invalid-feedback">
+                                    Mohon isi sales dengan benar.
+                                </div>
+                            {{-- </div> --}}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="col-form-label">
                                 No. KK
                             </label>
                             <input type="text" name="no_kk" id="no_kk" class="form-control">
@@ -172,6 +194,7 @@
 
 @endsection
 @section('extra-script')
+    <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
     <script src="{{asset('assets/js/examples/file-manager.js')}}"></script>
     <script src="{{asset('assets/js/custom/data_master_customer.js')}}"></script>
     <script src="{{asset('assets/js/custom/data_master.js')}}"></script>

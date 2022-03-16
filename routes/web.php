@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\PembayaranController;
 use App\Http\Controllers\ChargeController;
+use App\Http\Controllers\KetentuanController;
 use App\Http\Controllers\ServiceController;
 
 /*
@@ -59,7 +60,8 @@ Route::group(['middleware' => ['auth']],function(){
         return view('data_master_pegawai');
     });
     Route::get('/data_master/customer', function () {
-        return view('data_master_customer');
+        $data['sales'] = DB::table('sales')->select('id_sales', 'name_sales')->get();
+        return view('data_master_customer', compact('data'));
     });
     Route::get('/data_master/pemilik-kendaraan', function () {
         return view('data_master_pemilik_kendaraan');
@@ -77,6 +79,9 @@ Route::group(['middleware' => ['auth']],function(){
     });
     Route::get('/list_booking', function(){
         return view('list_booking');
+    });
+    Route::get('/data_master/ketentuan', function(){
+        return view('ketentuan');
     });
     // Route::get('/board_monitoring', function () {
     //     return view('board_monitoring');
@@ -160,6 +165,10 @@ Route::group(['middleware' => ['auth']],function(){
     Route::post('data_master/service', [ServiceController::class, 'store']);
 
     Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+
+    Route::get('ketentuan_datatable', [KetentuanController::class, 'datatable']);
+    Route::post('ketentuan', [KetentuanController::class, 'store']);
+    Route::get('ketentuan/{id}', [KetentuanController::class, 'destroy']);
 
     Route::get('/bukti/{id}', function($id){
         $data = DB::table('booking')->where('id_booking', $id)->first();

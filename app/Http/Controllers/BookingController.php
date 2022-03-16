@@ -332,7 +332,7 @@ class BookingController extends Controller
 
         $params = [];
         for ($i=0; $i < count($form_checklist); $i++) {
-            if($request->checklist[$i] == on){
+            if($request->checklist[$i] == 'on'){
                 $cek = 1;
             }
             else{
