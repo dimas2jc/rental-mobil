@@ -11,29 +11,32 @@ use Carbon\Carbon;
 class MonitoringController extends Controller
 {
     public function index_keuangan(){
+        $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+        $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
+        
+        $charge = DB::raw('(
+            SELECT SUM(cr.price_charge_vehicles) as total_charge, dc.id_payment_rent
+            FROM detail_charge as dc inner join charge_rent as cr on dc.id_charge_vehicles=cr.id_charge_vehicles
+          ) as charge');
+
         $data = DB::table('booking as b')
-                ->join('sales as s', 's.id_sales', '=', 'b.id_sales')
-                ->join('customer as c', 'c.id_customer', '=', 'b.id_customer')
-                ->join('vehicles as v', 'v.id_vehicles', '=', 'b.id_vehicles')
-                ->join('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
-                ->join('detail_payment as dp', 'dp.id_booking', '=', 'b.id_booking')
-                ->join('payment_rent as pr', 'pr.id_payment_rent', '=', 'dp.id_payment_rent')
-                ->select('b.id_booking', 'vv.vehicles_type', 'b.date_start', 'b.date_finish', 's.name_sales',
-                'c.name_customer', 'pr.total_payment', 'b.dp_sales', 'dp.description')
-                ->groupBy('b.id_booking', 'vv.vehicles_type', 'b.date_start', 'b.date_finish', 's.name_sales',
-                'c.name_customer', 'pr.total_payment', 'b.dp_sales', 'dp.description')
-                // ->groupBy('b.id_booking', 'type_unit', 'date_start', 'date_finish', 'name_sales', 'user', 'real_price', 'price_user', 'o_charge', 'lw_charge', 'dp_sales', 'description')
-                ->where('b.status_booking', 4)
-                ->get();
-        $data2 = DB::table('detail_payment as dp')
-                ->join('payment_rent as pr', 'pr.id_payment_rent', '=', 'dp.id_payment_rent')
-                ->join('charge_rent as cr', 'cr.id_charge_vehicles', '=', 'pr.id_charge_vehicles')
-                ->select('dp.id_booking', 'pr.id_charge_vehicles', 'cr.price_charge_vehicles', 'pr.total_payment')
-                // ->groupBy('dp.id_booking', 'pr.id_charge_vehicles', 'cr.price_charge_vehicles', 'pr.total_payment')
-                // ->where('dp.id_booking', 2)
-                ->get();
+        ->leftJoin('detail_payment as dp', 'dp.id_booking', '=', 'b.id_booking')
+        ->leftJoin('payment_rent as pr', 'pr.id_payment_rent', '=', 'dp.id_payment_rent')
+        ->leftJoin('customer as c', 'c.id_customer', '=', 'b.id_customer')
+        ->leftJoin('sales as s', 's.id_sales', '=', 'b.id_sales')
+        ->leftJoin('employes_company as ec', 'ec.id_employes', '=', 'b.id_employes')
+        ->leftJoin('vehicles as v', 'v.id_vehicles', '=', 'b.id_vehicles')
+        ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
+        ->leftJoin($charge, 'charge.id_payment_rent', 'pr.id_payment_rent')
+        ->select('b.id_booking as id_booking', 'c.name_customer as name_customer', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales', DB::raw("SUM(dp.price) as total"), 'dp.bukti',
+        'c.name_customer as user', 'pr.total_payment as price_user', 'pr.date_payment as date', 'b.dp_sales as dp_sales', 'dp.description as description', DB::raw("CONCAT(vv.nama_varian, ' - ', vv.vehicles_type) AS type_unit"), 'charge.total_charge')
+        ->groupBy('b.id_booking')
+        ->where('b.status_booking', 2)
+        ->whereBetween('pr.date_payment', [$startOfWeek, $endOfWeek])
+        ->get();
+
         // dd($data2);
-        return view('/monitoring', compact('data', 'data2'));
+        return view('/monitoring', compact('data'));
     }
 
     // public function get_monitoring(){

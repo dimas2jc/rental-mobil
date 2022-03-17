@@ -32,22 +32,22 @@
                         <tbody>
                             @foreach($data as $d1)
                                 <tr>
-                                    <td>{{ $d1->vehicles_type }}</td>
-                                    <td>{{ $d1->date }}</td>
+                                    <td>{{ $d1->type_unit }}</td>
+                                    <td>{{ date("d-m-Y", strtotime($d1->date)) }}</td>
                                     <td>{{ $d1->name_sales }}</td>
                                     <td>{{ $d1->name_customer }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($d1->date_start)) }}</td>
-                                    <td>{{ date("d-m-Y", strtotime($d1->date_finish)) }}</td>
-                                    <td>{{ $d1->price_sales }}</td>
+                                    <td>{{ date("d-m-Y H:i", strtotime($d1->date_start)) }}</td>
+                                    <td>{{ date("d-m-Y H:i", strtotime($d1->date_finish)) }}</td>
+                                    <td>{{ $d1->price_user }}</td>
                                     <td>{{ $d1->total_charge }}</td>
-                                    <td>{{ $d1->price_sales + $d1->total_charge }}</td>
-                                    <td>{{ $d1->total }}</td>
+                                    <td>{{ $d1->price_user + $d1->total_charge }}</td>
+                                    <td>{{ $d1->dp_sales }}</td>
                                     @if($d1->bukti != null)
                                     <td>TF</td>
                                     @else
                                     <td>Cash</td>
                                     @endif
-                                    <td>{{ $d1->price_sales - $d1->total }}</td>
+                                    <td> {{ $d1->total }} / {{ ($d1->price_user + $d1->total_charge) - $d1->total }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
