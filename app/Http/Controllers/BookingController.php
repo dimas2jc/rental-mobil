@@ -238,7 +238,7 @@ class BookingController extends Controller
         // dd($id_vehicle);
 
         $data = Vehicle::whereNotIn('id_vehicles', $id_vehicle)
-        ->leftJoin('vehicles_variants as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
         ->select('vehicles.id_vehicles', DB::raw("CONCAT(vv.nama_varian, ' ', vv.vehicles_type) AS name"), 'vehicles.nopol')
         ->get();
 
@@ -300,6 +300,8 @@ class BookingController extends Controller
         $detail = Booking::where('id_booking', $id)
         ->leftJoin('customer' , 'customer.id_customer', 'booking.id_customer')
         ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', 'vehicles.id_varian_vehicles')
         ->select(
             'booking.*',
             DB::raw("(
@@ -312,13 +314,17 @@ class BookingController extends Controller
                 END
             ) AS status"),
             'customer.name_customer',
-            'sales.name_sales'
+            'sales.name_sales',
+            DB::raw("CONCAT(vv.nama_varian, ' ', vv.vehicles_type, ' / ', vehicles.nopol) AS kendaraan"),
+            'vehicles.nopol'
         )
         ->first();
+        // dd($detail);
+        $bukti = DB::table('detail_payment')->where('description', 'like', '%DP%')->where('id_booking', $detail->id_booking)->first();
         $checklist = DB::table('checklist')->where('id_booking', $id)->orderBy('nama', 'ASC')->get();
         $form_checklist = DB::table('vehicle_bodies')->where(['id_vehicles' => $detail->id_vehicles, 'is_active' => 1])->orderBy('name_vehicles_bodies', 'ASC')->get();
 
-        return view('detail_list_booking', compact('detail', 'checklist', 'form_checklist'));
+        return view('detail_list_booking', compact('detail', 'checklist', 'form_checklist', 'bukti'));
     }
 
     public function checklist(Request $request, $id)

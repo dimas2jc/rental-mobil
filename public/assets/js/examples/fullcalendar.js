@@ -62,9 +62,10 @@ $(document).ready(function () {
     var events = [];
     $.ajax({
         type: 'GET',
-        url: baseUrl+'/get_booking',
+        url: baseUrl+'/dashboard/get_booking',
         dataType: 'json',
         success: function (results) {
+            console.log(results);
             for(let i = 0; i < results.length; i++){
                 // events[i] = {
                 //     title: results[i].NOPOL,
@@ -111,7 +112,7 @@ $(document).ready(function () {
                                             `</div>`+
                                         `</div>`;
             }
-
+console.log(events);
             $('#calendar-demo').fullCalendar({
                 header: {
                     left: 'prev,next today',

@@ -33,6 +33,7 @@ $(document).ready(function(){
             },
             {data:"no_nik_customer",name:"no_nik_customer"},
             {data:"name_customer",name:"name_customer"},
+            {data:"name_sales",name:"name_sales"},
             {data:"address_customer",name:"address_customer"},
             {
                 data:"phone_customer",
@@ -108,12 +109,13 @@ $(document).ready(function(){
         $("#formCustomer").attr('action', url);
         $("#formCustomer").attr('method', 'POST');
 
+        let id_sales;
         $.ajax({
             type: 'GET',
             url: baseUrl+'/data_master/get_customer/'+id,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
+                $(".select-sales").empty();
                 $("#no_kk").val(data.no_kk_customer);
                 $("#no_nik").val(data.no_nik_customer);
                 $("#name").val(data.name_customer);
@@ -121,7 +123,26 @@ $(document).ready(function(){
                 $("#phone").val("0"+data.phone_customer);
                 $("#sosmed").val(data.sosmed_customer);
                 $("#email").val(data.email_customer);
-                $("#sales").val(data.id_sales);
+                $('.select-sales').append(new Option(data.name_sales, data.id_sales));
+                id_sales = data.id_sales
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/get_select_sales',
+            dataType: 'json',
+            success: function (data) {
+                for(let i=0;i<data.length;i++){
+                    if(data[i].id_sales != id_dokumen){
+                        $('#dokumen').append(
+                            '<option value="'+data[i].id_sales+'" >'+data[i].name_sales+'</option>'
+                        );
+                    }
+                }
             },
             error:function(data){
                 console.log(data);
@@ -157,6 +178,7 @@ $(document).ready(function(){
             },
             {data:"no_nik_customer",name:"no_nik_customer"},
             {data:"name_customer",name:"name_customer"},
+            {data:"name_sales",name:"name_sales"},
             {data:"address_customer",name:"address_customer"},
             {
                 data:"phone_customer",

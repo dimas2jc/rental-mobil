@@ -93,7 +93,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('store_booking') }}" method="POST">
+                <form action="{{ url('store_booking') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Customer Lama?</label>
@@ -341,7 +341,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('update_booking') }}" method="POST">
+                <form action="{{ url('update_booking') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_booking_update" id="id_booking_update" class="form-control">
                     <div class="update-customer">

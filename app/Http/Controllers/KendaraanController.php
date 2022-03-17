@@ -10,6 +10,7 @@ use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 class KendaraanController extends Controller
 {
@@ -297,6 +298,13 @@ class KendaraanController extends Controller
     public function get_all_dokumen_kendaraan()
     {
         $data = DocumentVehicle::all();
+
+        return response()->json($data, 200);
+    }
+
+    public function get_data_dokumen($id)
+    {
+        $data = DB::table('document_vehicles')->where('id_doc_vehicles', $id)->first();
 
         return response()->json($data, 200);
     }

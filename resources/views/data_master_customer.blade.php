@@ -42,12 +42,13 @@
                     </button>
                 </div>
                 <div style="overflow-x: auto;">
-                    <table id="table-customer" class="table table-striped table-bordered responsive" style="width: 100%">
+                    <table id="table-customer" class="table table-striped table-bordered" style="width: 100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th>No. KK</th>
                                 <th>No. NIK</th>
                                 <th>Nama</th>
+                                <th>Sales</th>
                                 <th>Alamat</th>
                                 <th>No. HP</th>
                                 <th>Sosmed</th>
@@ -70,6 +71,7 @@
                             <th>No. KK</th>
                             <th>No. NIK</th>
                             <th>Nama</th>
+                            <th>Sales</th>
                             <th>Alamat</th>
                             <th>No. HP</th>
                             <th>Sosmed</th>
@@ -114,7 +116,7 @@
                                 Sales
                             </label>
                             {{-- <div class="col-sm-9"> --}}
-                                <select class="form-control select-component select-sales @error('sales') is-invalid @enderror" id="sales" name="sales" required>
+                                <select class="form-control select-component select-sales @error('sales') is-invalid @enderror" name="sales" required>
                                     <option selected disabled>Pilih Sales . . </option>
                                     @foreach ($data['sales'] as $d)
                                         <option value="{{ $d->id_sales }}">{{ $d->name_sales }}</option>

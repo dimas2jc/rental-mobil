@@ -18,8 +18,8 @@ $(document).ready(function(){
             {data:"name_customer",name:"name_customer"},
             {data:"name_sales",name:"name_sales"},
             {data:"kendaraan",name:"kendaraan"},
-            {data:"tgl_ambil",name:"tgl_ambil"},
-            {data:"tgl_kembali",name:"tgl_kembali"},
+            {data:"date_start",name:"date_start"},
+            {data:"date_finish",name:"date_finish"},
             {
                 data:null,
                 name:null,
@@ -55,7 +55,7 @@ $(document).ready(function(){
                     if(data.status_booking == 1){
                         html += '<a href=""><i class="fa fa-check approve" id="'+data.id_booking+'"></i></a>&nbsp;';
                     }
-                    html += '<a href=""><i class="fa fa-calendar reschedule" id="'+data.id_booking+'"></i></a>&nbsp;';
+                    html += '<i class="fa fa-calendar reschedule" style="cursor: pointer" id="'+data.id_booking+'"></i>&nbsp;';
                     html += '<a href="'+baseUrl+'/detail_booking/'+data.id_booking+'"><i class="fa fa-folder"></i></a>&nbsp;';
 
                     return html;
