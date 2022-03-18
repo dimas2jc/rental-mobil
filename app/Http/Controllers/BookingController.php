@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Date;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -394,5 +395,10 @@ class BookingController extends Controller
         ]);
 
         return back();
+    }
+
+    public function print_checklist($id){
+        $pdf = PDF::loadview('print_checklist',compact( 'id'))->setPaper('A4', 'potrait');
+        return $pdf->stream('Checklist-'.$id.'.pdf');
     }
 }

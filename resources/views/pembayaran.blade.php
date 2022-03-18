@@ -150,35 +150,32 @@
                     <i class="fa fa-times-circle text-danger"></i>
                 </button>
             </div>
-            <form action="" id="formCharge" method="POST" class="needs-validation" novalidate>
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group">
-                        <label for="" class="col-form-label">
-                            Nama Charge
-                        </label>
-                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" required>
-                        <div class="invalid-feedback">
-                            Mohon isi nama charge dengan benar.
-                        </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="" class="col-form-label">
+                        Nama Charge
+                    </label>
+                    <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" required>
+                    <div class="invalid-feedback">
+                        Mohon isi nama charge dengan benar.
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="" class="col-form-label">
-                            Harga Charge
-                        </label>
-                        <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" required>
-                        <div class="invalid-feedback">
-                            Mohon isi harga charge dengan benar.
-                        </div>
+                <div class="form-group">
+                    <label for="" class="col-form-label">
+                        Harga Charge
+                    </label>
+                    <input type="number" name="harga" id="harga" class="form-control @error('harga') is-invalid @enderror" required>
+                    <div class="invalid-feedback">
+                        Mohon isi harga charge dengan benar.
                     </div>
+                </div>
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-google btn-sm" onclick="$('#modal-tambah-charge').modal('toggle');">BATAL</button>
-                    <button type="submit" class="btn btn-linkedin btn-sm">SIMPAN</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-google btn-sm" onclick="$('#modal-tambah-charge').modal('toggle');">BATAL</button>
+                <button type="button" class="btn btn-linkedin btn-sm" id="simpanCharge">SIMPAN</button>
+            </div>
         </div>
     </div>
 </div>
@@ -189,4 +186,18 @@
     <script src="{{ asset('vendors/select2/js/select2.min.js') }}"></script>
     <script src="{{asset('assets/js/examples/file-manager.js')}}"></script>
     <script src="{{asset('assets/js/custom/pos.js')}}"></script>
-@endsection
+    
+    
+    @endsection
+    
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Data Berhasil Ditambah',
+                showConfirmButton: false,
+                timer: 2000
+            }); 
+        </script>
+    @endif
