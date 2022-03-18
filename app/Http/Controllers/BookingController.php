@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Date;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -315,6 +316,7 @@ class BookingController extends Controller
             'sales.name_sales'
         )
         ->first();
+        // dd($detail);
         $checklist = DB::table('checklist')->where('id_booking', $id)->orderBy('nama', 'ASC')->get();
         $form_checklist = DB::table('vehicle_bodies')->where(['id_vehicles' => $detail->id_vehicles, 'is_active' => 1])->orderBy('name_vehicles_bodies', 'ASC')->get();
 
@@ -388,5 +390,10 @@ class BookingController extends Controller
         ]);
 
         return back();
+    }
+
+    public function print_checklist($id){
+        $pdf = PDF::loadview('print_checklist',compact( 'id'))->setPaper('A4', 'potrait');
+        return $pdf->stream('Checklist-'.$id.'.pdf');
     }
 }

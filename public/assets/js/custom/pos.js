@@ -103,11 +103,35 @@ $(document).ready(function(){
 
         $("#name").val("");
         $("#harga").val("");
+        // urlCharge = baseUrl+"/data_master/charge"
+        // $("#formCharge").attr('action', urlCharge);
+        // $("#formCharge").attr('method', 'POST');
+    });
 
-        urlCharge = baseUrl+"/data_master/charge"
-        $("#formCharge").attr('action', urlCharge);
-        $("#formCharge").attr('method', 'POST');
+    $('#simpanCharge').on('click', function(){
+        var name = $("#name").val();
+        var harga = $("#harga").val();
 
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "/data_master/charge",
+            type: "POST",
+            data: {
+                name: name,
+                harga: harga,
+            },
+            cache: false,
+            success: function (data) {
+                alert("Charge berhasil ditambahkan");
+                $("#modal-tambah-charge").modal('hide');
+                // console.log("Berhasil Tambah");
+            },
+            error:function(data){
+              console.log(data);
+            }
+        });    
     });
 
     $(".tombol-charge").on("click", function(){
@@ -157,12 +181,12 @@ $(document).ready(function(){
                 // arrayCharge.push(value[index].id_charge_vehicles);
                 // console.log(arrayCharge);
 
-                $("#modal-tambah-charge").modal("hide");
+                $("#modal-charge").modal("hide");
                 $('#table-pos tbody').append(
-                    '<tr id="idTr'+value[index].id_charge_vehicles+'">\
+                    '<tr id="idTr-'+id_charge+'">\
                       <td><input class="id_charge" id="id_charge['+value[index].id_charge_vehicles+']" name="id_charge[]" hidden value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles+'</td>\
                       <td><input class="price_charge" id="price_charge['+value[index].id_charge_vehicles+']" name="price_charge[]" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
-                      <td><button type="button" onclick="hapusEl('+value[index].id_charge_vehicles+')" class="btn btn-danger hapus">Delete</button></td>\
+                      <td><a href="#" onclick="hapusEl('+id_charge+')" class="btn btn-danger">Delete</a></td>\
                     </tr>'
                 );
                 total();
@@ -177,7 +201,8 @@ $(document).ready(function(){
 })
 
 function hapusEl(id){
-    $('#idTr'+id).remove();
+    console.log('hapus');
+    $('#idTr-'+id).remove();
     total();
 }
 

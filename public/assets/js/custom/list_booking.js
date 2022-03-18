@@ -18,8 +18,8 @@ $(document).ready(function(){
             {data:"name_customer",name:"name_customer"},
             {data:"name_sales",name:"name_sales"},
             {data:"kendaraan",name:"kendaraan"},
-            {data:"tgl_ambil",name:"tgl_ambil"},
-            {data:"tgl_kembali",name:"tgl_kembali"},
+            {data:"date_start",name:"date_start"},
+            {data:"date_finish",name:"date_finish"},
             {
                 data:null,
                 name:null,

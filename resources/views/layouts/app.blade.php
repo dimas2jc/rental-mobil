@@ -130,7 +130,8 @@
 
     <script> const baseUrl = "{{ env('APP_URL') }}"; </script>
     <script src="{{asset('vendors/input-mask/jquery.mask.js')}}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    
     @yield('extra-script')
 
 </body>
