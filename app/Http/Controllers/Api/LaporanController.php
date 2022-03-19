@@ -20,10 +20,10 @@ class LaporanController extends Controller
             ->leftJoin('employes_company as ec', 'ec.id_employes', '=', 'b.id_employes')
             ->leftJoin('vehicles as v', 'v.id_vehicles', '=', 'b.id_vehicles')
             ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
-            ->select('b.id_booking as id_booking', 'c.name_customer as name_customer', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales',
-            'c.name_customer as user', 'pr.total_payment as price_user', 'b.dp_sales as dp_sales', 'dp.description as description', DB::raw("CONCAT(vv.nama_varian, ' - ', vv.vehicles_type) AS type_unit"))
-            ->groupBy('id_booking', 'type_unit', 'name_customer', 'date_start', 'date_finish', 'name_sales', 'user', 'price_user', 'dp_sales', 'description')
-            // ->where('b.status_booking', 4)
+            ->select('b.id_booking as id_booking', 'b.komisi_sales', 'c.name_customer as name_customer', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales',
+            'c.name_customer as user', DB::raw("SUM(dp.price) AS payment"), 'pr.total_payment as price_user', 'b.dp_sales as dp_sales', 'dp.description as description', DB::raw("CONCAT(vv.nama_varian, ' - ', vv.vehicles_type) AS type_unit"))
+            ->groupBy('b.id_booking')
+            // ->where('pr.status', 1)
             ->get();
             return Datatables::of($data)
                 ->addColumn('action', function($row){

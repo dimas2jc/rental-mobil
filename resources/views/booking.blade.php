@@ -183,7 +183,7 @@
                                 Sales
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="cust" class="form-control" readonly>
+                                <input type="text" id="sales_name" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">
-                            Harga Sales
+                            Komisi Sales
                         </label>
                         <div class="col-sm-9">
                             <input type="text" name="harga" id="harga" class="form-control">

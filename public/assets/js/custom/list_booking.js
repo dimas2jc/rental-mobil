@@ -78,8 +78,8 @@ $(document).ready(function(){
                 $("#update_end_date").val(data.end_date);
                 $("#update_start_time").val(data.start_time);
                 $("#update_end_time").val(data.end_time);
-                $("#harga_update").val(data.price_sales);
-                $("#real_price_update").val(data.start_time);
+                $("#harga_update").val(data.komisi_sales);
+                $("#real_price_update").val(data.price_sales);
                 $("#dp_update").val(data.dp_sales);
                 $("#nopol_update").val(data.nopol);
                 $("#id_vehicle_update").val(data.id_vehicles);

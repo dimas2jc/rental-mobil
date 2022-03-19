@@ -13,7 +13,7 @@ class MonitoringController extends Controller
     public function index_keuangan(){
         $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
         $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
-        
+
         $charge = DB::raw('(
             SELECT SUM(cr.price_charge_vehicles) as total_charge, dc.id_payment_rent
             FROM detail_charge as dc inner join charge_rent as cr on dc.id_charge_vehicles=cr.id_charge_vehicles
@@ -28,7 +28,7 @@ class MonitoringController extends Controller
         ->leftJoin('vehicles as v', 'v.id_vehicles', '=', 'b.id_vehicles')
         ->leftJoin('vehicles_varians as vv', 'vv.id_varian_vehicles', '=', 'v.id_varian_vehicles')
         ->leftJoin($charge, 'charge.id_payment_rent', 'pr.id_payment_rent')
-        ->select('b.id_booking as id_booking', 'c.name_customer as name_customer', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales', DB::raw("SUM(dp.price) as total"), 'dp.bukti',
+        ->select('b.id_booking as id_booking', 'c.name_customer as name_customer', 'b.komisi_sales as komisi_sales', 'b.date_start as date_start', 'b.date_finish as date_finish', 's.name_sales as name_sales', DB::raw("SUM(dp.price) as total"), 'dp.bukti',
         'c.name_customer as user', 'pr.total_payment as price_user', 'pr.date_payment as date', 'b.dp_sales as dp_sales', 'dp.description as description', DB::raw("CONCAT(vv.nama_varian, ' - ', vv.vehicles_type) AS type_unit"), 'charge.total_charge')
         ->groupBy('b.id_booking')
         ->where('b.status_booking', 2)

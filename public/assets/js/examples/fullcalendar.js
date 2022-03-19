@@ -80,7 +80,7 @@ $(document).ready(function () {
                 events[i].id = results[i].id_booking,
                 events[i].status = results[i].status,
                 events[i].start = new Date(results[i].date_start).toISOString().slice(0, 10),
-                events[i].end = new Date(results[i].date_finish).toISOString().slice(0, 10),
+                events[i].end = new Date(results[i].date_finish_temp).toISOString().slice(0, 10),
                 events[i].description = `<div class="form-group row">`+
                                             `<div class="col-sm-12">`+
                                                 `<table style="border: 0px">`+

@@ -165,7 +165,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::put('data_master/service/{id}', [ServiceController::class, 'update_status']);
     Route::post('data_master/service', [ServiceController::class, 'store']);
 
-    Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+    // Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
 
     Route::get('ketentuan_datatable', [KetentuanController::class, 'datatable']);
     Route::post('ketentuan', [KetentuanController::class, 'store']);

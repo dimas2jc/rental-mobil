@@ -14,6 +14,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use PDF;
+use DateTime;
 
 class BookingController extends Controller
 {
@@ -76,6 +77,22 @@ class BookingController extends Controller
             $id_user = auth()->user()->id;
         }
 
+        $temp_start = new DateTime(date("Y-m-d H:i", strtotime($date_start)));
+        $temp_end = new DateTime(date("Y-m-d H:i", strtotime($date_end)));
+        $diff = $temp_start->diff($temp_end);
+
+        $kali_komisi = 1;
+        if($diff->d > 0){
+            if($diff->h > 0){
+                $kali_komisi = $diff->d + 1;
+            }
+            else{
+                $kali_komisi = $diff->d;
+            }
+        }
+
+        $komisi_sales = $kali_komisi * $request->harga;
+
         $id_booking = Uuid::uuid4();
         $id_payment = Uuid::uuid4();
         Booking::insert([
@@ -83,19 +100,19 @@ class BookingController extends Controller
             'id_customer' => $id_customer,
             'id_vehicles' => $request->vehicle,
             'id_sales' => $id_user,
-            'date_start' => date("Y-m-d H:i:s", strtotime($date_start)),
-            'date_finish' => date("Y-m-d H:i:s", strtotime($date_end)),
-            'price_sales' => $request->harga,
+            'date_start' => $temp_start,
+            'date_finish' => $temp_end,
+            'price_sales' => $request->real_price + $komisi_sales,
             'dp_sales' => $request->dp,
             'status_booking' => 1, // init (belum di approve)
-            'komisi_sales' => $request->harga - $request->real_price,
+            'komisi_sales' => $komisi_sales,
             'real_price' => $request->real_price,
             'id_service' => $request->service
         ]);
 
         PaymentRent::insert([
             'id_payment_rent' => $id_payment,
-            'total_payment' => $request->harga,
+            'total_payment' => $request->real_price + $komisi_sales,
             'date_payment' => Carbon::now(),
             'status_payment' => 0 // Belum Lunas
         ]);
@@ -143,30 +160,33 @@ class BookingController extends Controller
         $real_price_before = (24 / $jam) * $booking->real_price;
         $real_price = ($jam_now / 24) * $real_price_before;
 
+        $mod = $jam_now % 24;
+        $temp_jam = $jam_now - $mod;
+        $kali_komisi = $temp_jam / 24;
+        if($mod > 0){
+            $kali_komisi += 1;
+        }
 
         Booking::where('id_booking', $request->id_booking_update)->update([
             'id_vehicles' => $id_vehicle,
             'date_start' => date("Y-m-d H:i:s", $date_start),
             'date_finish' => date("Y-m-d H:i:s", $date_end),
-            'price_sales' => $request->harga_update,
+            'price_sales' => ($request->harga_update * $kali_komisi) + $real_price,
             'dp_sales' => $request->dp_update,
             'status_booking' => 3, // reschedule
-            'komisi_sales' => $request->harga_update - $real_price,
+            'komisi_sales' => $request->harga_update * $kali_komisi,
             'real_price' => $real_price
         ]);
 
         PaymentRent::where('id_payment_rent', $booking->id_payment_rent)->update([
-            'total_payment' => $request->harga_update,
+            'total_payment' => ($request->harga_update * $kali_komisi) + $real_price,
             'date_payment' => Carbon::now()
         ]);
 
-        // DetailPayment::insert([
-        //     'id_booking' => $id_booking,
-        //     'id_payment_rent' => $id_payment,
-        //     'price' => $request->dp,
-        //     'description' => "DP - ".$nopol->nopol." - Untuk tgl ".$date_start." sampai ".$date_end,
-        //     'timestamps' => Carbon::now()
-        // ]);
+        DetailPayment::where('id_booking', $booking->id_booking)->update([
+            'price' => $request->dp_update,
+            'timestamps' => Carbon::now()
+        ]);
 
         DB::commit();
 

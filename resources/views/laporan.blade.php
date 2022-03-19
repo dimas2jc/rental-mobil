@@ -16,18 +16,16 @@
                                 <th rowspan="2">Type Unit</th>
                                 <th rowspan="2">Customer</th>
                                 <th rowspan="2">Sales</th>
-                                <th rowspan="2">User</th>
-                                <th rowspan="2">Date</th>
                                 <th colspan="2" class="text-center">Time</th>
                                 <th rowspan="2">Price User</th>
+                                <th rowspan="2">Komisi Sales</th>
                                 <th rowspan="2">Down Paytment</th>
-                                <th rowspan="2">Paid / Remaining Payment</th>
-                                <th rowspan="2">Cash / TF</th>
+                                <th rowspan="2">Terbayar</th>
                                 <th rowspan="2">Aksi</th>
                             </tr>
                             <tr>
-                                <th>Ambil</th>
-                                <th>Kembali</th>
+                                <th class="text-center">Ambil</th>
+                                <th class="text-center">Kembali</th>
                             </tr>
                         </thead>
                         <tbody>
