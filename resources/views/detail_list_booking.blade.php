@@ -28,7 +28,7 @@
                                 </tr>
                                 <tr>
                                     <td>Kendaraan</td>
-                                    <td>: {{ $detail->kendaraan }}</td>
+                                    <td>: {{ $detail->nama_varian }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nopol</td>
@@ -48,7 +48,7 @@
                                 </tr>
                                 <tr>
                                     <td>DP</td>
-                                    <td>: {{ number_format(floatval($detail->dp_sales),0,',','.') }}</td>
+                                    <td>: Rp. {{ number_format(floatval($detail->dp_sales),0,',','.') }}</td>
                                 </tr>
                                 <tr>
                                     <td>Bukti</td>

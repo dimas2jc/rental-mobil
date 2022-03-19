@@ -300,6 +300,8 @@ class BookingController extends Controller
     {
         $detail = Booking::where('id_booking', $id)
         ->leftJoin('customer' , 'customer.id_customer', 'booking.id_customer')
+        ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        ->leftJoin('vehicles_varians', 'vehicles_varians.id_varian_vehicles', 'vehicles.id_varian_vehicles')
         ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
         ->select(
             'booking.*',
@@ -313,7 +315,7 @@ class BookingController extends Controller
                 END
             ) AS status"),
             'customer.name_customer',
-            'sales.name_sales'
+            'sales.name_sales', 'vehicles.nopol', 'vehicles_varians.nama_varian'
         )
         ->first();
         // dd($detail);
@@ -393,7 +395,49 @@ class BookingController extends Controller
     }
 
     public function print_checklist($id){
-        $pdf = PDF::loadview('print_checklist',compact( 'id'))->setPaper('A4', 'potrait');
+        // $startOfWeek = Carbon::now()->startOfWeek()->startOfDay();
+        // $endOfWeek = Carbon::now()->endOfWeek()->endOfDay();
+
+        // $date = [];
+        // for($i = 0; $i < 7; $i++){
+        //     if($i != 0){
+        //         $date[$i] = date("d-m-Y", strtotime($startOfWeek.'+'.$i.' days'));
+        //     }
+        //     else{
+        //         $date[$i] = date("d-m-Y", strtotime($startOfWeek));
+        //     }
+        // }
+
+        $detail = Booking::where('id_booking', $id)
+        ->leftJoin('customer' , 'customer.id_customer', 'booking.id_customer')
+        ->leftJoin('vehicles', 'vehicles.id_vehicles', 'booking.id_vehicles')
+        ->leftJoin('vehicles_varians', 'vehicles_varians.id_varian_vehicles', 'vehicles.id_varian_vehicles')
+        ->leftJoin('sales', 'sales.id_sales', 'booking.id_sales')
+        ->select(
+            'booking.*',
+            DB::raw("(
+                CASE
+                    WHEN booking.status_booking = 1 THEN 'Belum Disetujui'
+                    WHEN booking.status_booking = 2 THEN 'Disetujui'
+                    WHEN booking.status_booking = 3 THEN 'Dijadwalkan Ulang'
+                    WHEN booking.status_booking = 4 THEN 'Diambil'
+                    WHEN booking.status_booking = 5 THEN 'Dikembalikan/Selesai'
+                END
+            ) AS status"),
+            'customer.name_customer', 'customer.address_customer', 'customer.phone_customer', 'customer.no_nik_customer',
+            'sales.name_sales', 'vehicles.*', 'vehicles_varians.*'
+        )
+        ->first();
+
+        $diff=date_diff($detail->date_finish,$detail->date_start);
+        $diff_date = $diff->format("%d Hari %h Jam");
+        // $jam = abs(strtotime($detail->date_finish) - strtotime($detail->date_start))/(60*60);
+        // dd($val);
+
+        $checklist = DB::table('checklist')->where('id_booking', $id)->orderBy('nama', 'ASC')->get();
+        $form_checklist = DB::table('vehicle_bodies')->where(['id_vehicles' => $detail->id_vehicles, 'is_active' => 1])->orderBy('name_vehicles_bodies', 'ASC')->get();
+
+        $pdf = PDF::loadview('print_checklist',compact('detail', 'checklist', 'diff_date', 'form_checklist', 'id'))->setPaper('A4', 'potrait');
         return $pdf->stream('Checklist-'.$id.'.pdf');
     }
 }

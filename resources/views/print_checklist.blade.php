@@ -169,20 +169,18 @@
                         <td width="140px" style="border:0px;">
                             <img src="assets/media/image/logo_invoice.jpg" style="width: 150px; height: 70px;">
                         </td>
-                        <td style="border:0px;">
-                            <h4 style="font-size: 15px;">Asmoro</h4>
-                            <p style="font-size: 15px;">Jl. Mawar 20, Surabaya</p>
-                            <p style="font-size: 15px;">Phone : 876655</p>
-                            <p style="font-size: 15px;">Email :  asmoro@gmail.com</p>
+                        <td style="border:0px; width:250px;">
                         </td>
                         <td width="100px" style="border:0px;">
-                            <h4 style="font-size: 30px; padding-right:20px;">NO :</h4>
+                            <h4 style="font-size: 30px; padding-right:20px;">No:___________</h4>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" style="text-align: center; border:0px;">
+                        <td colspan="3" style="text-align: center; border:0px; padding:0px; margin:0px;">
                             <h1><b>RENTAL MOBIL</b></h1>
                             <h2>RENT CAR - CITYTOUR - PRIVATE TRIP - RENT BUS</h2>
+                            <h3>Office Surabaya : Jl.Wonokitri 1 No.18 (Warkop Mewek) Sawahan-Surabaya 60258</h3>
+                            <h3>Telp/WA 0812-4040-5189, 0822-3407-5824</h3>
                         </td>
                     </tr>
                 </table>
@@ -190,7 +188,7 @@
                 <hr size="4">
             </div>
 
-            <h5>LEMBAR CHECKLIST</h5>
+            <h5 style="margin-bottom: 5px;">LEMBAR CHECKLIST</h5>
             <table >
                 <tr>
                     <td colspan=2 style="font-size: 15px; text-align: center;"><b>Data Customer</b></td>
@@ -198,47 +196,47 @@
                 </tr>
                 <tr >
                     <td rowspan="2" style="font-size: 12px; width:100px;">Nama</td>
-                    <td rowspan="2" style="font-size: 12px; width:280px;"></td> 
+                    <td rowspan="2" style="font-size: 12px; width:280px;">{{ $detail->name_customer }}</td> 
                     <td style="font-size: 12px; width:100px;">Driver</td>
                     <td style="font-size: 12px;"></td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;">Merek</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ $detail->nama_varian }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;" rowspan="3" >Alamat</td>
-                    <td style="font-size: 12px;" rowspan="3"></td> 
+                    <td style="font-size: 12px;" rowspan="3">{{ $detail->address_customer }}</td> 
                     <td style="font-size: 12px;">No. Pol</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ $detail->nopol }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;">Type</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ $detail->vehicles_type }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;">Warna</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ $detail->warna }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;" rowspan="2">Telp/HP</td>
-                    <td style="font-size: 12px;" rowspan="2"></td> 
+                    <td style="font-size: 12px;" rowspan="2">{{ $detail->phone_customer }}</td> 
                     <td style="font-size: 12px;">Lama Sewa</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ $diff_date }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;">Harga</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">Rp. {{ number_format(floatval($detail->price_sales)) }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;" rowspan="2">No KTP</td>
-                    <td style="font-size: 12px;" rowspan="2"></td> 
+                    <td style="font-size: 12px;" rowspan="2">{{ $detail->no_nik_customer }}</td> 
                     <td style="font-size: 12px;">Tanggal Keluar</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ date("d-m-Y", strtotime($detail->date_start)) }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;">Tanggal Masuk</td>
-                    <td style="font-size: 12px;"></td>                
+                    <td style="font-size: 12px;">{{ date("d-m-Y", strtotime($detail->date_finish)) }}</td>                
                 </tr>
                 <tr>
                     <td style="font-size: 12px;" rowspan="2">Jaminan</td>
@@ -251,20 +249,14 @@
                     <td style="font-size: 12px;"></td>                
                 </tr>
                 <tr>
-                    <td style="font-size: 15px;" colspan="2"><b>Sewa Unit :
-                    <table style="border:0px;  width:100%;">
-                        <td style="font-size: 15px; border:0px; width:50px;">  </td>
-                        <td style="font-size: 15px;  width:10px;"> 1 </td>
-                        <td style="font-size: 15px; border:0px; width:10px;"> Day </td>
-                        <td style="font-size: 15px; width:10px;"> 10 </td>
-                        <td style="font-size: 15px; border:0px; width:10px;"> Jam</td>
-                    </table>
+                    <td style="font-size: 15px;" colspan="2"><b>Sewa Unit : {{ $diff_date }}
+
                     </b></td>
-                    <td style="font-size: 15px;" colspan="2"><b>Total : </b></td>
+                    <td style="font-size: 15px;" colspan="2"><b>Total : Rp. {{ number_format(floatval($detail->price_sales)) }}</b></td>
                 </tr>
             </table>
 
-            <h3>KEWAJIBAN PENYEWA</h3>
+            <h5 style="margin-bottom:0px;">KEWAJIBAN PENYEWA</h5>
             
             <table style="border:0px;">
                 <tr>
@@ -309,7 +301,7 @@
                 </tr>
             </table>
             
-            <h5>ASURANSI : YA /TIDAK</h5>
+            <h5 style="margin-bottom: 5px;">ASURANSI : YA /TIDAK</h5>
             <table>
                 <tr >
                     <td height="60px">BBM : </td>
