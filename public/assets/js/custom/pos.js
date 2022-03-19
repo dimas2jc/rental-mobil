@@ -1,6 +1,50 @@
+function number_format(number, decimals, dec_point, thousands_sep) {
+    number = number.toFixed(decimals)
+
+    var nstr = number.toString()
+    nstr += ''
+    x = nstr.split('.')
+    x1 = x[0]
+    x2 = x.length > 1 ? dec_point + x[1] : ''
+    var rgx = /(\d+)(\d{3})/
+
+    while (rgx.test(x1))
+        x1 = x1.replace(rgx, '$1' + thousands_sep + '$2')
+
+    return x1 + x2
+}
+
+// let rupiah = document.getElementById('inputDiskon2');
+// rupiah.addEventListener('keyup', function(e){
+//     rupiah.value = formatRupiah(this.value, 'Rp.');
+//     convertToAngka(rupiah.value);
+//     console.log(convertToAngka(rupiah.value));
+//     // console.log(convertToRupiah(rupiah.value));
+// });
+
+// function formatRupiah(angka, prefix){
+//     var number_string = angka.replace(/[^,\d]/g, '').toString(),
+//     split   		= number_string.split(','),
+//     sisa     		= split[0].length % 3,
+//     rupiah     		= split[0].substr(0, sisa),
+//     ribuan     		= split[0].substr(sisa).match(/\d{3}/gi);
+
+//     if(ribuan){
+//         separator = sisa ? '.' : '';
+//         rupiah += separator + ribuan.join('.');
+//     }
+
+//     rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+//     return prefix == undefined ? rupiah : (rupiah ? 'Rp.' + rupiah : '');
+// }
+
+// function convertToAngka(rupiah){
+//     return parseInt(rupiah.toString().replace(/,.*|[^0-9]/g, ''), 10);
+// }
+
 $(document).ready(function(){
     $("#pembayaran").addClass("active");
-
+    
     $.ajax({
         type: 'GET',
         url: baseUrl+'/get_booking',
@@ -80,9 +124,9 @@ $(document).ready(function(){
                         $('#inputBooking').val(value[i].nopol);
                         $('#label-booking').html(value[i].nopol);
                         $('#inputSubtotal').val(price);
-                        $('#label-subTotal').html(price);
+                        $('#inputSubtotal2').val('Rp.'+number_format(Math.abs(parseInt(price)), 0, '.', ','));
                         $('#inputTotal').val(value[i].price_sales);
-                        $('#label-total').html(value[i].price_sales);
+                        $('#inputTotal2').val('Rp.'+number_format(Math.abs(parseInt(value[i].price_sales)), 0, '.', ','));
                         $('#idBooking').val(value[i].id);
                         subtotal(price);
                         $("#modal-booking").modal("hide");
@@ -148,7 +192,6 @@ $(document).ready(function(){
                 }
             },
             columns:[
-                {data:"id_charge_vehicles",name:"id_charge_vehicles"},
                 {data:"name_charge_vehicles",name:"name_charge_vehicles"},
                 {data:"price_charge_vehicles",name:"price_charge_vehicles"},
                 {
@@ -255,9 +298,9 @@ function total(){
     subTotalCharge += Number(subTotal);
     totalCharge = subTotalCharge - inputDiskon;
     $('#inputSubtotal').val(subTotalCharge);
-    $('#label-subTotal').html(subTotalCharge);
+    $('#inputSubtotal2').val('Rp.'+number_format(Math.abs(parseInt(subTotalCharge)), 0, '.', ','));
     $('#inputTotal').val(totalCharge);
-    $('#label-total').html(totalCharge);
+    $('#inputTotal2').val('Rp.'+number_format(Math.abs(parseInt(totalCharge)), 0, '.', ','));
 }
 
 $("#bayar").on("click", function(){

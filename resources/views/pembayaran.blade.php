@@ -29,7 +29,7 @@
                                 Sub Total
                             </label>
                             <div class="col-sm-4">
-                                <label name="label-subTotal" id="label-subTotal" class="form-control"></label>
+                                <input name="inputSubtotal2" id="inputSubtotal2" class="form-control">
                                 <input name="inputSubtotal" id="inputSubtotal" class="form-control" hidden>
                             </div>
                         </div>
@@ -62,7 +62,7 @@
                         Total
                     </label>
                     <div class="col-sm-3">
-                        <label name="label-total" id="label-total" class="form-control"></label>
+                        <input name="inputTotal2" id="inputTotal2" class="form-control">
                         <input name="inputTotal" id="inputTotal" class="form-control" hidden>
                     </div>
                 </div>
@@ -126,7 +126,6 @@
                 <table id="table-charge" class="table table-striped table-bordered responsive" style="width: 100%">
                     <thead class="thead-dark">
                         <tr>
-                            <th>ID</th>
                             <th>Charge</th>
                             <th>Price</th>
                             <th>Action</th>
