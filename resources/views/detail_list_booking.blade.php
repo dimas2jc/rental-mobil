@@ -159,15 +159,17 @@
                     <table id="table-kembali" class="table table-striped table-bordered responsive" style="width: 100%">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Nama</th>
-                                <th>Cek</th>
+                                <th style="width: 30%">Nama</th>
+                                <th style="width: 5%">Cek</th>
+                                <th class="text-center" style="width: 65%">Deskripsi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($form_checklist as $key => $fc)
                                 <tr>
-                                    <td>{{ $fc->nama }}</td>
+                                    <td>{{ $fc->name_vehicles_bodies }}</td>
                                     <td><input type="checkbox" name="checklist[{{ $key }}]"></td>
+                                    <td><input type="text" class="form-control" name="description[{{ $key }}]"></td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -198,15 +200,17 @@
                     <table id="table-kembali" class="table table-striped table-bordered responsive" style="width: 100%">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Nama</th>
-                                <th>Cek</th>
+                                <th style="width: 30%">Nama</th>
+                                <th style="width: 5%">Cek</th>
+                                <th class="text-center" style="width: 65%">Deskripsi</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($form_checklist as $key => $fc)
                                 <tr>
-                                    <td>{{ $fc->nama }}</td>
+                                    <td>{{ $fc->name_vehicles_bodies }}</td>
                                     <td><input type="checkbox" name="checklist[{{ $key }}]"></td>
+                                    <td><input type="text" class="form-control" name="description[{{ $key }}]"></td>
                                 </tr>
                             @endforeach
                         </tbody>
