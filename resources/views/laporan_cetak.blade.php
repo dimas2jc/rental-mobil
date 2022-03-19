@@ -287,7 +287,7 @@
                                                     </td>
                                                     <td style="font-size: 15px; width:100px;"> 
                                                         @if($c->price_charge != null)
-                                                            {{ $c->price_charge }}
+                                                        Rp. {{ number_format(floatval($c->price_charge)) }}
                                                         @else
                                                             -
                                                         @endif
@@ -300,20 +300,18 @@
                                     </tr>
                                 </table>
                             </td>
-                            <td style="font-size: 25px; text-align:center;">Rp</td>
-                            <td style="font-size: 25px; text-align:center;">{{ $data['data']->price_user }}</td>
+                            <td style="font-size: 25px; text-align:right;">Rp. {{ number_format(floatval($data['data']->price_user)) }}</td>
                        </tr>
                        <tr>
                            <td></td>
-                            <td style="font-size: 25px; text-align:center;">Rp</td>
-                            <td style="font-size: 25px; text-align:center;">{{ $total }}</td>
+                            <td style="font-size: 25px; text-align:right;">Rp. {{ number_format(floatval($total)) }}</td>
                         </tr>
                    </tbody>
                 </table>
             </div>
 
             <div class="container2" style="text-align:right;">
-                <p id="total"><b>Total</b>: Rp. {{ $data['data']->price_user + $total }}</p>
+                <p id="total"><b>Total</b>: Rp. {{ number_format(floatval($data['data']->price_user + $total)) }}</p>
             </div><br><br>
 
             <div class="row">
