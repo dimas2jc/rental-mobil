@@ -131,7 +131,7 @@ $(document).ready(function(){
             error:function(data){
               console.log(data);
             }
-        });    
+        });
     });
 
     $(".tombol-charge").on("click", function(){
@@ -159,52 +159,73 @@ $(document).ready(function(){
                     }
                 },
             ]
-        });        
+        });
     });
-    
+
+    var data_charge = []
     $('#table-charge tbody').on('click', '.pilih-charge', function () {
         let id_charge = $(this).attr("id");
-        $.ajax({
-            type: 'GET',
-            url: baseUrl+'/get_charge',
-            dataType: 'json',
-            success: function (data) {
-                var value = data.data;
-                var index;
-                for(var i=0;i<=value.length;i++){
-                    if(value[i].id_charge_vehicles == id_charge){
-                        index=i;
-                        break;
-                    }
-                }
-                // var arrayCharge = [];
-                // arrayCharge.push(value[index].id_charge_vehicles);
-                // console.log(arrayCharge);
+        if(data_charge.indexOf(id_charge) != -1){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Data Sudah Ada',
+                showConfirmButton: false,
+                timer: 1000
+            });
+        }
+        else{
+            data_charge.push(id_charge);
 
-                $("#modal-charge").modal("hide");
-                $('#table-pos tbody').append(
-                    '<tr id="idTr-'+id_charge+'">\
-                      <td><input class="id_charge" id="id_charge['+value[index].id_charge_vehicles+']" name="id_charge[]" hidden value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles+'</td>\
-                      <td><input class="price_charge" id="price_charge['+value[index].id_charge_vehicles+']" name="price_charge[]" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
-                      <td><a href="#" onclick="hapusEl('+id_charge+')" class="btn btn-danger">Delete</a></td>\
-                    </tr>'
-                );
-                total();
-            },
-            error:function(data){
-                console.log(data);
-            }
-        });
-        
+            $.ajax({
+                type: 'GET',
+                url: baseUrl+'/get_charge',
+                dataType: 'json',
+                success: function (data) {
+                    var value = data.data;
+                    var index;
+                    for(var i=0;i<=value.length;i++){
+                        if(value[i].id_charge_vehicles == id_charge){
+                            index=i;
+                            break;
+                        }
+                    }
+                    // var arrayCharge = [];
+                    // arrayCharge.push(value[index].id_charge_vehicles);
+                    // console.log(arrayCharge);
+
+                    $("#modal-charge").modal("hide");
+                    $('#table-pos tbody').append(
+                        '<tr id="idTr-'+id_charge+'">\
+                            <td><input class="id_charge" id="id_charge['+value[index].id_charge_vehicles+']" name="id_charge[]" hidden value="'+value[index].id_charge_vehicles+'">'+value[index].name_charge_vehicles+'</td>\
+                            <td><input class="price_charge" id="price_charge['+value[index].id_charge_vehicles+']" name="price_charge[]" hidden value="'+value[index].price_charge_vehicles+'">'+value[index].price_charge_vehicles+'</td>\
+                            <td><button type="button" id="'+id_charge+'" class="btn btn-danger delete">Delete</button></td>\
+                        </tr>'
+                    );
+                    total();
+                },
+                error:function(data){
+                    console.log(data);
+                }
+            });
+        }
     });
 
+    let index;
+    $("#table-pos tbody").on("click", ".delete", function(){
+        let id = $(this).attr('id')
+        $('#idTr-'+id).remove();
+        index = data_charge.indexOf(id);
+        data_charge.splice(index, 1);
+        total();
+    })
 })
 
-function hapusEl(id){
-    console.log('hapus');
-    $('#idTr-'+id).remove();
-    total();
-}
+// function hapusEl(id){
+//     console.log('hapus');
+//     $('#idTr-'+id).remove();
+//     total();
+// }
 
 var subTotal = 0;
 function subtotal(subtotal){
@@ -236,7 +257,7 @@ function total(){
     $('#inputSubtotal').val(subTotalCharge);
     $('#label-subTotal').html(subTotalCharge);
     $('#inputTotal').val(totalCharge);
-    $('#label-total').html(totalCharge); 
+    $('#label-total').html(totalCharge);
 }
 
 $("#bayar").on("click", function(){

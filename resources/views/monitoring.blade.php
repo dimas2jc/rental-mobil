@@ -57,7 +57,11 @@
                                     @else
                                     <td>Cash</td>
                                     @endif
+                                    @if(($d1->price_user + $d1->total_charge) - $d1->total) < 0)
+                                    <td> {{ number_format(floatval($d1->total),0,',','.') }} / ( {{ number_format(floatval($remain),0,',','.') }} )</td>
+                                    @else
                                     <td> {{ number_format(floatval($d1->total),0,',','.') }} / {{ number_format(floatval($remain),0,',','.') }}</td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>
