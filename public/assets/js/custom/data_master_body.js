@@ -53,10 +53,10 @@ $(document).ready(function(){
         url: baseUrl+'/data_master/get_all_kendaraan',
         dataType: 'json',
         success: function (data) {
-            $('#kendaraan').empty();
-            $('#kendaraan').append('<option selected disabled>Pilih kendaraan . . </option>');
+            $('#kendaraan_select').empty();
+            $('#kendaraan_select').append('<option selected disabled>Pilih kendaraan . . </option>');
             for(let i=0;i<data.length;i++){
-                $('#kendaraan').append(
+                $('#kendaraan_select').append(
                     '<option value="'+data[i].id_vehicles+'" >'+data[i].nopol+'</option>'
                 );
             }
@@ -88,7 +88,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                 $("#name").val(data.name_vehicles_bodies);
-                $("#kendaraan").val(data.id_vehicles);
+                $("#kendaraan_select").val(data.id_vehicles);
                 if(data.is_active == 1){
                     $("#customCheck").prop("checked", true);
                 }

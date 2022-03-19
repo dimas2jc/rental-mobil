@@ -398,6 +398,22 @@ $(document).ready(function(){
         ]
     });
 
+    $("#dokumen").on("change", function(){
+        let id_dokumen = $(this).val()
+        $.ajax({
+            type: 'GET',
+            url: baseUrl+'/data_master/get_data_dokumen/'+id_dokumen,
+            dataType: 'json',
+            success: function (data) {
+                $("#nopol").val(data.name_doc_vehicles)
+                $("#masa_stnk").val(data.expired_doc_vehicles)
+            },
+            error:function(data){
+                console.log(data);
+            }
+        });
+    })
+
     $(".tombol-tambah-dokumen").on("click", function(){
         $("#name_dokumen").val("");
         $("#type_dokumen").val("");

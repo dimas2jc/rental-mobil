@@ -98,7 +98,7 @@ Route::group(['middleware' => ['auth']],function(){
     Route::get('pembayaran', [PembayaranController::class, 'index']);
     Route::post('pembayaran/insert', [PembayaranController::class, 'insert']);
     Route::get('pembayaran/pos', [PembayaranController::class, 'pos']);
-    Route::get('get_booking', [BookingController::class, 'get_booking']);
+    Route::get('dashboard/get_booking', [BookingController::class, 'get_booking']);
     Route::get('get_all_service', [BookingController::class, 'get_all_service']);
     Route::get('reschedule_booking/{id}', [BookingController::class, 'get_reschedule_booking']);
     Route::get('approve/{id}', [BookingController::class, 'approve']);
@@ -140,6 +140,7 @@ Route::group(['middleware' => ['auth']],function(){
 
     Route::get('data_master/get_kendaraan/{id}', [KendaraanController::class, 'get_kendaraan']);
     Route::get('data_master/get_all_kendaraan', [KendaraanController::class, 'get_all_kendaraan']);
+    Route::get('data_master/get_data_dokumen/{id}', [KendaraanController::class, 'get_data_dokumen']);
     Route::post('data_master/kendaraan/{id}', [KendaraanController::class, 'update_kendaraan']);
     Route::post('data_master/kendaraan', [KendaraanController::class, 'store_kendaraan']);
 
@@ -164,15 +165,15 @@ Route::group(['middleware' => ['auth']],function(){
     Route::put('data_master/service/{id}', [ServiceController::class, 'update_status']);
     Route::post('data_master/service', [ServiceController::class, 'store']);
 
-    Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
+    // Route::get('monitoring_datatable', [MonitoringController::class, 'monitoring_datatable']);
 
     Route::get('ketentuan_datatable', [KetentuanController::class, 'datatable']);
     Route::post('ketentuan', [KetentuanController::class, 'store']);
     Route::get('ketentuan/{id}', [KetentuanController::class, 'destroy']);
 
     Route::get('/bukti/{id}', function($id){
-        $data = DB::table('booking')->where('id_booking', $id)->first();
-        $file = '/document/bukti/'.$data->bukti;
+        $data = DB::table('detail_payment')->where('description', 'like', '%DP%')->where('id_booking', $id)->first();
+        $file = public_path().'/document/bukti_bayar/'.$data->bukti;
         return response()->file($file);
     });
 

@@ -62,9 +62,10 @@ $(document).ready(function () {
     var events = [];
     $.ajax({
         type: 'GET',
-        url: baseUrl+'/get_booking',
+        url: baseUrl+'/dashboard/get_booking',
         dataType: 'json',
         success: function (results) {
+            console.log(results);
             for(let i = 0; i < results.length; i++){
                 // events[i] = {
                 //     title: results[i].NOPOL,
@@ -79,7 +80,7 @@ $(document).ready(function () {
                 events[i].id = results[i].id_booking,
                 events[i].status = results[i].status,
                 events[i].start = new Date(results[i].date_start).toISOString().slice(0, 10),
-                events[i].end = new Date(results[i].date_finish).toISOString().slice(0, 10),
+                events[i].end = new Date(results[i].date_finish_temp).toISOString().slice(0, 10),
                 events[i].description = `<div class="form-group row">`+
                                             `<div class="col-sm-12">`+
                                                 `<table style="border: 0px">`+
@@ -111,7 +112,7 @@ $(document).ready(function () {
                                             `</div>`+
                                         `</div>`;
             }
-
+console.log(events);
             $('#calendar-demo').fullCalendar({
                 header: {
                     left: 'prev,next today',

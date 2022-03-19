@@ -93,7 +93,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('store_booking') }}" method="POST">
+                <form action="{{ url('store_booking') }}" method="POST" enctype="multipart/form-data" >
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Customer Lama?</label>
@@ -183,7 +183,7 @@
                                 Sales
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" id="cust" class="form-control" readonly>
+                                <input type="text" id="sales_name" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
@@ -265,7 +265,7 @@
                     </div>
                     <div class="form-group row">
                         <label for="" class="col-sm-3 col-form-label">
-                            Harga Sales
+                            Komisi Sales
                         </label>
                         <div class="col-sm-9">
                             <input type="text" name="harga" id="harga" class="form-control">
@@ -341,7 +341,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('update_booking') }}" method="POST">
+                <form action="{{ url('update_booking') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="id_booking_update" id="id_booking_update" class="form-control">
                     <div class="update-customer">

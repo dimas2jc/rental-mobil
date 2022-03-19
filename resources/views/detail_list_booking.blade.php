@@ -52,7 +52,7 @@
                                 </tr>
                                 <tr>
                                     <td>Bukti</td>
-                                    <td>: <a href="{{ url('bukti/'.$detail->id_booking) }}" target="_blank">{{ $detail->bukti }}</a></td>
+                                    <td>: <a href="{{ url('bukti/'.$detail->id_booking) }}" target="_blank">{{ $bukti->bukti }}</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -66,9 +66,9 @@
                     <div class="judul-tabel mb-3">
                         <h5>Checklist</h5>
                     </div>
-                    <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
+                    {{-- <a href="#" class="app-sidebar-menu-button btn btn-outline-light">
                         <i data-feather="menu"></i>
-                    </a>
+                    </a> --}}
                     <ul class="nav nav-tabs mb-3" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="ambil-tab" data-toggle="tab" href="#ambil" role="tab"
@@ -76,7 +76,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" id="kembali-tab" data-toggle="tab" href="#kembali" role="tab"
-                            aria-controls="kembali" aria-selected="false">Sales</a>
+                            aria-controls="kembali" aria-selected="false">Kembali</a>
                         </li>
                     </ul>
 
@@ -109,7 +109,7 @@
                             </table>
                         </div>
 
-                        <div class="tab-pane fade" id="kembali_tab" role="tabpanel" aria-labelledby="sales_tab-tab">
+                        <div class="tab-pane fade" id="kembali" role="tabpanel" aria-labelledby="kembali-tab">
                             <div class="judul-tabel mb-3">
                                 <h5>Kembali</h5>
                                 <button class="btn btn-sm btn-rounded bg-dribbble ml-auto tombol-kembali" data-toggle="modal" data-target="#modal-kembali">

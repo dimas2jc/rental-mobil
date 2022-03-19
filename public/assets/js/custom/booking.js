@@ -42,7 +42,7 @@ $(document).ready(function(){
             dataType: 'json',
             success: function (data) {
                 $("#cust").val(data.name_customer);
-                $("#sales").val(data.name_sales);
+                $("#sales_name").val(data.name_sales);
             },
             error:function(data){
                 console.log(data);

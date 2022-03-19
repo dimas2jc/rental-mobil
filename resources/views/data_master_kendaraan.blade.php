@@ -129,7 +129,7 @@
                 <table id="table-dokumen" class="table table-striped table-bordered responsive" style="width: 100%">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Nama</th>
+                            <th>Nopol</th>
                             {{-- <th>Tipe</th> --}}
                             <th>Kadaluarsa</th>
                             <th>Deskripsi</th>
@@ -204,7 +204,7 @@
                             <label for="" class="col-form-label">
                                 No. Polisi
                             </label>
-                            <input type="text" name="nopol" id="nopol" class="form-control @error('nopol') is-invalid @enderror" required>
+                            <input type="text" name="nopol" id="nopol" class="form-control @error('nopol') is-invalid @enderror" required readonly>
                             <div class="invalid-feedback">
                                 Mohon isi nomor polisi kendaraan dengan benar.
                             </div>
@@ -278,7 +278,7 @@
                             <label for="" class="col-form-label">
                                 Masa STNK
                             </label>
-                            <input type="text" name="masa_stnk" id="masa_stnk" class="form-control @error('masa_stnk') is-invalid @enderror">
+                            <input type="text" name="masa_stnk" id="masa_stnk" class="form-control @error('masa_stnk') is-invalid @enderror" readonly>
                             <div class="invalid-feedback">
                                 Mohon isi Masa STNK dengan benar.
                             </div>

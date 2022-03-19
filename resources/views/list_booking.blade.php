@@ -132,8 +132,17 @@
                             Harga
                         </label>
                         <div class="col-sm-9">
-                            <input type="text" name="harga_update" id="harga_update" class="form-control">
-                            <input type="hidden" name="real_price_update" id="real_price_update" class="form-control">
+                            {{-- <input type="text" name="harga_update" id="harga_update" class="form-control"> --}}
+                            <input type="text" name="real_price_update" id="real_price_update" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-sm-3 col-form-label">
+                            Komisi Sales
+                        </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="harga_update" id="harga_update" class="form-control" readonly>
+                            {{-- <input type="hidden" name="real_price_update" id="real_price_update" class="form-control"> --}}
                         </div>
                     </div>
                     <div class="form-group row">

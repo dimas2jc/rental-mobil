@@ -46,48 +46,38 @@ $(document).ready(function(){
                 name: "name_sales"
             },
             {
-                data: "user",
-                name: "user"
-            },
-            {
                 data: "date_start",
                 name: "date_start",
                 render  : function(data,type,row) {
-                    return data.substring(0, 10);
-                }
-            },
-            {
-                data: "date_start",
-                name: "date_start",
-                render  : function(data,type,row) {
-                    return data.substring(11, 16);
+                    return new Date(data).toLocaleString("id-ID").replace(",","").replace(/:.. /," ");
                 }
             },
             {
                 data: "date_finish",
                 name: "date_finish",
                 render  : function(data,type,row) {
-                    return data.substring(11, 16);
+                    return new Date(data).toLocaleString("id-ID").replace(",","").replace(/:.. /," ");
                 }
-            },
-            {
-                data: "price_user",
-                name: "price_user"
-            },
-            {
-                data: "dp_sales",
-                name: "dp_sales"
             },
             {
                 data: "price_user",
                 name: "price_user",
-                render  : function(data,type,row) {
-                    return data-row.dp_sales;
-                }
+                render : $.fn.dataTable.render.number( '.')
             },
             {
-                data: "description",
-                name: "description"
+                data: "komisi_sales",
+                name: "komisi_sales",
+                render : $.fn.dataTable.render.number( '.')
+            },
+            {
+                data: "dp_sales",
+                name: "dp_sales",
+                render : $.fn.dataTable.render.number( '.')
+            },
+            {
+                data: "payment",
+                name: "payment",
+                render : $.fn.dataTable.render.number( '.')
             },
             {
                 data: null,

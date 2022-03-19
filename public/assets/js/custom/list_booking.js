@@ -55,7 +55,7 @@ $(document).ready(function(){
                     if(data.status_booking == 1){
                         html += '<a href=""><i class="fa fa-check approve" id="'+data.id_booking+'"></i></a>&nbsp;';
                     }
-                    html += '<a href=""><i class="fa fa-calendar reschedule" id="'+data.id_booking+'"></i></a>&nbsp;';
+                    html += '<i class="fa fa-calendar reschedule" style="cursor: pointer" id="'+data.id_booking+'"></i>&nbsp;';
                     html += '<a href="'+baseUrl+'/detail_booking/'+data.id_booking+'"><i class="fa fa-folder"></i></a>&nbsp;';
 
                     return html;
@@ -78,8 +78,8 @@ $(document).ready(function(){
                 $("#update_end_date").val(data.end_date);
                 $("#update_start_time").val(data.start_time);
                 $("#update_end_time").val(data.end_time);
-                $("#harga_update").val(data.price_sales);
-                $("#real_price_update").val(data.start_time);
+                $("#harga_update").val(data.komisi_sales);
+                $("#real_price_update").val(data.price_sales);
                 $("#dp_update").val(data.dp_sales);
                 $("#nopol_update").val(data.nopol);
                 $("#id_vehicle_update").val(data.id_vehicles);

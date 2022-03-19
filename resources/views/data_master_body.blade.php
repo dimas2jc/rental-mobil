@@ -59,7 +59,7 @@
                         <label for="" class="col-form-label">
                             Kendaraan
                         </label>
-                        <select class="form-control select-component select-kendaraan" id="kendaraan" name="id_vehicles">
+                        <select class="form-control select-component select-kendaraan" id="kendaraan_select" name="id_vehicles">
                             <option selected disabled>Pilih kendaraan . . </option>
                         </select>
                     </div>
