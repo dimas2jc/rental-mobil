@@ -21,8 +21,8 @@ $(document).ready(function(){
         columns:[
           {data:"nopol",name:"nopol"},
           {data:"nama_varian",name:"nama_varian"},
-          {data:"kapasitas_bbm",name:"kapasitas_bbm"},
-          {data:"price_vehicles",name:"price_vehicles"},
+          {data:"kapasitas_bbm",name:"kapasitas_bbm",render : $.fn.dataTable.render.number( '.')},
+          {data:"price_vehicles",name:"price_vehicles",render : $.fn.dataTable.render.number( '.')},
           {data:"time_rent",name:"time_rent"},
         {
             data: null,
